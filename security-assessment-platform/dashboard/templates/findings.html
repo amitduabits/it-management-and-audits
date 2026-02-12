@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Findings - SecureAudit Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">SA</div>
+            <span>SecureAudit Pro</span>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="/">Risk Overview</a></li>
+            <li class="active"><a href="/findings">Findings</a></li>
+            <li><a href="/compliance">Compliance</a></li>
+            <li><a href="/remediation">Remediation</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <header class="content-header">
+            <div>
+                <h1>Security Findings</h1>
+                <p class="subtitle">{{ filtered_count }} of {{ total_findings }} findings</p>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <div class="filters-bar">
+            <form method="GET" action="/findings" class="filter-form">
+                <div class="filter-group">
+                    <label>Severity</label>
+                    <select name="severity" onchange="this.form.submit()">
+                        <option value="all" {{ 'selected' if current_severity == 'all' }}>All Severities</option>
+                        {% for sev in severities %}
+                        <option value="{{ sev }}" {{ 'selected' if current_severity == sev }}>{{ sev | capitalize }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select name="category" onchange="this.form.submit()">
+                        <option value="all" {{ 'selected' if current_category == 'all' }}>All Categories</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat }}" {{ 'selected' if current_category == cat }}>{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group filter-search">
+                    <label>Search</label>
+                    <input type="text" name="search" value="{{ current_search }}" placeholder="Search findings..." />
+                    <button type="submit" class="btn-search">Search</button>
+                </div>
+                {% if current_severity != 'all' or current_category != 'all' or current_search %}
+                <a href="/findings" class="btn-clear">Clear Filters</a>
+                {% endif %}
+            </form>
+        </div>
+
+        <!-- Findings Table -->
+        <div class="findings-table-container">
+            <table class="findings-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Severity</th>
+                        <th>Finding</th>
+                        <th>Category</th>
+                        <th>CVSS</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for finding in findings %}
+                    <tr class="finding-row severity-row-{{ finding.severity }}">
+                        <td class="finding-id">{{ finding.id }}</td>
+                        <td>
+                            <span class="severity-badge severity-{{ finding.severity }}">
+                                {{ finding.severity | upper }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="finding-title-cell">{{ finding.title }}</div>
+                            <div class="finding-desc-cell">{{ finding.description | truncate(100) }}</div>
+                        </td>
+                        <td class="finding-category">{{ finding.category }}</td>
+                        <td>
+                            <div class="cvss-cell">
+                                <strong>{{ finding.cvss_score }}</strong>
+                                <div class="cvss-mini-bar">
+                                    <div class="cvss-mini-fill severity-bg-{{ finding.severity }}" style="width: {{ finding.cvss_score * 10 }}%;"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-expand" onclick="toggleDetail(this)">View</button>
+                        </td>
+                    </tr>
+                    <tr class="detail-row" style="display:none;">
+                        <td colspan="6">
+                            <div class="detail-content">
+                                <div class="detail-section">
+                                    <h4>Description</h4>
+                                    <p>{{ finding.description }}</p>
+                                </div>
+                                {% if finding.evidence %}
+                                <div class="detail-section">
+                                    <h4>Evidence</h4>
+                                    <code class="evidence-code">{{ finding.evidence }}</code>
+                                </div>
+                                {% endif %}
+                                {% if finding.remediation %}
+                                <div class="detail-section">
+                                    <h4>Remediation</h4>
+                                    <p class="remediation-text">{{ finding.remediation }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if not findings %}
+            <div class="empty-state">
+                <p>No findings match the current filters.</p>
+                <a href="/findings">Clear all filters</a>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <script>
+        function toggleDetail(btn) {
+            const detailRow = btn.closest('tr').nextElementSibling;
+            const isVisible = detailRow.style.display !== 'none';
+            detailRow.style.display = isVisible ? 'none' : 'table-row';
+            btn.textContent = isVisible ? 'View' : 'Hide';
+        }
+    </script>
+</body>
+</html>

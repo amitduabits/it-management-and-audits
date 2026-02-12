@@ -1,0 +1,282 @@
+{
+  "framework": "COBIT 2019",
+  "version": "2019",
+  "description": "COBIT 2019 Governance and Management Objectives",
+  "domains": [
+    {
+      "id": "EDM",
+      "name": "Evaluate, Direct and Monitor",
+      "description": "Governance objectives covering the evaluation, direction, and monitoring of IT strategy and compliance",
+      "objectives": [
+        {
+          "id": "EDM01",
+          "name": "Ensured Governance Framework Setting and Maintenance",
+          "description": "Analyze and articulate the requirements for the governance of enterprise IT. Put in place and maintain the governance structures, principles, processes, and practices.",
+          "keywords": ["governance", "framework", "policy", "oversight", "board", "structure", "principles"]
+        },
+        {
+          "id": "EDM02",
+          "name": "Ensured Benefits Delivery",
+          "description": "Optimize the value contribution to the business from IT-enabled business processes, services, and assets.",
+          "keywords": ["benefits", "value", "ROI", "business case", "investment", "portfolio", "value delivery"]
+        },
+        {
+          "id": "EDM03",
+          "name": "Ensured Risk Optimization",
+          "description": "Ensure that enterprise IT-related risk does not exceed the organization's risk appetite and tolerance.",
+          "keywords": ["risk", "appetite", "tolerance", "risk management", "enterprise risk", "risk optimization"]
+        },
+        {
+          "id": "EDM04",
+          "name": "Ensured Resource Optimization",
+          "description": "Ensure that adequate and sufficient IT-related capabilities are available to support enterprise objectives.",
+          "keywords": ["resource", "capacity", "capability", "staffing", "skills", "optimization", "allocation"]
+        },
+        {
+          "id": "EDM05",
+          "name": "Ensured Stakeholder Engagement",
+          "description": "Ensure that enterprise IT stakeholders are identified, engaged, and that IT performance reporting is transparent.",
+          "keywords": ["stakeholder", "transparency", "reporting", "communication", "engagement", "accountability"]
+        }
+      ]
+    },
+    {
+      "id": "APO",
+      "name": "Align, Plan and Organize",
+      "description": "Management objectives for aligning IT with business strategy, planning, and organizing IT resources",
+      "objectives": [
+        {
+          "id": "APO01",
+          "name": "Managed IT Management Framework",
+          "description": "Implement a consistent management approach for governance requirements to be met covering processes, structures, roles, and responsibilities.",
+          "keywords": ["management framework", "processes", "roles", "responsibilities", "IT management", "operating model"]
+        },
+        {
+          "id": "APO02",
+          "name": "Managed Strategy",
+          "description": "Provide a holistic view of the current IT and business environment, the future direction, and the initiatives required.",
+          "keywords": ["strategy", "roadmap", "digital transformation", "IT strategy", "planning", "vision", "alignment"]
+        },
+        {
+          "id": "APO03",
+          "name": "Managed Enterprise Architecture",
+          "description": "Establish a common architecture covering business process, information, data, application, and technology layers.",
+          "keywords": ["architecture", "enterprise architecture", "TOGAF", "integration", "standards", "blueprint"]
+        },
+        {
+          "id": "APO04",
+          "name": "Managed Innovation",
+          "description": "Maintain an awareness of IT and related service trends, identify innovation opportunities, and plan how to benefit from innovation.",
+          "keywords": ["innovation", "emerging technology", "research", "trends", "prototyping", "digital"]
+        },
+        {
+          "id": "APO05",
+          "name": "Managed Portfolio",
+          "description": "Execute the strategic direction set for investments in line with the enterprise architecture vision.",
+          "keywords": ["portfolio", "investment", "project portfolio", "prioritization", "program management"]
+        },
+        {
+          "id": "APO06",
+          "name": "Managed Budget and Costs",
+          "description": "Manage the IT-related financial activities in both the business and IT functions.",
+          "keywords": ["budget", "cost", "financial", "expenditure", "cost optimization", "TCO", "chargeback"]
+        },
+        {
+          "id": "APO07",
+          "name": "Managed Human Resources",
+          "description": "Provide a structured approach to ensure optimal sourcing, structuring, rights, and skills of human resources.",
+          "keywords": ["human resources", "HR", "skills", "training", "competency", "staffing", "talent"]
+        },
+        {
+          "id": "APO08",
+          "name": "Managed Relationships",
+          "description": "Manage the relationship between the business and IT in a formalized and transparent manner.",
+          "keywords": ["relationships", "business relationship", "SLA", "service level", "customer satisfaction"]
+        },
+        {
+          "id": "APO09",
+          "name": "Managed Service Agreements",
+          "description": "Align IT-enabled services and service levels with enterprise needs and expectations.",
+          "keywords": ["service agreement", "SLA", "OLA", "service catalog", "service level management"]
+        },
+        {
+          "id": "APO10",
+          "name": "Managed Vendors",
+          "description": "Manage IT-related products and services provided by all types of vendors to meet enterprise requirements.",
+          "keywords": ["vendor", "supplier", "procurement", "contract", "third party", "outsourcing"]
+        },
+        {
+          "id": "APO11",
+          "name": "Managed Quality",
+          "description": "Define and communicate quality requirements in all processes, procedures, and the related enterprise outcomes.",
+          "keywords": ["quality", "QA", "quality assurance", "testing", "standards", "continuous improvement"]
+        },
+        {
+          "id": "APO12",
+          "name": "Managed Risk",
+          "description": "Continually identify, assess, and reduce IT-related risk within levels of tolerance set by management.",
+          "keywords": ["risk management", "risk assessment", "risk register", "mitigation", "risk analysis"]
+        },
+        {
+          "id": "APO13",
+          "name": "Managed Security",
+          "description": "Define, operate, and monitor an information security management system.",
+          "keywords": ["security", "ISMS", "information security", "cybersecurity", "security policy", "ISO 27001"]
+        },
+        {
+          "id": "APO14",
+          "name": "Managed Data",
+          "description": "Achieve and maintain effective management of enterprise data assets throughout the data life cycle.",
+          "keywords": ["data", "data management", "data governance", "data quality", "master data", "metadata"]
+        }
+      ]
+    },
+    {
+      "id": "BAI",
+      "name": "Build, Acquire and Implement",
+      "description": "Management objectives for building, acquiring, and implementing IT solutions",
+      "objectives": [
+        {
+          "id": "BAI01",
+          "name": "Managed Programs",
+          "description": "Manage all programs from the investment portfolio in alignment with enterprise strategy and in a coordinated manner.",
+          "keywords": ["program", "project management", "PMO", "program management", "delivery"]
+        },
+        {
+          "id": "BAI02",
+          "name": "Managed Requirements Definition",
+          "description": "Identify solutions and analyze requirements before acquisition or creation to ensure alignment with business requirements.",
+          "keywords": ["requirements", "analysis", "specifications", "business requirements", "functional requirements"]
+        },
+        {
+          "id": "BAI03",
+          "name": "Managed Solutions Identification and Build",
+          "description": "Establish and maintain identified solutions in line with enterprise requirements covering design, development, procurement, and partnering.",
+          "keywords": ["development", "build", "design", "software development", "SDLC", "coding", "solution"]
+        },
+        {
+          "id": "BAI04",
+          "name": "Managed Availability and Capacity",
+          "description": "Balance current and future needs for availability, performance, and capacity with cost-effective service provision.",
+          "keywords": ["availability", "capacity", "performance", "scalability", "capacity planning"]
+        },
+        {
+          "id": "BAI05",
+          "name": "Managed Organizational Change",
+          "description": "Maximize the likelihood of successfully implementing sustainable organizational change.",
+          "keywords": ["change management", "organizational change", "adoption", "training", "transition"]
+        },
+        {
+          "id": "BAI06",
+          "name": "Managed IT Changes",
+          "description": "Manage all changes in a controlled manner, including standard changes and emergency maintenance.",
+          "keywords": ["change control", "change management", "CAB", "change advisory", "release", "deployment"]
+        },
+        {
+          "id": "BAI07",
+          "name": "Managed IT Change Acceptance and Transitioning",
+          "description": "Formally accept and make operational new solutions, including implementation planning, system and data conversion.",
+          "keywords": ["transition", "acceptance testing", "UAT", "go-live", "deployment", "cutover"]
+        },
+        {
+          "id": "BAI08",
+          "name": "Managed Knowledge",
+          "description": "Maintain the availability of relevant, current, validated, and reliable knowledge to support all process activities.",
+          "keywords": ["knowledge", "documentation", "knowledge base", "wiki", "knowledge management"]
+        },
+        {
+          "id": "BAI09",
+          "name": "Managed Assets",
+          "description": "Manage IT assets through their life cycle to make sure their use delivers value at optimal cost.",
+          "keywords": ["asset", "asset management", "CMDB", "inventory", "license", "hardware", "software asset"]
+        },
+        {
+          "id": "BAI10",
+          "name": "Managed Configuration",
+          "description": "Define and maintain descriptions and relationships between key resources and capabilities required to deliver IT-enabled services.",
+          "keywords": ["configuration", "CMDB", "configuration management", "baseline", "CI"]
+        }
+      ]
+    },
+    {
+      "id": "DSS",
+      "name": "Deliver, Service and Support",
+      "description": "Management objectives for delivering, servicing, and supporting IT services",
+      "objectives": [
+        {
+          "id": "DSS01",
+          "name": "Managed Operations",
+          "description": "Coordinate and execute the activities and operational procedures required to deliver IT services.",
+          "keywords": ["operations", "monitoring", "scheduling", "IT operations", "run", "batch processing"]
+        },
+        {
+          "id": "DSS02",
+          "name": "Managed Service Requests and Incidents",
+          "description": "Provide timely and effective response to user requests and resolution of all types of incidents.",
+          "keywords": ["incident", "service request", "help desk", "service desk", "ticket", "incident management"]
+        },
+        {
+          "id": "DSS03",
+          "name": "Managed Problems",
+          "description": "Identify and classify problems and their root causes. Provide timely resolution to prevent recurring incidents.",
+          "keywords": ["problem", "root cause", "problem management", "workaround", "known error"]
+        },
+        {
+          "id": "DSS04",
+          "name": "Managed Continuity",
+          "description": "Establish and maintain a plan to enable the business and IT to respond to incidents and disruptions.",
+          "keywords": ["continuity", "disaster recovery", "BCP", "DRP", "resilience", "business continuity"]
+        },
+        {
+          "id": "DSS05",
+          "name": "Managed Security Services",
+          "description": "Protect enterprise information to maintain the level of information security risk acceptable to the enterprise.",
+          "keywords": ["security services", "access control", "malware", "network security", "endpoint", "firewall"]
+        },
+        {
+          "id": "DSS06",
+          "name": "Managed Business Process Controls",
+          "description": "Define and maintain appropriate business process controls to ensure that information processed satisfies all relevant requirements.",
+          "keywords": ["process controls", "data integrity", "input validation", "authorization", "segregation of duties"]
+        }
+      ]
+    },
+    {
+      "id": "MEA",
+      "name": "Monitor, Evaluate and Assess",
+      "description": "Management objectives for monitoring, evaluating, and assessing IT performance and compliance",
+      "objectives": [
+        {
+          "id": "MEA01",
+          "name": "Managed Performance and Conformance Monitoring",
+          "description": "Collect, validate, and evaluate business and IT goals and metrics. Monitor that processes are performing against agreed performance and conformance goals.",
+          "keywords": ["performance", "monitoring", "KPI", "metrics", "dashboard", "SLA monitoring"]
+        },
+        {
+          "id": "MEA02",
+          "name": "Managed System of Internal Control",
+          "description": "Continuously monitor and evaluate the control environment including self-assessments and independent assurance reviews.",
+          "keywords": ["internal control", "audit", "compliance", "control assessment", "assurance", "SOX"]
+        },
+        {
+          "id": "MEA03",
+          "name": "Managed Compliance with External Requirements",
+          "description": "Evaluate that IT processes and IT-supported business processes are compliant with laws, regulations, and contractual requirements.",
+          "keywords": ["compliance", "regulatory", "legal", "GDPR", "PCI-DSS", "regulation", "external compliance"]
+        },
+        {
+          "id": "MEA04",
+          "name": "Managed Assurance",
+          "description": "Enable the organization to design and develop efficient and effective assurance initiatives.",
+          "keywords": ["assurance", "audit planning", "external audit", "independent assurance", "certification"]
+        },
+        {
+          "id": "MEA05",
+          "name": "Managed External Assurance",
+          "description": "Obtain independent assurance of the adequacy and effectiveness of the system of internal controls.",
+          "keywords": ["external assurance", "third-party audit", "certification", "attestation", "SOC report"]
+        }
+      ]
+    }
+  ]
+}

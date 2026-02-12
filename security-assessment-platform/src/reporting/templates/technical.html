@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ report_title }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .page { max-width: 1100px; margin: 0 auto; padding: 30px; }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b, #475569);
+            color: white; padding: 40px 50px; border-radius: 16px; margin-bottom: 30px;
+        }
+        .header h1 { font-size: 2em; margin-bottom: 8px; }
+        .header .meta { display: flex; gap: 30px; margin-top: 15px; font-size: 0.85em; opacity: 0.7; }
+
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 30px;
+        }
+        .stat-item {
+            background: white; border-radius: 10px; padding: 18px; text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .stat-item .num { font-size: 1.8em; font-weight: 700; }
+        .stat-item .lbl { font-size: 0.78em; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .finding-card {
+            background: white; border-radius: 12px; margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow: hidden;
+        }
+        .finding-header {
+            display: flex; align-items: center; gap: 15px; padding: 20px 24px;
+            border-bottom: 1px solid #f1f5f9; cursor: pointer;
+        }
+        .finding-header:hover { background: #f8fafc; }
+        .finding-num {
+            width: 40px; height: 40px; border-radius: 8px; display: flex;
+            align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.85em; color: white; flex-shrink: 0;
+        }
+        .finding-title { flex: 1; }
+        .finding-title h3 { font-size: 1em; margin-bottom: 3px; }
+        .finding-title .category { font-size: 0.82em; color: #94a3b8; }
+
+        .cvss-badge {
+            display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+        }
+        .cvss-score {
+            font-size: 1.4em; font-weight: 700;
+        }
+        .cvss-label {
+            font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 2px 8px; border-radius: 4px; color: white; font-weight: 600;
+        }
+
+        .finding-body { padding: 20px 24px; }
+        .finding-section { margin-bottom: 16px; }
+        .finding-section h4 {
+            font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.5px;
+            color: #64748b; margin-bottom: 6px;
+        }
+        .finding-section p { font-size: 0.92em; }
+
+        .evidence-box {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+            padding: 12px 16px; font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85em; color: #475569; word-break: break-all;
+        }
+
+        .remediation-box {
+            background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
+            padding: 12px 16px; font-size: 0.92em; color: #166534;
+        }
+
+        .compliance-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .compliance-tag {
+            background: #eff6ff; color: #2563eb; padding: 2px 10px;
+            border-radius: 12px; font-size: 0.78em; font-weight: 500;
+        }
+
+        .cvss-bar {
+            height: 6px; background: #e2e8f0; border-radius: 3px; margin-top: 8px;
+        }
+        .cvss-bar .fill { height: 100%; border-radius: 3px; }
+
+        .toc { background: white; border-radius: 12px; padding: 24px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .toc h2 { font-size: 1.1em; margin-bottom: 12px; }
+        .toc-list { columns: 2; list-style: none; }
+        .toc-list li { padding: 4px 0; font-size: 0.88em; }
+        .toc-list li a { color: #2563eb; text-decoration: none; }
+        .toc-list li a:hover { text-decoration: underline; }
+
+        .section-divider { font-size: 1.3em; font-weight: 600; margin: 30px 0 15px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; }
+
+        .footer { text-align: center; padding: 25px; color: #94a3b8; font-size: 0.82em; margin-top: 30px; }
+        .disclaimer { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 15px 20px; margin-top: 30px; font-size: 0.85em; color: #92400e; }
+
+        @media print { .finding-header:hover { background: white; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>{{ report_title }}</h1>
+            <p style="opacity:0.8;">Detailed vulnerability findings with CVSS scoring and remediation guidance</p>
+            <div class="meta">
+                <span>Organization: {{ organization }}</span>
+                <span>Date: {{ report_date }}</span>
+                <span>Report ID: {{ report_id }}</span>
+                <span>Total Findings: {{ total_findings }}</span>
+            </div>
+        </div>
+
+        <!-- Statistics Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="num">{{ statistics.total }}</div>
+                <div class="lbl">Total</div>
+            </div>
+            <div class="stat-item">
+                <div class="num" style="color:#ef4444;">{{ statistics.severity_counts.critical }}</div>
+                <div class="lbl">Critical</div>
+            </div>
+            <div class="stat-item">
+                <div class="num" style="color:#f97316;">{{ statistics.severity_counts.high }}</div>
+                <div class="lbl">High</div>
+            </div>
+            <div class="stat-item">
+                <div class="num" style="color:#eab308;">{{ statistics.severity_counts.medium }}</div>
+                <div class="lbl">Medium</div>
+            </div>
+            <div class="stat-item">
+                <div class="num" style="color:#22c55e;">{{ statistics.severity_counts.low }}</div>
+                <div class="lbl">Low</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">{{ statistics.avg_cvss }}</div>
+                <div class="lbl">Avg CVSS</div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul class="toc-list">
+                {% for finding in findings %}
+                <li>
+                    <a href="#finding-{{ finding.finding_number }}">
+                        #{{ finding.finding_number }}: {{ finding.title | truncate(60) }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Findings -->
+        <h2 class="section-divider">Detailed Findings</h2>
+
+        {% for finding in findings %}
+        <div class="finding-card" id="finding-{{ finding.finding_number }}">
+            <div class="finding-header">
+                <div class="finding-num" style="background: {{ finding.cvss_severity_color }};">
+                    #{{ finding.finding_number }}
+                </div>
+                <div class="finding-title">
+                    <h3>{{ finding.title }}</h3>
+                    <span class="category">{{ finding.category }} | {{ finding.id }}</span>
+                </div>
+                <div class="cvss-badge">
+                    <span class="cvss-score" style="color: {{ finding.cvss_severity_color }};">{{ finding.cvss_score }}</span>
+                    <span class="cvss-label" style="background: {{ finding.cvss_severity_color }};">{{ finding.cvss_severity_label }}</span>
+                </div>
+            </div>
+            <div class="finding-body">
+                <div class="finding-section">
+                    <h4>Description</h4>
+                    <p>{{ finding.description }}</p>
+                </div>
+
+                {% if finding.evidence %}
+                <div class="finding-section">
+                    <h4>Evidence</h4>
+                    <div class="evidence-box">{{ finding.evidence }}</div>
+                </div>
+                {% endif %}
+
+                <div class="finding-section">
+                    <h4>CVSS Score</h4>
+                    <div class="cvss-bar">
+                        <div class="fill" style="width: {{ finding.cvss_bar_width }}%; background: {{ finding.cvss_severity_color }};"></div>
+                    </div>
+                    <p style="font-size:0.82em; color:#94a3b8; margin-top:4px;">{{ finding.cvss_score }} / 10.0</p>
+                </div>
+
+                {% if finding.remediation %}
+                <div class="finding-section">
+                    <h4>Remediation</h4>
+                    <div class="remediation-box">{{ finding.remediation }}</div>
+                </div>
+                {% endif %}
+
+                {% if finding.compliance_refs %}
+                <div class="finding-section">
+                    <h4>Compliance References</h4>
+                    <div class="compliance-tags">
+                        {% for ref in finding.compliance_refs %}
+                        <span class="compliance-tag">{{ ref }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if not findings %}
+        <div style="text-align:center; padding:50px; color:#94a3b8;">
+            <p style="font-size:1.2em;">No findings to report.</p>
+            <p>All scanned components passed security checks.</p>
+        </div>
+        {% endif %}
+
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> This technical report documents findings from automated security scanning.
+            CVSS scores are estimated based on finding characteristics and may differ from formal CVSS calculations.
+            All findings should be validated by qualified security professionals before taking remediation action.
+            This tool is intended for authorized security assessments only.
+        </div>
+
+        <div class="footer">
+            Generated by SecureAudit Pro | Report ID: {{ report_id }} | {{ report_date }}
+        </div>
+    </div>
+</body>
+</html>

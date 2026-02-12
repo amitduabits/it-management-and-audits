@@ -1,0 +1,165 @@
+{
+    "title": "Financial Performance Dashboard",
+    "description": "Monthly financial analytics including revenue, expenses, profit tracking, margin analysis, and budget variance reporting.",
+    "version": "1.0.0",
+    "refresh_interval": 600,
+    "kpis": [
+        {
+            "label": "Total Revenue",
+            "column": "revenue",
+            "function": "sum",
+            "format": "currency",
+            "compare_periods": true,
+            "icon": "dollar-sign"
+        },
+        {
+            "label": "Total Expenses",
+            "column": "expenses",
+            "function": "sum",
+            "format": "currency",
+            "compare_periods": true,
+            "icon": "credit-card"
+        },
+        {
+            "label": "Net Profit",
+            "column": "net_profit",
+            "function": "sum",
+            "format": "currency",
+            "compare_periods": true,
+            "icon": "trending-up"
+        },
+        {
+            "label": "Avg Monthly Revenue",
+            "column": "revenue",
+            "function": "mean",
+            "format": "currency",
+            "compare_periods": true,
+            "icon": "bar-chart"
+        },
+        {
+            "label": "Avg Profit Margin",
+            "column": "profit_margin",
+            "function": "mean",
+            "format": "percent",
+            "compare_periods": true,
+            "icon": "percent"
+        },
+        {
+            "label": "Total Budget",
+            "column": "budget",
+            "function": "sum",
+            "format": "currency",
+            "compare_periods": false,
+            "icon": "briefcase"
+        },
+        {
+            "label": "Avg Operating Cost",
+            "column": "operating_costs",
+            "function": "mean",
+            "format": "currency",
+            "compare_periods": true,
+            "icon": "settings"
+        },
+        {
+            "label": "Total Headcount",
+            "column": "headcount",
+            "function": "max",
+            "format": "integer",
+            "compare_periods": true,
+            "icon": "users"
+        }
+    ],
+    "charts": [
+        {
+            "type": "line",
+            "title": "Revenue vs Expenses Over Time",
+            "x": "month",
+            "y": "revenue",
+            "agg": "sum",
+            "color_scheme": "corporate",
+            "height": 450
+        },
+        {
+            "type": "bar",
+            "title": "Monthly Net Profit",
+            "x": "month",
+            "y": "net_profit",
+            "agg": "sum",
+            "color_scheme": "green",
+            "height": 420
+        },
+        {
+            "type": "line",
+            "title": "Profit Margin Trend",
+            "x": "month",
+            "y": "profit_margin",
+            "agg": "mean",
+            "color_scheme": "purple",
+            "fill": true,
+            "height": 380
+        },
+        {
+            "type": "pie",
+            "title": "Expense Breakdown by Department",
+            "labels": "department",
+            "values": "expenses",
+            "agg": "sum",
+            "color_scheme": "viridis",
+            "height": 420
+        },
+        {
+            "type": "stacked_bar",
+            "title": "Revenue by Department and Quarter",
+            "x": "department",
+            "y": "revenue",
+            "stack_by": "quarter",
+            "agg": "sum",
+            "color_scheme": "cool",
+            "height": 450
+        },
+        {
+            "type": "bar",
+            "title": "Budget vs Actual by Department",
+            "x": "department",
+            "y": "budget",
+            "agg": "sum",
+            "color_scheme": "warm",
+            "height": 400
+        },
+        {
+            "type": "scatter",
+            "title": "Revenue vs Headcount",
+            "x": "headcount",
+            "y": "revenue",
+            "color": "department",
+            "height": 420
+        },
+        {
+            "type": "heatmap",
+            "title": "Revenue Heatmap by Department and Quarter",
+            "x": "quarter",
+            "y": "department",
+            "values": "revenue",
+            "agg": "sum",
+            "height": 400
+        }
+    ],
+    "filters": {
+        "department": {
+            "type": "select",
+            "label": "Department"
+        },
+        "quarter": {
+            "type": "select",
+            "label": "Quarter"
+        },
+        "month": {
+            "type": "date_range",
+            "label": "Month Range"
+        }
+    },
+    "layout": {
+        "kpi_columns": 4,
+        "chart_columns": 2
+    }
+}

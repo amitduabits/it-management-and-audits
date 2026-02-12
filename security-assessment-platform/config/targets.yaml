@@ -1,0 +1,75 @@
+# SecureAudit Pro - Target Configuration
+# =======================================
+#
+# IMPORTANT: Only scan targets you own or have explicit written
+# authorization to assess. Unauthorized scanning is illegal.
+#
+# This file defines the targets for security assessment.
+# Copy this file to targets.local.yaml for your specific environment.
+
+# Assessment metadata
+assessment:
+  name: "Security Assessment"
+  organization: "Your Organization"
+  assessor: "Security Team"
+  scope: "Internal network assessment"
+  authorization_reference: "AUTH-2025-001"
+  assessment_date: "2025-01-01"
+
+# Scan targets
+targets:
+  # Primary target - adjust to your authorized target
+  - host: "127.0.0.1"
+    name: "Localhost Test"
+    description: "Local system for testing and validation"
+    scan_type: "full"  # full, network-only, web-only, dns-only
+    ports: "1-1024"
+    web_url: "http://127.0.0.1"
+    domain: "localhost"
+    enabled: true
+
+  # Example: Internal web server
+  # - host: "192.168.1.10"
+  #   name: "Internal Web Server"
+  #   description: "Primary web application server"
+  #   scan_type: "full"
+  #   ports: "1-65535"
+  #   web_url: "https://internal.example.com"
+  #   domain: "example.com"
+  #   enabled: true
+
+  # Example: Database server
+  # - host: "192.168.1.20"
+  #   name: "Database Server"
+  #   description: "Primary database server"
+  #   scan_type: "network-only"
+  #   ports: "1433,3306,5432,27017,6379,9200"
+  #   enabled: true
+
+# Scan configuration
+scan_settings:
+  network:
+    timeout: 2.0          # TCP connection timeout in seconds
+    max_threads: 50       # Maximum concurrent scanning threads
+    banner_timeout: 3.0   # Banner grab timeout in seconds
+    default_port_range: "1-1024"
+
+  web:
+    timeout: 10           # HTTP request timeout in seconds
+    verify_ssl: true      # Verify SSL certificates
+    user_agent: "SecureAudit-Pro/1.0 Security-Scanner"
+    follow_redirects: true
+
+  dns:
+    timeout: 5.0          # DNS query timeout in seconds
+    # Custom nameservers (optional, uses system DNS if empty)
+    nameservers: []
+    # nameservers:
+    #   - "8.8.8.8"
+    #   - "1.1.1.1"
+
+# Exclusions - ports/services to skip
+exclusions:
+  ports: []               # Ports to exclude from scanning
+  # ports: [80, 443]      # Example: skip web ports
+  services: []            # Services to exclude from findings

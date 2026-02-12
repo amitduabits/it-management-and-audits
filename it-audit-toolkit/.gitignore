@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+*.whl
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Generated reports
+reports/
+*.html
+!templates/*.html
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Audit data (may contain sensitive information)
+# Uncomment the following line in production to exclude audit data from version control:
+# data/*.json
+# !data/sample_audit.json

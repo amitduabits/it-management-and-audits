@@ -1,0 +1,68 @@
+# SecureAudit Pro - Git Ignore
+# =============================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+*.whl
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Assessment data (may contain sensitive information)
+reports/
+output/
+*.json
+!config/*.yaml
+!tests/*.json
+
+# Local configuration (may contain target-specific data)
+config/targets.local.yaml
+config/*.local.yaml
+
+# Logs
+*.log
+logs/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# pytest
+.pytest_cache/
+
+# Environment files
+.env
+.env.local
+*.pem
+*.key
+*.crt
+
+# Distribution
+*.tar.gz
+*.zip

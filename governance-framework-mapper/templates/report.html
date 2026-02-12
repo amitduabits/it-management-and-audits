@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ framework }} Compliance Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #1e3a5f, #2563eb); color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px; }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.85; font-size: 14px; }
+        .card { background: white; border-radius: 10px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .card h2 { color: #1e3a5f; margin-bottom: 15px; font-size: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: #1e3a5f; color: white; padding: 12px 15px; text-align: left; font-weight: 600; font-size: 13px; text-transform: uppercase; }
+        td { padding: 10px 15px; border-bottom: 1px solid #e5e7eb; font-size: 14px; }
+        tr:hover { background: #f8fafc; }
+        .progress-bar { background: #e5e7eb; border-radius: 10px; height: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
+        .fill-strong { background: #10b981; }
+        .fill-moderate { background: #f59e0b; }
+        .fill-partial { background: #f97316; }
+        .fill-weak { background: #ef4444; }
+        .fill-critical { background: #dc2626; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .badge-strong { background: #d1fae5; color: #065f46; }
+        .badge-moderate { background: #fef3c7; color: #92400e; }
+        .badge-partial { background: #ffedd5; color: #9a3412; }
+        .badge-weak { background: #fee2e2; color: #991b1b; }
+        .badge-critical { background: #fecaca; color: #7f1d1d; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .summary-box { background: #f8fafc; border-radius: 8px; padding: 20px; text-align: center; border: 1px solid #e5e7eb; }
+        .summary-box .number { font-size: 36px; font-weight: 700; color: #1e3a5f; }
+        .summary-box .label { font-size: 13px; color: #6b7280; margin-top: 4px; }
+        .footer { text-align: center; padding: 20px; color: #9ca3af; font-size: 12px; }
+        .score-cell { font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ framework }} Compliance Report</h1>
+            <p>Generated on {{ generated_at }} | IT Governance Framework Mapper</p>
+        </div>
+
+        <div class="card">
+            <h2>Executive Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <div class="number">{{ scorecard.overall.overall_coverage_percentage }}%</div>
+                    <div class="label">Overall Coverage</div>
+                </div>
+                <div class="summary-box">
+                    <div class="number">{{ scorecard.overall.covered_controls }}</div>
+                    <div class="label">Controls Covered</div>
+                </div>
+                <div class="summary-box">
+                    <div class="number">{{ scorecard.overall.total_controls }}</div>
+                    <div class="label">Total Controls</div>
+                </div>
+                <div class="summary-box">
+                    <div class="number">{{ scorecard.overall.uncovered_controls }}</div>
+                    <div class="label">Gaps Identified</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Coverage by Domain</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th>Covered</th>
+                        <th>Total</th>
+                        <th>Coverage</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for domain in scorecard.domains %}
+                    <tr>
+                        <td><strong>{{ domain.id }}</strong> — {{ domain.name }}</td>
+                        <td>{{ domain.covered }}</td>
+                        <td>{{ domain.total }}</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill fill-{{ domain.status|lower }}" style="width: {{ domain.percentage }}%"></div>
+                            </div>
+                            <small>{{ domain.percentage }}%</small>
+                        </td>
+                        <td><span class="badge badge-{{ domain.status|lower }}">{{ domain.status }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Priority Gaps</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Control ID</th>
+                        <th>Control Name</th>
+                        <th>Domain</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gap in gaps[:15] %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ gap.control_id }}</td>
+                        <td>{{ gap.control_name }}</td>
+                        <td>{{ gap.domain }}</td>
+                        <td class="score-cell">{{ gap.priority_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Process Mappings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Organization Process</th>
+                        <th>Framework Control</th>
+                        <th>ID</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in mappings[:30] %}
+                    <tr>
+                        <td>{{ m.process_name }}</td>
+                        <td>{{ m.objective_name or m.practice_name }}</td>
+                        <td>{{ m.objective_id or m.practice_id }}</td>
+                        <td class="score-cell">{{ "%.0f"|format(m.confidence_score * 100) }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>IT Governance Framework Mapper — Compliance Report</p>
+        </div>
+    </div>
+</body>
+</html>

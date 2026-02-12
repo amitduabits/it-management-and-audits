@@ -1,0 +1,59 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Node (if build tools are added later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+build/
+.cache/
+.tmp/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Compiled CSS (if preprocessors are added)
+*.css.map
+*.scss.map
+
+# Figma tokens export
+figma-tokens/
+
+# Screenshots (generated)
+docs/screenshots/*.png
+docs/screenshots/*.jpg
+docs/screenshots/*.gif
+!docs/screenshots/SCREENSHOTS.md

@@ -1,0 +1,107 @@
+{
+  "organization": "PayFlow Digital — Digital Payments Company",
+  "processes": [
+    {
+      "id": "PROC-001",
+      "name": "IT Strategy and Roadmap Planning",
+      "description": "Define the annual IT strategy aligned with business goals, including digital transformation roadmap, technology investment priorities, and innovation initiatives.",
+      "tags": ["strategy", "roadmap", "planning", "digital transformation", "investment"]
+    },
+    {
+      "id": "PROC-002",
+      "name": "Information Security Management",
+      "description": "Operate the enterprise information security management system (ISMS) including policy creation, risk assessments, vulnerability management, and security awareness training.",
+      "tags": ["security", "ISMS", "cybersecurity", "policy", "risk assessment", "vulnerability"]
+    },
+    {
+      "id": "PROC-003",
+      "name": "Change Management and Release Control",
+      "description": "Manage all IT changes through a structured change advisory board (CAB) process including change requests, impact analysis, approval workflows, and post-implementation reviews.",
+      "tags": ["change", "CAB", "release", "change control", "deployment", "RFC"]
+    },
+    {
+      "id": "PROC-004",
+      "name": "Incident and Problem Management",
+      "description": "Detect, triage, and resolve IT incidents within SLA targets. Conduct root cause analysis for recurring issues and maintain a known error database.",
+      "tags": ["incident", "problem", "root cause", "SLA", "escalation", "service desk", "triage"]
+    },
+    {
+      "id": "PROC-005",
+      "name": "Vendor and Third-Party Risk Management",
+      "description": "Evaluate, onboard, and monitor technology vendors and service providers. Conduct periodic risk assessments and SLA compliance reviews for third-party services.",
+      "tags": ["vendor", "third party", "procurement", "supplier", "contract", "risk", "SLA"]
+    },
+    {
+      "id": "PROC-006",
+      "name": "IT Budget and Cost Management",
+      "description": "Plan, allocate, and track IT expenditures including capital and operational costs. Perform TCO analysis and cost optimization reviews quarterly.",
+      "tags": ["budget", "cost", "financial", "expenditure", "TCO", "cost optimization"]
+    },
+    {
+      "id": "PROC-007",
+      "name": "Data Governance and Quality Management",
+      "description": "Define data ownership, classification, and quality standards. Monitor data quality metrics across payment transaction databases and ensure regulatory compliance for data handling.",
+      "tags": ["data", "data governance", "data quality", "classification", "master data", "compliance"]
+    },
+    {
+      "id": "PROC-008",
+      "name": "Disaster Recovery and Business Continuity",
+      "description": "Maintain and test disaster recovery plans for critical payment processing systems. Conduct annual BCP tabletop exercises and maintain RPO/RTO targets.",
+      "tags": ["disaster recovery", "BCP", "DRP", "continuity", "resilience", "failover", "RPO", "RTO"]
+    },
+    {
+      "id": "PROC-009",
+      "name": "Access Control and Identity Management",
+      "description": "Manage user access provisioning, de-provisioning, and periodic access reviews. Enforce least privilege, multi-factor authentication, and role-based access control.",
+      "tags": ["access control", "identity", "IAM", "authentication", "authorization", "MFA", "RBAC"]
+    },
+    {
+      "id": "PROC-010",
+      "name": "Software Development Lifecycle (SDLC)",
+      "description": "Manage the full software development lifecycle for payment platform features including requirements gathering, design, development, code review, testing, and deployment.",
+      "tags": ["development", "SDLC", "coding", "software", "agile", "DevOps", "testing"]
+    },
+    {
+      "id": "PROC-011",
+      "name": "IT Asset and Configuration Management",
+      "description": "Track and manage all IT assets (hardware, software, licenses) through their lifecycle. Maintain a CMDB with configuration baselines and dependency mapping.",
+      "tags": ["asset", "CMDB", "configuration", "inventory", "license", "hardware", "lifecycle"]
+    },
+    {
+      "id": "PROC-012",
+      "name": "PCI-DSS Compliance Program",
+      "description": "Maintain compliance with Payment Card Industry Data Security Standard. Conduct quarterly vulnerability scans, annual penetration tests, and SAQ assessments.",
+      "tags": ["PCI-DSS", "compliance", "regulatory", "audit", "vulnerability", "penetration test"]
+    },
+    {
+      "id": "PROC-013",
+      "name": "Performance Monitoring and Capacity Planning",
+      "description": "Monitor system performance metrics, application response times, and infrastructure capacity. Plan capacity upgrades based on transaction volume forecasts.",
+      "tags": ["performance", "monitoring", "capacity", "scalability", "metrics", "alerting", "dashboard"]
+    },
+    {
+      "id": "PROC-014",
+      "name": "IT Risk Assessment and Management",
+      "description": "Conduct periodic IT risk assessments, maintain the enterprise risk register, and track risk mitigation activities. Report risk posture to the board quarterly.",
+      "tags": ["risk", "risk management", "risk assessment", "mitigation", "risk register", "governance"]
+    },
+    {
+      "id": "PROC-015",
+      "name": "Service Level Management",
+      "description": "Define, negotiate, and monitor service level agreements for internal and external IT services. Track SLA compliance and conduct periodic service reviews.",
+      "tags": ["SLA", "service level", "OLA", "service quality", "availability", "performance target"]
+    },
+    {
+      "id": "PROC-016",
+      "name": "IT Talent and Training Management",
+      "description": "Recruit, develop, and retain IT talent. Conduct skills gap analyses and provide technical training programs including security certifications.",
+      "tags": ["talent", "HR", "training", "skills", "recruitment", "competency", "certification"]
+    },
+    {
+      "id": "PROC-017",
+      "name": "Enterprise Architecture Management",
+      "description": "Maintain the enterprise architecture blueprint covering applications, data, infrastructure, and integration layers. Ensure new solutions align with architectural standards.",
+      "tags": ["architecture", "enterprise architecture", "blueprint", "standards", "integration", "technology"]
+    }
+  ]
+}

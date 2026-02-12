@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Payments — NovaPay</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .upcoming-bill {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background: var(--color-neutral-0);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-3);
+    }
+    .upcoming-bill__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .upcoming-bill__info { flex: 1; }
+    .upcoming-bill__name {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+    }
+    .upcoming-bill__due {
+      font-size: var(--font-size-xs);
+      color: var(--color-neutral-500);
+      margin-top: 2px;
+    }
+    .upcoming-bill__amount {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-bold);
+    }
+    .upcoming-bill__pay-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-primary-600);
+      color: white;
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      border: none;
+      transition: background var(--duration-fast) var(--ease-default);
+      min-height: 32px;
+    }
+    .upcoming-bill__pay-btn:hover { background: var(--color-primary-700); }
+    .payee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      padding: 0 var(--space-5);
+    }
+    .payee-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-default);
+    }
+    .payee-item:hover { background: var(--color-neutral-100); }
+    .payee-item__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    .payee-item__name {
+      font-size: 11px;
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-700);
+      text-align: center;
+    }
+    .due-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: var(--font-weight-semibold);
+    }
+    .due-badge--urgent {
+      background: var(--color-danger-50);
+      color: var(--color-danger-700);
+    }
+    .due-badge--soon {
+      background: var(--color-warning-50);
+      color: var(--color-warning-700);
+    }
+    .due-badge--safe {
+      background: var(--color-success-50);
+      color: var(--color-success-700);
+    }
+    .summary-card {
+      background: linear-gradient(135deg, var(--color-neutral-800) 0%, var(--color-neutral-700) 100%);
+      color: white;
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      margin: 0 var(--space-5) var(--space-4);
+    }
+    .summary-card__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .summary-card__label {
+      font-size: var(--font-size-sm);
+      opacity: 0.7;
+    }
+    .summary-card__value {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <div class="screen" style="background:var(--color-neutral-50);">
+
+      <!-- Status Bar -->
+      <div class="status-bar status-bar-light">
+        <span class="status-bar__time">9:41</span>
+        <div class="status-bar__icons">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="app-header__left">
+          <a href="dashboard.html" class="app-header__back" aria-label="Back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </a>
+        </div>
+        <h1 class="app-header__title">Payments</h1>
+        <div class="app-header__right">
+          <button class="btn-icon btn-ghost" aria-label="Add payee">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="screen-content">
+
+        <!-- Monthly Summary -->
+        <div class="summary-card animate-fade-in-up" style="margin-top:var(--space-4);">
+          <div class="summary-card__row">
+            <div>
+              <p class="summary-card__label">Total Due This Month</p>
+              <p class="summary-card__value">$1,284.50</p>
+            </div>
+            <div style="text-align:right;">
+              <p class="summary-card__label">Paid</p>
+              <p style="font-size:var(--font-size-lg);font-weight:var(--font-weight-bold);color:var(--color-success-500);">$856.00</p>
+            </div>
+          </div>
+          <div class="progress-bar mt-4" style="height:8px;background:rgba(255,255,255,0.15);">
+            <div class="progress-bar__fill progress-bar__fill--success" style="width:67%;background:var(--color-success-500);"></div>
+          </div>
+          <div class="d-flex justify-between mt-2">
+            <span style="font-size:11px;opacity:0.6;">67% paid</span>
+            <span style="font-size:11px;opacity:0.6;">$428.50 remaining</span>
+          </div>
+        </div>
+
+        <!-- Payee Categories -->
+        <div class="section-header">
+          <h3 class="section-header__title">Pay a Bill</h3>
+        </div>
+        <div class="payee-grid mb-4">
+          <div class="payee-item">
+            <div class="payee-item__icon" style="background:var(--color-primary-50);color:var(--color-primary-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg>
+            </div>
+            <span class="payee-item__name">Utilities</span>
+          </div>
+          <div class="payee-item">
+            <div class="payee-item__icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="payee-item__name">Rent</span>
+          </div>
+          <div class="payee-item">
+            <div class="payee-item__icon" style="background:var(--color-warning-50);color:var(--color-warning-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <span class="payee-item__name">Credit Card</span>
+          </div>
+          <div class="payee-item">
+            <div class="payee-item__icon" style="background:var(--color-danger-50);color:var(--color-danger-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <span class="payee-item__name">Phone</span>
+          </div>
+          <div class="payee-item">
+            <div class="payee-item__icon" style="background:#faf5ff;color:#7c3aed;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <span class="payee-item__name">Internet</span>
+          </div>
+          <div class="payee-item">
+            <div class="payee-item__icon" style="background:var(--color-neutral-100);color:var(--color-neutral-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <span class="payee-item__name">More</span>
+          </div>
+        </div>
+
+        <!-- Upcoming Bills -->
+        <div class="section-header">
+          <h3 class="section-header__title">Upcoming Bills</h3>
+          <button class="section-header__action">Schedule All</button>
+        </div>
+
+        <div style="padding:0 var(--space-5);">
+          <div class="upcoming-bill animate-fade-in-up stagger-1">
+            <div class="upcoming-bill__icon" style="background:var(--color-danger-50);color:var(--color-danger-600);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <div class="upcoming-bill__info">
+              <p class="upcoming-bill__name">Internet - Comcast</p>
+              <p class="upcoming-bill__due">
+                <span class="due-badge due-badge--urgent">Due Tomorrow</span>
+              </p>
+            </div>
+            <div style="text-align:right;">
+              <p class="upcoming-bill__amount">$79.99</p>
+              <button class="upcoming-bill__pay-btn" onclick="window.PrototypeKit.Toast.show('Payment of $79.99 sent to Comcast', 'success');">Pay Now</button>
+            </div>
+          </div>
+
+          <div class="upcoming-bill animate-fade-in-up stagger-2">
+            <div class="upcoming-bill__icon" style="background:var(--color-primary-50);color:var(--color-primary-600);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg>
+            </div>
+            <div class="upcoming-bill__info">
+              <p class="upcoming-bill__name">Electric - ConEdison</p>
+              <p class="upcoming-bill__due">
+                <span class="due-badge due-badge--soon">Due in 5 days</span>
+              </p>
+            </div>
+            <div style="text-align:right;">
+              <p class="upcoming-bill__amount">$142.50</p>
+              <button class="upcoming-bill__pay-btn" onclick="window.PrototypeKit.Toast.show('Payment of $142.50 sent to ConEdison', 'success');">Pay Now</button>
+            </div>
+          </div>
+
+          <div class="upcoming-bill animate-fade-in-up stagger-3">
+            <div class="upcoming-bill__icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="upcoming-bill__info">
+              <p class="upcoming-bill__name">Rent - Avalon Apts</p>
+              <p class="upcoming-bill__due">
+                <span class="due-badge due-badge--safe">Due in 18 days</span>
+              </p>
+            </div>
+            <div style="text-align:right;">
+              <p class="upcoming-bill__amount">$1,850.00</p>
+              <button class="upcoming-bill__pay-btn" style="background:var(--color-neutral-200);color:var(--color-neutral-600);">Schedule</button>
+            </div>
+          </div>
+
+          <div class="upcoming-bill animate-fade-in-up stagger-4">
+            <div class="upcoming-bill__icon" style="background:var(--color-warning-50);color:var(--color-warning-600);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="upcoming-bill__info">
+              <p class="upcoming-bill__name">Phone - T-Mobile</p>
+              <p class="upcoming-bill__due">
+                <span class="due-badge due-badge--safe">Due in 22 days</span>
+              </p>
+            </div>
+            <div style="text-align:right;">
+              <p class="upcoming-bill__amount">$85.00</p>
+              <button class="upcoming-bill__pay-btn" style="background:var(--color-neutral-200);color:var(--color-neutral-600);">Schedule</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:var(--space-6);"></div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="dashboard.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="history.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>History</span>
+        </a>
+        <a href="transfer.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          <span>Transfer</span>
+        </a>
+        <a href="cards.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Cards</span>
+        </a>
+        <a href="profile.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+  <script src="../js/prototype.js"></script>
+</body>
+</html>

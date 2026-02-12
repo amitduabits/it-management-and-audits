@@ -1,0 +1,40 @@
+{
+  "name": "Phoenix Squad",
+  "members": [
+    {
+      "name": "Priya Sharma",
+      "role": "Tech Lead",
+      "capacity_hours": 6.0,
+      "skills": ["backend", "api", "security", "auth", "data"],
+      "experience_level": "Senior"
+    },
+    {
+      "name": "Arjun Mehta",
+      "role": "Developer",
+      "capacity_hours": 7.0,
+      "skills": ["mobile", "ui", "react-native", "dashboard", "theme"],
+      "experience_level": "Mid"
+    },
+    {
+      "name": "Sneha Reddy",
+      "role": "Developer",
+      "capacity_hours": 7.0,
+      "skills": ["backend", "payments", "integrations", "scheduling", "transfers"],
+      "experience_level": "Mid"
+    },
+    {
+      "name": "Vikram Patel",
+      "role": "QA Engineer",
+      "capacity_hours": 6.5,
+      "skills": ["testing", "automation", "mobile", "accessibility", "compliance"],
+      "experience_level": "Mid"
+    },
+    {
+      "name": "Kavitha Nair",
+      "role": "Designer",
+      "capacity_hours": 5.5,
+      "skills": ["ui", "onboarding", "analytics", "profile", "chat"],
+      "experience_level": "Senior"
+    }
+  ]
+}

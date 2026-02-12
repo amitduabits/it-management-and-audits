@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance - SecureAudit Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">SA</div>
+            <span>SecureAudit Pro</span>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="/">Risk Overview</a></li>
+            <li><a href="/findings">Findings</a></li>
+            <li class="active"><a href="/compliance">Compliance</a></li>
+            <li><a href="/remediation">Remediation</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <header class="content-header">
+            <div>
+                <h1>Compliance Status</h1>
+                <p class="subtitle">Framework compliance assessment results</p>
+            </div>
+        </header>
+
+        <!-- Framework Overview Cards -->
+        <div class="compliance-overview-grid">
+            {% set frameworks = [
+                ('iso27001', iso27001, 'ISO 27001:2022', '#3b82f6'),
+                ('pci_dss', pci_dss, 'PCI-DSS v4.0', '#8b5cf6'),
+                ('nist_csf', nist_csf, 'NIST CSF v2.0', '#06b6d4')
+            ] %}
+
+            {% for key, fw, name, color in frameworks %}
+            <div class="compliance-overview-card" style="border-top: 4px solid {{ color }};">
+                <div class="compliance-card-header">
+                    <h3>{{ name }}</h3>
+                    <div class="compliance-big-score" style="color: {{ color }};">
+                        {{ fw.get('overall_percentage', 0)|round(0)|int }}%
+                    </div>
+                </div>
+                <div class="compliance-progress-bar">
+                    <div class="compliance-progress-fill" style="width: {{ fw.get('overall_percentage', 0) }}%; background: {{ color }};"></div>
+                </div>
+                <div class="compliance-card-stats">
+                    <div class="comp-stat">
+                        <span class="comp-stat-num text-pass">{{ fw.get('passed', 0) }}</span>
+                        <span class="comp-stat-label">Passed</span>
+                    </div>
+                    <div class="comp-stat">
+                        <span class="comp-stat-num text-partial">{{ fw.get('partial', 0) }}</span>
+                        <span class="comp-stat-label">Partial</span>
+                    </div>
+                    <div class="comp-stat">
+                        <span class="comp-stat-num text-fail">{{ fw.get('failed', 0) }}</span>
+                        <span class="comp-stat-label">Failed</span>
+                    </div>
+                    <div class="comp-stat">
+                        <span class="comp-stat-num text-muted">{{ fw.get('not_assessed', 0) }}</span>
+                        <span class="comp-stat-label">N/A</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Compliance Comparison Chart -->
+        <div class="chart-card" style="margin-bottom: 30px;">
+            <h3>Framework Comparison</h3>
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="complianceCompareChart"></canvas>
+            </div>
+        </div>
+
+        <!-- ISO 27001 Category Scores -->
+        {% if iso27001.get('category_scores') %}
+        <div class="compliance-detail-section">
+            <h2 class="section-title-colored" style="border-color: #3b82f6;">ISO 27001:2022 - Category Breakdown</h2>
+            <div class="category-scores-grid">
+                {% for category, score in iso27001.get('category_scores', {}).items() %}
+                <div class="cat-score-card">
+                    <div class="cat-score-header">
+                        <h4>{{ category }}</h4>
+                        <span class="cat-score-value">{{ score|round(0)|int }}%</span>
+                    </div>
+                    <div class="cat-score-bar">
+                        <div class="cat-score-fill" style="width: {{ score }}%; background: #3b82f6;"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- PCI-DSS Section Scores -->
+        {% if pci_dss.get('section_scores') %}
+        <div class="compliance-detail-section">
+            <h2 class="section-title-colored" style="border-color: #8b5cf6;">PCI-DSS v4.0 - Section Breakdown</h2>
+            <div class="category-scores-grid">
+                {% for section, score in pci_dss.get('section_scores', {}).items() %}
+                <div class="cat-score-card">
+                    <div class="cat-score-header">
+                        <h4>{{ section }}</h4>
+                        <span class="cat-score-value">{{ score|round(0)|int }}%</span>
+                    </div>
+                    <div class="cat-score-bar">
+                        <div class="cat-score-fill" style="width: {{ score }}%; background: #8b5cf6;"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- NIST CSF Function Scores -->
+        {% if nist_csf.get('function_scores') %}
+        <div class="compliance-detail-section">
+            <h2 class="section-title-colored" style="border-color: #06b6d4;">
+                NIST CSF v2.0 - Core Functions
+                {% if nist_csf.get('overall_tier_name') %}
+                <span class="tier-badge">Tier {{ nist_csf.get('overall_tier', 1) }}: {{ nist_csf.get('overall_tier_name', '') }}</span>
+                {% endif %}
+            </h2>
+            <div class="nist-functions-grid">
+                {% set func_colors = {'Identify': '#3b82f6', 'Protect': '#22c55e', 'Detect': '#eab308', 'Respond': '#f97316', 'Recover': '#8b5cf6'} %}
+                {% for func, score in nist_csf.get('function_scores', {}).items() %}
+                <div class="nist-function-card" style="border-left: 4px solid {{ func_colors.get(func, '#94a3b8') }};">
+                    <div class="nist-func-name">{{ func }}</div>
+                    <div class="nist-func-score" style="color: {{ func_colors.get(func, '#94a3b8') }};">{{ score|round(0)|int }}%</div>
+                    <div class="nist-func-bar">
+                        <div class="nist-func-fill" style="width: {{ score }}%; background: {{ func_colors.get(func, '#94a3b8') }};"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script>
+        const complianceData = {
+            labels: ['ISO 27001', 'PCI-DSS', 'NIST CSF'],
+            scores: [
+                {{ iso27001.get('overall_percentage', 0) }},
+                {{ pci_dss.get('overall_percentage', 0) }},
+                {{ nist_csf.get('overall_percentage', 0) }}
+            ],
+            passed: [{{ iso27001.get('passed',0) }}, {{ pci_dss.get('passed',0) }}, {{ nist_csf.get('passed',0) }}],
+            failed: [{{ iso27001.get('failed',0) }}, {{ pci_dss.get('failed',0) }}, {{ nist_csf.get('failed',0) }}],
+            partial: [{{ iso27001.get('partial',0) }}, {{ pci_dss.get('partial',0) }}, {{ nist_csf.get('partial',0) }}],
+        };
+        initComplianceChart('complianceCompareChart', complianceData);
+    </script>
+</body>
+</html>

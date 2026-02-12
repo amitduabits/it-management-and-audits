@@ -1,0 +1,176 @@
+{
+  "domain": "Network Security",
+  "version": "1.0",
+  "description": "Controls for network perimeter defense, internal segmentation, traffic monitoring, wireless security, and secure network architecture. Covers firewall management, intrusion detection, VPN configuration, and network access control.",
+  "framework_references": ["ISO 27001:2022 A.8.20-A.8.22", "COBIT 2019 DSS05.02", "NIST CSF PR.AC/PR.DS/DE.CM", "PCI-DSS v4.0 Req 1-2"],
+  "controls": [
+    {
+      "id": "NS-001",
+      "title": "Firewall Configuration and Rule Management",
+      "description": "Verify that firewalls are deployed at all network boundaries and configured with a default-deny policy. Firewall rules should follow the principle of least privilege, be documented with business justification, and reviewed at least semi-annually. Unused or overly permissive rules (e.g., ANY-ANY) should be identified and removed.",
+      "test_procedure": "1. Obtain network architecture diagrams and identify all firewall locations. 2. Export firewall rulesets from all in-scope firewalls. 3. Verify default-deny policy is configured (implicit deny at end of ruleset). 4. Identify overly permissive rules (ANY source, ANY destination, ANY service). 5. Verify that a rule review was completed within the past 6 months with business justifications. 6. Confirm unused rules are identified and removed.",
+      "expected_evidence": "Network architecture diagrams, firewall ruleset exports, rule review documentation with business justifications, evidence of removed/tightened rules, default-deny configuration evidence",
+      "framework_mapping": {
+        "ISO 27001": "A.8.20 Networks Security",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.AC-5 Network integrity is protected",
+        "PCI-DSS": "1.2 Restrict inbound and outbound traffic"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "NS-002",
+      "title": "Network Segmentation",
+      "description": "Verify that the network is segmented into security zones based on data sensitivity and function. Critical assets (databases, payment systems, PII stores) should be isolated in dedicated segments with controlled access between zones. Flat network architectures without segmentation represent a significant risk for lateral movement.",
+      "test_procedure": "1. Review network architecture diagrams for segmentation design. 2. Identify segments for critical data (cardholder data, PII, financial records). 3. Verify inter-segment access controls (firewall rules, ACLs) restrict traffic to required flows. 4. Conduct network scans from the general user segment to verify isolation of sensitive segments. 5. Confirm that segmentation is enforced at the network layer (VLANs + ACLs, not VLANs alone).",
+      "expected_evidence": "Network segmentation diagram, VLAN and subnet configuration, inter-segment firewall/ACL rules, network scan results demonstrating isolation, data flow documentation",
+      "framework_mapping": {
+        "ISO 27001": "A.8.22 Segregation of Networks",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.AC-5 Network integrity is protected",
+        "PCI-DSS": "1.3 Prohibit direct public access to cardholder data environment"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "NS-003",
+      "title": "Intrusion Detection and Prevention Systems (IDS/IPS)",
+      "description": "Verify that intrusion detection/prevention systems are deployed at critical network boundaries and internally within sensitive segments. IDS/IPS signatures should be updated regularly, alert thresholds should be tuned to minimize false positives, and alerts should be monitored and investigated.",
+      "test_procedure": "1. Identify IDS/IPS deployment locations on the network diagram. 2. Verify sensor placement covers internet boundaries, DMZ, and internal sensitive segments. 3. Confirm signature databases are updated automatically (daily or more frequently). 4. Review IDS/IPS alert logs for the past 30 days for volume, investigation, and resolution. 5. Verify that critical alerts are integrated with the SIEM and generate notifications.",
+      "expected_evidence": "IDS/IPS deployment diagram, sensor configuration, signature update logs, alert summary report (30 days), sample alert investigation records, SIEM integration configuration",
+      "framework_mapping": {
+        "ISO 27001": "A.8.16 Monitoring Activities",
+        "COBIT": "DSS05.07 Monitor the Infrastructure for Security-Related Events",
+        "NIST CSF": "DE.CM-1 Network is monitored to detect cybersecurity events",
+        "PCI-DSS": "11.4 Use intrusion-detection and intrusion-prevention techniques"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "NS-004",
+      "title": "Vulnerability Scanning and Patch Management",
+      "description": "Verify that network-facing systems are scanned for vulnerabilities on a regular schedule (at least quarterly, monthly preferred). Critical and high-severity vulnerabilities should be remediated within defined SLAs. The patch management process should prioritize patching based on vulnerability severity and asset criticality.",
+      "test_procedure": "1. Review the vulnerability management policy and scanning schedule. 2. Obtain vulnerability scan reports for the past 3 months. 3. Verify scan coverage includes all network segments and externally facing systems. 4. For critical/high vulnerabilities identified, verify remediation within SLA (e.g., 30 days for critical). 5. Review patch management metrics: scan coverage percentage, mean time to remediate, aging vulnerability count.",
+      "expected_evidence": "Vulnerability management policy, scan reports (3 months), remediation tracking records, patch management metrics dashboard, exception/risk acceptance records for deferred patches",
+      "framework_mapping": {
+        "ISO 27001": "A.8.8 Management of Technical Vulnerabilities",
+        "COBIT": "DSS05.01 Protect Against Malware",
+        "NIST CSF": "DE.CM-8 Vulnerability scans are performed",
+        "PCI-DSS": "6.3 Identify security vulnerabilities, 11.3 External and internal vulnerability scanning"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "NS-005",
+      "title": "Network Traffic Monitoring and Analysis",
+      "description": "Verify that network traffic is monitored for anomalous patterns that may indicate security incidents, data exfiltration, or policy violations. Network monitoring should include NetFlow/sFlow analysis, DNS monitoring, and encrypted traffic inspection where appropriate.",
+      "test_procedure": "1. Identify network traffic monitoring tools and their deployment scope. 2. Verify monitoring covers both north-south (internet boundary) and east-west (internal) traffic. 3. Review monitoring rules/signatures for detection of data exfiltration patterns. 4. Confirm DNS monitoring for domain generation algorithms (DGA) and C2 communication. 5. Review sample network anomaly alerts and their investigation outcomes.",
+      "expected_evidence": "Network monitoring tool inventory and configuration, traffic analysis rules, sample anomaly alerts and investigations, DNS monitoring configuration, monitoring coverage documentation",
+      "framework_mapping": {
+        "ISO 27001": "A.8.16 Monitoring Activities",
+        "COBIT": "DSS05.07 Monitor the Infrastructure for Security-Related Events",
+        "NIST CSF": "DE.CM-1 Network is monitored",
+        "PCI-DSS": "10.6.1 Review security events daily"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "NS-006",
+      "title": "Wireless Network Security",
+      "description": "Verify that wireless networks use enterprise-grade authentication (WPA3-Enterprise or WPA2-Enterprise with 802.1X) and encryption. Guest wireless should be isolated from the corporate network. Rogue access point detection should be enabled. Default SSIDs and credentials on access points must be changed.",
+      "test_procedure": "1. Obtain wireless network architecture and access point inventory. 2. Verify enterprise wireless uses WPA2/WPA3-Enterprise with RADIUS authentication. 3. Confirm guest wireless is on a separate VLAN with no access to corporate resources. 4. Test for rogue access point detection capability. 5. Verify default credentials are changed on all access points and wireless controllers.",
+      "expected_evidence": "Wireless architecture diagram, access point configuration, WPA2/WPA3-Enterprise and RADIUS configuration, guest network isolation configuration, rogue AP detection tool/configuration, default credential change verification",
+      "framework_mapping": {
+        "ISO 27001": "A.8.20 Networks Security",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.AC-5 Network integrity is protected",
+        "PCI-DSS": "1.2.3 Secure wireless environments, 2.1.1 Change default wireless settings"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "NS-007",
+      "title": "DMZ and Public-Facing Services",
+      "description": "Verify that public-facing services (web servers, email gateways, DNS) are deployed in a DMZ separated from the internal network. DMZ architecture should prevent direct access from the internet to internal systems. Reverse proxies or web application firewalls should protect web applications.",
+      "test_procedure": "1. Review DMZ architecture and identify all public-facing services. 2. Verify DMZ is separated from the internal network by firewalls on both sides (internet-facing and internal-facing). 3. Confirm that no direct connections are allowed from the DMZ to internal database or application servers. 4. Verify web application firewall (WAF) deployment for public-facing web applications. 5. Confirm that DMZ servers are hardened and minimally configured.",
+      "expected_evidence": "DMZ architecture diagram, firewall rules for DMZ boundaries, public service inventory, WAF configuration and rule sets, server hardening documentation for DMZ hosts",
+      "framework_mapping": {
+        "ISO 27001": "A.8.22 Segregation of Networks",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.AC-5 Network integrity is protected",
+        "PCI-DSS": "1.3 Prohibit direct public access to cardholder data environment"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "NS-008",
+      "title": "Encryption of Data in Transit",
+      "description": "Verify that sensitive data transmitted across networks is encrypted using current, strong protocols. TLS 1.2 or higher should be enforced for web traffic. Deprecated protocols (SSL 3.0, TLS 1.0, TLS 1.1) should be disabled. Internal communications containing sensitive data should also use encryption.",
+      "test_procedure": "1. Scan externally facing services for supported SSL/TLS versions and cipher suites. 2. Verify TLS 1.0 and 1.1 are disabled on all public-facing endpoints. 3. Confirm TLS 1.2+ is enforced with strong cipher suites (no RC4, DES, 3DES, MD5). 4. Review certificate management for valid, non-expired certificates from trusted CAs. 5. Verify internal sensitive traffic (database connections, API calls, LDAP) uses encryption.",
+      "expected_evidence": "SSL/TLS scan results (e.g., from SSLyze, testssl.sh), certificate inventory, cipher suite configuration, internal encryption configuration for database and API connections",
+      "framework_mapping": {
+        "ISO 27001": "A.8.24 Use of Cryptography",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.DS-2 Data-in-transit is protected",
+        "PCI-DSS": "4.2 Protect cardholder data with strong cryptography during transmission"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "NS-009",
+      "title": "Network Access Control (NAC)",
+      "description": "Verify that network access control mechanisms are in place to prevent unauthorized devices from connecting to the network. NAC should authenticate devices and verify compliance (patching, antivirus, configuration) before granting network access. Non-compliant devices should be quarantined or placed in a restricted network.",
+      "test_procedure": "1. Review NAC solution deployment and configuration. 2. Verify that NAC is enforced on all user-facing network segments. 3. Test by connecting an unauthorized device and verifying it is quarantined. 4. Confirm device compliance checks include patch level, antivirus status, and disk encryption. 5. Verify that exceptions to NAC are documented and approved.",
+      "expected_evidence": "NAC solution configuration, compliance check requirements, quarantine network configuration, test results for unauthorized device connection, NAC exception list with approvals",
+      "framework_mapping": {
+        "ISO 27001": "A.8.20 Networks Security",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.AC-1 Identities and credentials are issued, PR.AC-5 Network integrity is protected",
+        "PCI-DSS": "1.2 Restrict connections between untrusted networks"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "NS-010",
+      "title": "Network Device Hardening",
+      "description": "Verify that network devices (routers, switches, firewalls, load balancers) are hardened according to vendor best practices and industry benchmarks (CIS Benchmarks). Default credentials must be changed, unnecessary services disabled, management interfaces restricted, and firmware maintained at supported versions.",
+      "test_procedure": "1. Obtain the network device hardening standard/baseline. 2. Select a sample of 10 network devices across different types. 3. Compare device configurations against the hardening baseline. 4. Verify default credentials have been changed (admin/admin, cisco/cisco, etc.). 5. Confirm management interfaces are only accessible from designated management networks. 6. Verify firmware versions are current and supported.",
+      "expected_evidence": "Network device hardening standard, configuration audit results for sampled devices, firmware version report, management interface ACL configuration, CIS Benchmark comparison results",
+      "framework_mapping": {
+        "ISO 27001": "A.8.9 Configuration Management",
+        "COBIT": "DSS05.03 Manage Endpoint Security",
+        "NIST CSF": "PR.IP-1 Baseline configuration created and maintained",
+        "PCI-DSS": "2.2 Develop configuration standards for all system components"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "NS-011",
+      "title": "DNS Security",
+      "description": "Verify that DNS infrastructure is secured against common attack vectors including DNS spoofing, cache poisoning, and DNS tunneling. DNSSEC should be implemented for authoritative zones. Internal DNS should be separated from external DNS. DNS query logging should be enabled for monitoring.",
+      "test_procedure": "1. Review DNS architecture (internal vs. external, recursive vs. authoritative). 2. Verify that internal DNS servers are not accessible from the internet. 3. Check DNSSEC implementation for external authoritative zones. 4. Confirm DNS query logging is enabled and logs are forwarded to the SIEM. 5. Verify DNS monitoring for anomalous query patterns (tunneling, DGA).",
+      "expected_evidence": "DNS architecture diagram, DNS server configuration, DNSSEC configuration evidence, DNS query logging configuration, DNS monitoring rules and sample alerts",
+      "framework_mapping": {
+        "ISO 27001": "A.8.20 Networks Security",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.AC-5 Network integrity is protected",
+        "PCI-DSS": "1.2 Restrict connections between untrusted networks"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "NS-012",
+      "title": "Network Change and Configuration Management",
+      "description": "Verify that changes to network device configurations follow the organization's change management process. Configuration backups should be taken before changes, and a central configuration repository should maintain version history. Unauthorized configuration changes should be detected and alerted.",
+      "test_procedure": "1. Verify network changes follow the standard change management process (CM-001 through CM-012). 2. Confirm that network device configurations are backed up on a regular schedule and before changes. 3. Review the configuration management tool (e.g., RANCID, Oxidized, SolarWinds NCM) for version tracking. 4. Verify that configuration change detection is enabled and alerts on unauthorized modifications. 5. Select 5 recent network changes and verify change tickets, approvals, and pre-change backups.",
+      "expected_evidence": "Network configuration management tool, configuration backup schedule and evidence, version history for sampled devices, change detection alert configuration, network change tickets with approvals",
+      "framework_mapping": {
+        "ISO 27001": "A.8.9 Configuration Management, A.8.32 Change Management",
+        "COBIT": "BAI10 Manage Configuration, BAI06 Manage Changes",
+        "NIST CSF": "PR.IP-1 Baseline configuration created and maintained",
+        "PCI-DSS": "1.1.1 Change control procedures for network connections"
+      },
+      "risk_weight": 4
+    }
+  ]
+}

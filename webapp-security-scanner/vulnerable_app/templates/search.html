@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Search Products - VulnApp{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 2rem auto;">
+    <div class="card">
+        <h2>Product Search</h2>
+        <p class="text-muted mb-2">Search our product catalog by name or description.</p>
+
+        <!-- VULNERABILITY: No CSRF token -->
+        <!-- VULNERABILITY: Form does not sanitize input -->
+        <form method="POST" action="/search">
+            <div class="form-group">
+                <label for="query">Search Query</label>
+                <div style="display: flex; gap: 0.75rem;">
+                    <input
+                        type="text"
+                        id="query"
+                        name="query"
+                        placeholder="Search for products..."
+                        value=""
+                        style="flex: 1;"
+                    >
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- VULNERABILITY: Reflected XSS - query is rendered with |safe filter -->
+        {% if query %}
+        <div class="alert alert-warning" style="margin-top: 1rem;">
+            Showing results for: <strong>{{ query|safe }}</strong>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if results %}
+    <div class="card">
+        <h3 style="color: #2ed573; margin-bottom: 1rem;">
+            Found {{ results|length }} result(s)
+        </h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in results %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis;">
+                        {{ product.description }}
+                    </td>
+                    <td>${{ "%.2f"|format(product.price) }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.stock }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% elif query %}
+    <div class="card">
+        <p class="text-center text-muted" style="padding: 2rem 0;">
+            No products found matching your search query.
+        </p>
+    </div>
+    {% endif %}
+
+    <div class="card" style="margin-top: 1rem;">
+        <h3 style="color: #ffa502; font-size: 1.1rem; margin-bottom: 0.8rem;">
+            Vulnerability Hints
+        </h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+                <h4 style="color: #e94560; font-size: 0.95rem;">SQL Injection</h4>
+                <ul style="color: #a0a0b0; font-size: 0.85rem; margin-top: 0.5rem; padding-left: 1.2rem;">
+                    <li><code>' OR '1'='1</code></li>
+                    <li><code>' UNION SELECT 1,2,3,4,5,6,7,8--</code></li>
+                    <li><code>' ORDER BY 1--</code></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #e94560; font-size: 0.95rem;">Reflected XSS</h4>
+                <ul style="color: #a0a0b0; font-size: 0.85rem; margin-top: 0.5rem; padding-left: 1.2rem;">
+                    <li><code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></li>
+                    <li><code>&lt;img src=x onerror=alert(1)&gt;</code></li>
+                    <li><code>&lt;svg onload=alert('XSS')&gt;</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

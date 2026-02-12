@@ -1,0 +1,857 @@
+openapi: 3.0.3
+info:
+  title: Payment Processing API
+  description: |
+    A mock payment processing API designed for integration testing.
+    Supports payment creation, retrieval, listing with pagination,
+    refunds, status checks, webhooks, and OAuth2 authentication flows.
+
+    ## Authentication
+    All protected endpoints require a valid API key passed via:
+    - `Authorization: Bearer demo_key_...` header
+    - `X-API-Key: demo_key_...` header
+
+    ## Rate Limiting
+    Requests are rate-limited per API key. Standard keys allow 100
+    requests per minute. Rate limit headers are included in every response.
+
+    ## Error Handling
+    All errors follow a consistent JSON format with `type`, `message`,
+    and `status` fields. Validation errors include a detailed `errors`
+    array with per-field information.
+  version: 2.4.0
+  contact:
+    name: API Engineering Team
+    email: api-team@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:5000/v1
+    description: Local development server
+  - url: https://api.staging.example.com/v1
+    description: Staging environment
+
+tags:
+  - name: Health
+    description: Service health and metadata endpoints
+  - name: Payments
+    description: Payment creation, retrieval, and management
+  - name: Refunds
+    description: Refund creation and management
+  - name: Webhooks
+    description: Webhook endpoint registration and event management
+  - name: Authentication
+    description: OAuth2 authorization and token management
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Health check
+      description: Returns the current health status of the API service.
+      operationId: healthCheck
+      security: []
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: healthy
+                  service:
+                    type: string
+                    example: payment-api
+                  version:
+                    type: string
+                    example: "2.4.0"
+                  timestamp:
+                    type: string
+                    format: date-time
+                  checks:
+                    type: object
+                    properties:
+                      database:
+                        type: string
+                        example: connected
+                      cache:
+                        type: string
+                        example: connected
+                      queue:
+                        type: string
+                        example: connected
+
+  /api-info:
+    get:
+      tags: [Health]
+      summary: API information
+      description: Returns metadata about the API including version, supported currencies, and endpoint map.
+      operationId: apiInfo
+      security: []
+      responses:
+        "200":
+          description: API metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  version:
+                    type: string
+                  api_version:
+                    type: string
+                  environment:
+                    type: string
+                  endpoints:
+                    type: object
+                  supported_currencies:
+                    type: array
+                    items:
+                      type: string
+                  supported_payment_methods:
+                    type: array
+                    items:
+                      type: string
+
+  /payments:
+    post:
+      tags: [Payments]
+      summary: Create a payment
+      description: |
+        Create and process a new payment. The payment is processed
+        synchronously and the final status is returned immediately.
+
+        **Simulated failures:**
+        - Amount ending in `13.00` triggers a card decline
+        - Amount ending in `66.60` triggers insufficient funds
+        - Amount over `9000.00` ending in `00.00` triggers amount limit exceeded
+      operationId: createPayment
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          description: Unique key to prevent duplicate charges
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentRequest"
+            example:
+              amount: 49.99
+              currency: USD
+              description: "Order #12345 - Premium Widget"
+              customer_email: customer@example.com
+              payment_method: card
+              metadata:
+                order_id: "12345"
+      responses:
+        "201":
+          description: Payment created and completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "400":
+          description: Invalid request (malformed JSON or invalid ID)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "402":
+          description: Payment failed (card declined, insufficient funds)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    get:
+      tags: [Payments]
+      summary: List payments
+      description: List payments with pagination and optional filtering by status and currency.
+      operationId: listPayments
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, processing, completed, failed, cancelled, refunded, partially_refunded]
+        - name: currency
+          in: query
+          schema:
+            type: string
+            enum: [USD, EUR, GBP, JPY, CAD, AUD, INR]
+      responses:
+        "200":
+          description: Paginated list of payments
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentList"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "422":
+          description: Invalid pagination parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+
+  /payments/{payment_id}:
+    get:
+      tags: [Payments]
+      summary: Get a payment
+      description: Retrieve a single payment by its ID.
+      operationId: getPayment
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^pay_[a-f0-9]{24}$"
+          example: pay_abc123def456789012345678
+      responses:
+        "200":
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "400":
+          description: Invalid payment ID format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /payments/{payment_id}/status:
+    get:
+      tags: [Payments]
+      summary: Get payment status
+      description: Returns a compact status response for a payment.
+      operationId: getPaymentStatus
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  status:
+                    type: string
+                  failure_reason:
+                    type: string
+                    nullable: true
+                  updated_at:
+                    type: string
+                    format: date-time
+        "404":
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /payments/{payment_id}/cancel:
+    post:
+      tags: [Payments]
+      summary: Cancel a payment
+      description: Cancel a pending or processing payment. Returns 409 if the payment has already been completed.
+      operationId: cancelPayment
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment cancelled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "404":
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Payment cannot be cancelled in its current state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /payments/{payment_id}/refund:
+    post:
+      tags: [Refunds]
+      summary: Create a refund
+      description: |
+        Create a full or partial refund for a completed payment.
+        If no amount is specified, a full refund is issued.
+      operationId: createRefund
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRefundRequest"
+      responses:
+        "201":
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Refund"
+        "400":
+          description: Refund amount exceeds available balance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Payment not eligible for refund
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /oauth/authorize:
+    get:
+      tags: [Authentication]
+      summary: OAuth2 authorize
+      description: Initiate an OAuth2 authorization flow. Returns an authorization code.
+      operationId: oauthAuthorize
+      security: []
+      parameters:
+        - name: client_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: redirect_uri
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uri
+        - name: response_type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [code]
+        - name: scope
+          in: query
+          schema:
+            type: string
+            default: "payments:read"
+        - name: state
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Authorization code issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authorization_code:
+                    type: string
+                  redirect_uri:
+                    type: string
+                  expires_in:
+                    type: integer
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /oauth/token:
+    post:
+      tags: [Authentication]
+      summary: OAuth2 token exchange
+      description: Exchange an authorization code, refresh token, or client credentials for an access token.
+      operationId: oauthToken
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/AuthCodeTokenRequest"
+                - $ref: "#/components/schemas/RefreshTokenRequest"
+                - $ref: "#/components/schemas/ClientCredentialsRequest"
+      responses:
+        "200":
+          description: Token issued
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        "400":
+          description: Invalid grant or request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /webhooks/endpoints:
+    post:
+      tags: [Webhooks]
+      summary: Register webhook endpoint
+      description: Register a URL to receive webhook event notifications. Requires admin permissions.
+      operationId: registerWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url]
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  description: HTTPS URL for webhook delivery
+                events:
+                  type: array
+                  items:
+                    type: string
+                  description: Event types to subscribe to
+      responses:
+        "201":
+          description: Webhook endpoint registered
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+
+    get:
+      tags: [Webhooks]
+      summary: List webhook endpoints
+      operationId: listWebhooks
+      responses:
+        "200":
+          description: List of registered webhooks
+
+  /webhooks/endpoints/{webhook_id}:
+    delete:
+      tags: [Webhooks]
+      summary: Delete webhook endpoint
+      operationId: deleteWebhook
+      parameters:
+        - name: webhook_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Webhook deleted
+        "404":
+          description: Webhook not found
+
+  /webhooks/events:
+    get:
+      tags: [Webhooks]
+      summary: List webhook events
+      operationId: listWebhookEvents
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        "200":
+          description: List of webhook events
+
+  /webhooks/simulate:
+    post:
+      tags: [Webhooks]
+      summary: Simulate webhook event
+      description: Fire a test webhook event for development and testing.
+      operationId: simulateWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [event_type]
+              properties:
+                event_type:
+                  type: string
+                  enum:
+                    - payment.created
+                    - payment.completed
+                    - payment.failed
+                    - payment.cancelled
+                    - refund.created
+                    - refund.completed
+                    - refund.failed
+                payload:
+                  type: object
+      responses:
+        "200":
+          description: Webhook event simulated
+
+  /test/reset:
+    post:
+      tags: [Health]
+      summary: Reset test data
+      description: Clears all in-memory data. Requires admin API key.
+      operationId: resetTestData
+      responses:
+        "200":
+          description: Data reset successfully
+        "403":
+          description: Insufficient permissions
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key passed as a Bearer token
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key passed in a custom header
+
+  schemas:
+    CreatePaymentRequest:
+      type: object
+      required: [amount, currency, description, customer_email]
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Payment amount (must be positive)
+          example: 49.99
+        currency:
+          type: string
+          enum: [USD, EUR, GBP, JPY, CAD, AUD, INR]
+          example: USD
+        description:
+          type: string
+          maxLength: 500
+          example: "Order #12345"
+        customer_email:
+          type: string
+          format: email
+          example: customer@example.com
+        payment_method:
+          type: string
+          enum: [card, bank_transfer, wallet, crypto]
+          default: card
+        metadata:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: string
+              - type: number
+              - type: boolean
+          maxProperties: 20
+
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: "^pay_[a-f0-9]{24}$"
+        object:
+          type: string
+          enum: [payment]
+        amount:
+          type: number
+        currency:
+          type: string
+        description:
+          type: string
+        customer_email:
+          type: string
+        payment_method:
+          type: string
+        metadata:
+          type: object
+        status:
+          type: string
+          enum: [pending, processing, completed, failed, cancelled, refunded, partially_refunded]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        idempotency_key:
+          type: string
+          nullable: true
+        failure_reason:
+          type: string
+          nullable: true
+        refunded_amount:
+          type: number
+        livemode:
+          type: boolean
+
+    PaymentList:
+      type: object
+      properties:
+        object:
+          type: string
+          enum: [list]
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Payment"
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            per_page:
+              type: integer
+            total:
+              type: integer
+            total_pages:
+              type: integer
+            has_more:
+              type: boolean
+
+    CreateRefundRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Refund amount (omit for full refund)
+        reason:
+          type: string
+          enum:
+            - requested_by_customer
+            - duplicate
+            - fraudulent
+            - product_not_received
+            - product_unacceptable
+            - other
+          default: requested_by_customer
+
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: "^ref_[a-f0-9]{24}$"
+        object:
+          type: string
+          enum: [refund]
+        payment_id:
+          type: string
+        amount:
+          type: number
+        reason:
+          type: string
+        status:
+          type: string
+          enum: [pending, processing, completed, failed, rejected]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        failure_reason:
+          type: string
+          nullable: true
+
+    AuthCodeTokenRequest:
+      type: object
+      required: [grant_type, code]
+      properties:
+        grant_type:
+          type: string
+          enum: [authorization_code]
+        code:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+
+    RefreshTokenRequest:
+      type: object
+      required: [grant_type, refresh_token]
+      properties:
+        grant_type:
+          type: string
+          enum: [refresh_token]
+        refresh_token:
+          type: string
+
+    ClientCredentialsRequest:
+      type: object
+      required: [grant_type, client_id, client_secret]
+      properties:
+        grant_type:
+          type: string
+          enum: [client_credentials]
+        client_id:
+          type: string
+        client_secret:
+          type: string
+
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          enum: [Bearer]
+        expires_in:
+          type: integer
+        refresh_token:
+          type: string
+        scope:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Machine-readable error category
+              example: not_found
+            message:
+              type: string
+              description: Human-readable error description
+            status:
+              type: integer
+              description: HTTP status code
+            param:
+              type: string
+              nullable: true
+            retry_after:
+              type: integer
+              nullable: true
+
+    ValidationError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [validation_error]
+            message:
+              type: string
+            status:
+              type: integer
+              enum: [422]
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  code:
+                    type: string
+                  message:
+                    type: string
+
+security:
+  - BearerAuth: []
+  - ApiKeyHeader: []

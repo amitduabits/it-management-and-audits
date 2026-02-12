@@ -1,0 +1,148 @@
+{
+  "domain": "Data Backup and Recovery",
+  "version": "1.0",
+  "description": "Controls for data backup operations, integrity verification, offsite storage, restoration testing, and disaster recovery readiness. Ensures the organization can recover critical data and resume operations within defined recovery objectives.",
+  "framework_references": ["ISO 27001:2022 A.8.13-A.8.14", "COBIT 2019 DSS04", "NIST CSF PR.IP-4", "PCI-DSS v4.0 Req 9.5"],
+  "controls": [
+    {
+      "id": "BK-001",
+      "title": "Backup Policy and Strategy",
+      "description": "Verify that a formal data backup policy exists defining backup scope, frequency, retention periods, storage locations, and responsibilities. The policy should align with the organization's Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO) defined through business impact analysis.",
+      "test_procedure": "1. Obtain the data backup policy and strategy documents. 2. Verify the policy was approved by management and reviewed within 12 months. 3. Confirm the policy defines backup schedules for all critical data classifications. 4. Verify that RPO and RTO targets are defined and aligned with business requirements. 5. Confirm the policy addresses regulatory retention requirements for each data category.",
+      "expected_evidence": "Backup policy document, business impact analysis defining RPO/RTO, backup schedule matrix (system, frequency, retention), management approval documentation",
+      "framework_mapping": {
+        "ISO 27001": "A.8.13 Information Backup",
+        "COBIT": "DSS04.01 Define the Business Continuity Policy",
+        "NIST CSF": "PR.IP-4 Backups of information are conducted",
+        "PCI-DSS": "9.5 Protect media with backups"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "BK-002",
+      "title": "Backup Execution and Scheduling",
+      "description": "Verify that backups are executed per the defined schedule for all critical systems and data stores. Backup jobs should be automated, monitored for success/failure, and failures should be investigated and resolved promptly. Coverage should include databases, file systems, application configurations, and system state.",
+      "test_procedure": "1. Obtain backup job schedules from the backup management platform. 2. Compare scheduled backups against the backup policy requirements for completeness. 3. Review backup job logs for the past 30 days for success/failure rates. 4. For failed backup jobs, verify that failures were investigated and resolved. 5. Confirm that backup monitoring alerts are configured and reviewed daily.",
+      "expected_evidence": "Backup job schedules, backup log reports (30 days), failure investigation/resolution records, monitoring alert configuration, backup coverage matrix",
+      "framework_mapping": {
+        "ISO 27001": "A.8.13 Information Backup",
+        "COBIT": "DSS04.07 Manage Backup Arrangements",
+        "NIST CSF": "PR.IP-4 Backups of information are conducted",
+        "PCI-DSS": "9.5.1 Store backup media in a secure location"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "BK-003",
+      "title": "Backup Integrity Verification",
+      "description": "Verify that backup integrity is validated to ensure data can be successfully restored when needed. Integrity checks should include checksum verification, periodic test restores, and validation of data completeness. Relying solely on backup job success status is insufficient.",
+      "test_procedure": "1. Review the backup integrity verification procedure. 2. Confirm that automated checksum or hash verification is enabled for backup jobs. 3. Verify that test restores are performed on a defined schedule (e.g., monthly). 4. Review test restore results for the past 6 months. 5. Confirm that test restores validate data accessibility and application functionality, not just file-level recovery.",
+      "expected_evidence": "Integrity verification procedure, checksum verification configuration, test restore schedule and results (6 months), application-level restore validation evidence",
+      "framework_mapping": {
+        "ISO 27001": "A.8.13 Information Backup",
+        "COBIT": "DSS04.07 Manage Backup Arrangements",
+        "NIST CSF": "PR.IP-4 Backups of information are conducted",
+        "PCI-DSS": "9.5 Protect media with backups"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "BK-004",
+      "title": "Offsite and Geographic Redundancy",
+      "description": "Verify that backup copies are stored at an offsite location geographically separated from the primary data center. Offsite storage should be sufficiently distant to survive regional disasters. For cloud environments, verify that backups are replicated to a different availability zone or region.",
+      "test_procedure": "1. Identify all backup storage locations (primary, offsite, cloud). 2. Verify geographic separation between primary and offsite locations (minimum 100 miles for disaster resilience). 3. For cloud backups, confirm cross-region or cross-availability-zone replication. 4. Verify that offsite backup copies are encrypted in transit and at rest. 5. Confirm that offsite storage is subject to the same access controls as primary storage.",
+      "expected_evidence": "Backup storage location documentation, geographic distance verification, cloud replication configuration, encryption configuration for offsite copies, access control evidence for offsite storage",
+      "framework_mapping": {
+        "ISO 27001": "A.8.13 Information Backup",
+        "COBIT": "DSS04.07 Manage Backup Arrangements",
+        "NIST CSF": "PR.IP-4 Backups of information are conducted",
+        "PCI-DSS": "9.5.1 Store backup media in a secure location"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "BK-005",
+      "title": "Backup Encryption and Security",
+      "description": "Verify that backup data is encrypted both in transit and at rest using industry-standard encryption algorithms (AES-256 or equivalent). Encryption keys should be managed separately from the backup data and subject to key management lifecycle controls. Access to backup systems and media should be restricted to authorized personnel.",
+      "test_procedure": "1. Review backup encryption configuration for all backup targets. 2. Verify encryption algorithm meets minimum standards (AES-256). 3. Confirm encryption keys are managed through a key management system separate from backup storage. 4. Review access controls on backup systems and media libraries. 5. Verify that backup data cannot be restored without proper authentication and authorization.",
+      "expected_evidence": "Backup encryption configuration, key management procedures, key storage location documentation, backup system access control list, encryption verification test results",
+      "framework_mapping": {
+        "ISO 27001": "A.8.24 Use of Cryptography",
+        "COBIT": "DSS05.03 Manage Endpoint Security",
+        "NIST CSF": "PR.DS-1 Data-at-rest is protected",
+        "PCI-DSS": "3.4 Render PAN unreadable everywhere it is stored"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "BK-006",
+      "title": "Backup Retention and Lifecycle Management",
+      "description": "Verify that backup retention periods comply with regulatory, legal, and business requirements. A retention schedule should exist mapping data categories to retention periods. Expired backups should be securely destroyed. Long-term archival backups should be readable and recoverable even after technology changes.",
+      "test_procedure": "1. Obtain the backup retention schedule. 2. Verify retention periods align with regulatory requirements (SOX 7 years, HIPAA 6 years, etc.). 3. Confirm that expired backups are automatically purged or securely destroyed. 4. Verify that destruction of backup media is documented and auditable. 5. For long-term archives, confirm media format remains readable and tested periodically.",
+      "expected_evidence": "Backup retention schedule, regulatory requirement mapping, automated purge configuration, media destruction records, long-term archive readability test results",
+      "framework_mapping": {
+        "ISO 27001": "A.8.10 Information Deletion",
+        "COBIT": "DSS04.07 Manage Backup Arrangements",
+        "NIST CSF": "PR.IP-4 Backups of information are conducted",
+        "PCI-DSS": "3.1 Data retention and disposal policies"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "BK-007",
+      "title": "Disaster Recovery Plan (DRP)",
+      "description": "Verify that a documented Disaster Recovery Plan exists for restoring IT services in the event of a major disruption. The DRP should define recovery procedures for critical systems, role assignments, activation criteria, communication procedures, and recovery sequence priorities aligned with business impact analysis.",
+      "test_procedure": "1. Obtain the current Disaster Recovery Plan. 2. Verify the DRP was approved by management and reviewed within 12 months. 3. Confirm the DRP defines recovery procedures for all critical systems and applications. 4. Verify recovery sequence is prioritized based on business impact analysis. 5. Confirm the DRP includes vendor contacts, escalation procedures, and alternate site information.",
+      "expected_evidence": "Disaster Recovery Plan document, management approval, business impact analysis, critical system recovery priority list, vendor contact lists, alternate processing site agreements",
+      "framework_mapping": {
+        "ISO 27001": "A.5.30 ICT Readiness for Business Continuity",
+        "COBIT": "DSS04.03 Develop and Implement a Business Continuity Response",
+        "NIST CSF": "RC.RP-1 Recovery plan is executed",
+        "PCI-DSS": "12.10 Implement an incident response plan"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "BK-008",
+      "title": "Disaster Recovery Testing",
+      "description": "Verify that the Disaster Recovery Plan is tested at least annually. Testing should validate that critical systems can be recovered within defined RTO and RPO targets. Test types may include tabletop exercises, component recovery tests, or full failover tests. Results should be documented and gaps addressed.",
+      "test_procedure": "1. Obtain DR test plans and results for the past 12 months. 2. Verify that DR testing covers all critical systems identified in the DRP. 3. Confirm that recovery times achieved during testing meet RTO targets. 4. Confirm that data recovery point during testing meets RPO targets. 5. Review action items from DR tests and verify gaps were addressed.",
+      "expected_evidence": "DR test plan, test execution records, RTO/RPO achievement results, gap analysis and remediation plan, post-test report with lessons learned",
+      "framework_mapping": {
+        "ISO 27001": "A.5.30 ICT Readiness for Business Continuity",
+        "COBIT": "DSS04.04 Exercise, Test, and Review the BCP",
+        "NIST CSF": "RC.RP-1 Recovery plan is executed",
+        "PCI-DSS": "12.10.2 Review and test the plan annually"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "BK-009",
+      "title": "Database Backup and Point-in-Time Recovery",
+      "description": "Verify that database backups support point-in-time recovery through a combination of full backups, differential/incremental backups, and transaction log backups. Critical databases should support recovery to any point within the defined RPO window.",
+      "test_procedure": "1. Review database backup strategy (full, differential, transaction log schedule). 2. Verify transaction log backups are taken at intervals matching the RPO (e.g., every 15 minutes for 15-minute RPO). 3. Perform or review a point-in-time recovery test to verify capability. 4. Confirm that database backup monitoring includes transaction log backup failures. 5. Verify that database backup procedures address all database platforms in use.",
+      "expected_evidence": "Database backup schedule, transaction log backup configuration, point-in-time recovery test results, database backup monitoring configuration, multi-platform backup coverage documentation",
+      "framework_mapping": {
+        "ISO 27001": "A.8.13 Information Backup",
+        "COBIT": "DSS04.07 Manage Backup Arrangements",
+        "NIST CSF": "PR.IP-4 Backups of information are conducted",
+        "PCI-DSS": "9.5 Protect media with backups"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "BK-010",
+      "title": "Backup Monitoring and Reporting",
+      "description": "Verify that backup operations are actively monitored with automated alerting for failures. Regular backup status reports should be generated and reviewed by management. Key metrics should include backup success rate, backup window compliance, storage capacity utilization, and recovery test results.",
+      "test_procedure": "1. Review backup monitoring configuration and alert rules. 2. Verify alerts are sent to appropriate operations staff for backup failures. 3. Obtain backup status reports for the past 3 months. 4. Confirm reports include key metrics (success rate, failures, capacity). 5. Verify that management reviews backup reports on a regular cadence (weekly or monthly).",
+      "expected_evidence": "Backup monitoring tool configuration, alert configuration and distribution list, sample backup status reports (3 months), management review evidence (meeting minutes, sign-offs), backup metrics dashboard",
+      "framework_mapping": {
+        "ISO 27001": "A.8.13 Information Backup",
+        "COBIT": "DSS04.07 Manage Backup Arrangements",
+        "NIST CSF": "PR.IP-4 Backups of information are conducted",
+        "PCI-DSS": "9.5 Protect media with backups"
+      },
+      "risk_weight": 3
+    }
+  ]
+}

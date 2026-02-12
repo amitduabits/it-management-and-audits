@@ -1,0 +1,218 @@
+{
+  "domain": "Access Control",
+  "version": "1.0",
+  "description": "Controls for identity management, authentication, authorization, and access monitoring. Covers the complete identity lifecycle from provisioning through de-provisioning, including privileged access management and access review processes.",
+  "framework_references": ["ISO 27001:2022 A.5.15-A.5.18", "COBIT 2019 DSS05", "NIST CSF PR.AC", "PCI-DSS v4.0 Req 7-8"],
+  "controls": [
+    {
+      "id": "AC-001",
+      "title": "User Account Provisioning Process",
+      "description": "Verify that a formal, documented process exists for provisioning user accounts. The process should require authorized approval before account creation, define standard access profiles based on job roles, and include documentation of the business justification for access granted.",
+      "test_procedure": "1. Obtain the user provisioning policy/procedure document. 2. Select a sample of 25 user accounts created in the past 6 months. 3. For each sampled account, verify that an approved access request exists. 4. Confirm that access granted matches the approved request. 5. Verify the approver had the authority to approve the request.",
+      "expected_evidence": "User provisioning policy document, sample access request forms with approvals, IAM system screenshots showing account creation workflow, role-based access matrix",
+      "framework_mapping": {
+        "ISO 27001": "A.5.16 Identity Management",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-1 Identities and credentials are issued",
+        "PCI-DSS": "7.2 Access control systems"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "AC-002",
+      "title": "User Account De-Provisioning (Termination)",
+      "description": "Verify that user accounts are disabled or removed promptly when an employee is terminated, transferred, or no longer requires access. The de-provisioning process should be triggered by HR notifications and completed within defined SLA timeframes (e.g., same day for involuntary terminations, within 3 business days for voluntary departures).",
+      "test_procedure": "1. Obtain a list of employees terminated in the past 6 months from HR. 2. Cross-reference against active accounts in all in-scope systems (AD, VPN, email, applications). 3. For a sample of 25 terminated users, verify account disable/removal dates. 4. Calculate the time delta between termination date and account disable date. 5. Identify any accounts that remain active post-termination.",
+      "expected_evidence": "HR termination list, Active Directory disable date reports, access removal tickets/evidence, VPN and application access logs showing account status changes",
+      "framework_mapping": {
+        "ISO 27001": "A.5.18 Access Rights",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-1 Identities and credentials are issued",
+        "PCI-DSS": "8.1.3 Immediately revoke access for terminated users"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "AC-003",
+      "title": "Password Policy Enforcement",
+      "description": "Verify that password policies enforce minimum complexity, length, and rotation requirements consistent with current best practices and regulatory requirements. Policies should address minimum length (12+ characters), complexity rules, password history (last 12-24 passwords), account lockout thresholds, and maximum password age.",
+      "test_procedure": "1. Review the documented password policy. 2. Extract Active Directory / IAM password policy settings programmatically. 3. Compare configured settings against documented policy. 4. Compare documented policy against framework requirements (NIST SP 800-63B). 5. Test a sample account to confirm lockout behavior functions correctly.",
+      "expected_evidence": "Password policy document, Active Directory Group Policy settings export (net accounts output or GPO screenshots), IAM system password configuration, lockout test results",
+      "framework_mapping": {
+        "ISO 27001": "A.5.17 Authentication Information",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-7 Users are authenticated",
+        "PCI-DSS": "8.3.6 Minimum password length and complexity"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "AC-004",
+      "title": "Multi-Factor Authentication (MFA)",
+      "description": "Verify that multi-factor authentication is enforced for all remote access, privileged accounts, and access to sensitive data and systems. MFA should use at least two distinct factors: something the user knows (password), something the user has (token/phone), or something the user is (biometric).",
+      "test_procedure": "1. Obtain MFA policy and determine which systems/scenarios require MFA. 2. Test VPN login to confirm MFA challenge is presented. 3. Test administrative console login (AD admin, cloud admin) for MFA enforcement. 4. Review MFA enrollment reports to identify users/accounts without MFA. 5. Verify MFA cannot be bypassed through legacy authentication protocols.",
+      "expected_evidence": "MFA policy document, MFA enrollment statistics, VPN configuration showing MFA requirement, conditional access policies, test login screenshots demonstrating MFA prompts",
+      "framework_mapping": {
+        "ISO 27001": "A.5.17 Authentication Information",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-7 Users are authenticated",
+        "PCI-DSS": "8.4 Multi-factor authentication"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "AC-005",
+      "title": "Privileged Access Management (PAM)",
+      "description": "Verify that privileged accounts (administrator, root, service accounts with elevated rights) are subject to enhanced controls including restricted assignment, regular review, session monitoring, and credential vaulting. The number of privileged accounts should be minimized and justified.",
+      "test_procedure": "1. Obtain a complete list of all privileged accounts across in-scope systems. 2. For each privileged account, verify business justification and named owner. 3. Confirm privileged accounts use separate credentials from standard accounts. 4. Verify PAM tool (if deployed) is enforcing credential checkout and session recording. 5. Review privileged access usage logs for the past 90 days for anomalies.",
+      "expected_evidence": "Privileged account inventory, PAM tool configuration and reports, privilege usage logs, business justification documentation for each privileged account, session recording samples",
+      "framework_mapping": {
+        "ISO 27001": "A.8.2 Privileged Access Rights",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-4 Access permissions are managed",
+        "PCI-DSS": "7.2.2 Restrict access based on job function"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "AC-006",
+      "title": "Periodic Access Reviews (User Access Recertification)",
+      "description": "Verify that user access rights are reviewed at least quarterly for privileged accounts and semi-annually for standard accounts. Access reviews should be performed by appropriate business owners (not IT administrators), and any inappropriate access identified should be promptly revoked.",
+      "test_procedure": "1. Obtain the access review policy and schedule. 2. Request evidence of the last two completed access review cycles. 3. Verify that reviews were completed by authorized business owners. 4. For access flagged for removal during review, verify it was actually revoked. 5. Confirm review completion rates meet policy thresholds (e.g., 95%+).",
+      "expected_evidence": "Access review policy, completed review sign-offs, IAM recertification campaign reports, evidence of access revocation for flagged accounts, review completion metrics",
+      "framework_mapping": {
+        "ISO 27001": "A.5.18 Access Rights",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-4 Access permissions are managed",
+        "PCI-DSS": "7.2.3 Review user access privileges periodically"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "AC-007",
+      "title": "Role-Based Access Control (RBAC) Implementation",
+      "description": "Verify that access is granted through defined roles aligned to job functions rather than through individual permission assignments. Roles should follow the principle of least privilege, and role definitions should be documented and approved by business process owners.",
+      "test_procedure": "1. Obtain the role definition matrix mapping roles to permissions. 2. Select 15 users across different departments and verify their assigned roles match their job function. 3. Identify any users with direct permission grants outside of roles. 4. Check for role accumulation (users with multiple conflicting roles). 5. Verify roles are reviewed and updated when job functions change.",
+      "expected_evidence": "RBAC matrix document, IAM system role configuration, sample user-to-role assignments, exception list for direct permission grants, role review documentation",
+      "framework_mapping": {
+        "ISO 27001": "A.5.15 Access Control",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-4 Access permissions are managed",
+        "PCI-DSS": "7.2.1 Access control model"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "AC-008",
+      "title": "Segregation of Duties (SoD)",
+      "description": "Verify that access controls enforce segregation of incompatible duties. No single individual should be able to initiate, approve, and execute sensitive transactions (e.g., fund transfers, user provisioning, change deployment). Conflicting role combinations should be identified and monitored.",
+      "test_procedure": "1. Obtain the SoD conflict matrix defining incompatible role combinations. 2. Run an SoD conflict report from the IAM/ERP system. 3. For identified conflicts, verify that compensating controls exist and are documented. 4. Test a sample of 5 high-risk processes to confirm separation is enforced (e.g., can a developer deploy to production?). 5. Review SoD exception approvals.",
+      "expected_evidence": "SoD conflict matrix, SoD violation report, compensating control documentation, process walkthrough evidence, exception approval records",
+      "framework_mapping": {
+        "ISO 27001": "A.5.3 Segregation of Duties",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-4 Access permissions are managed",
+        "SOX": "Section 404 ITGC - Segregation of Duties"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "AC-009",
+      "title": "Service Account Management",
+      "description": "Verify that service accounts (non-interactive accounts used by applications and automated processes) are inventoried, assigned to responsible owners, use strong or managed credentials, and have their access rights limited to the minimum required for their function.",
+      "test_procedure": "1. Obtain a complete inventory of service accounts. 2. Verify each service account has a documented owner and purpose. 3. Check that service accounts are excluded from interactive login capabilities. 4. Verify password rotation schedule for service accounts (90 days or managed via PAM). 5. Confirm service accounts are not granted domain admin or equivalent privileges unless strictly necessary.",
+      "expected_evidence": "Service account inventory with owners, AD/IAM configuration showing login restrictions, PAM credential rotation logs, service account permission reports",
+      "framework_mapping": {
+        "ISO 27001": "A.5.16 Identity Management",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-1 Identities and credentials are issued",
+        "PCI-DSS": "8.6 Authentication for application and system accounts"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "AC-010",
+      "title": "Remote Access Controls",
+      "description": "Verify that remote access to the corporate network and systems is controlled through approved methods (VPN, virtual desktop, zero trust network access), requires MFA, and is logged and monitored. Split tunneling should be disabled or controlled.",
+      "test_procedure": "1. Review the remote access policy. 2. Identify all approved remote access methods. 3. Test VPN connection to verify MFA enforcement and endpoint compliance checks. 4. Review VPN/remote access logs for the past 30 days for anomalies (off-hours access, unusual geolocations). 5. Verify that remote access from unmanaged devices is restricted or sandboxed.",
+      "expected_evidence": "Remote access policy, VPN configuration documentation, MFA enforcement evidence, remote access usage logs, endpoint compliance check configuration",
+      "framework_mapping": {
+        "ISO 27001": "A.6.7 Remote Working",
+        "COBIT": "DSS05.02 Manage Network and Connectivity Security",
+        "NIST CSF": "PR.AC-3 Remote access is managed",
+        "PCI-DSS": "8.4.2 MFA for all remote network access"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "AC-011",
+      "title": "Physical Access Controls to IT Facilities",
+      "description": "Verify that physical access to data centers, server rooms, network closets, and other IT facilities is restricted to authorized personnel through badge/biometric access controls, visitor logs, and surveillance monitoring.",
+      "test_procedure": "1. Inspect physical access controls at the data center / server room. 2. Review the list of personnel with physical access badges. 3. Verify access list is reviewed at least quarterly. 4. Review visitor logs for the past 90 days for proper escort documentation. 5. Confirm surveillance cameras are operational and footage is retained per policy.",
+      "expected_evidence": "Physical access policy, badge access list, access review records, visitor logs with escort signatures, CCTV operational verification, photo evidence of physical controls",
+      "framework_mapping": {
+        "ISO 27001": "A.7.1-A.7.4 Physical Controls",
+        "COBIT": "DSS05.05 Manage Physical Access to IT Assets",
+        "NIST CSF": "PR.AC-2 Physical access is managed",
+        "PCI-DSS": "9.1-9.4 Physical access requirements"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "AC-012",
+      "title": "Dormant and Inactive Account Management",
+      "description": "Verify that accounts inactive for a defined period (e.g., 90 days) are automatically disabled and reviewed for removal. The organization should have an automated process to detect and handle dormant accounts to reduce the attack surface.",
+      "test_procedure": "1. Review the policy for dormant account management including inactivity thresholds. 2. Extract a list of all accounts with last login date older than 90 days. 3. Verify that automated processes exist to flag or disable inactive accounts. 4. For identified dormant accounts, determine if they represent legitimate exceptions. 5. Confirm that disabled dormant accounts have a defined retention and purge schedule.",
+      "expected_evidence": "Dormant account policy, AD/IAM report of inactive accounts, automated disable script/process documentation, exception list with justifications, account purge records",
+      "framework_mapping": {
+        "ISO 27001": "A.5.18 Access Rights",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-1 Identities and credentials are issued",
+        "PCI-DSS": "8.1.4 Remove inactive accounts within 90 days"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "AC-013",
+      "title": "Access Logging and Monitoring",
+      "description": "Verify that authentication events (successful logins, failed logins, account lockouts, privilege escalation) are logged, retained for an adequate period, and actively monitored for suspicious patterns. Alerts should be configured for high-risk events.",
+      "test_procedure": "1. Review logging configuration for authentication systems (AD, LDAP, SSO). 2. Verify log retention meets policy and regulatory requirements (minimum 1 year). 3. Confirm logs are forwarded to a centralized SIEM or log management platform. 4. Review alert rules for authentication anomalies (brute force, impossible travel, off-hours admin login). 5. Request evidence of a recent alert investigation.",
+      "expected_evidence": "Logging policy, SIEM configuration for auth log sources, log retention settings, alert rule definitions, sample alert investigation ticket",
+      "framework_mapping": {
+        "ISO 27001": "A.8.15 Logging",
+        "COBIT": "DSS05.07 Monitor Security Events",
+        "NIST CSF": "DE.AE-3 Event data are collected",
+        "PCI-DSS": "10.2 Audit trail for access events"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "AC-014",
+      "title": "Single Sign-On (SSO) and Centralized Authentication",
+      "description": "Verify that the organization uses centralized identity management (Active Directory, LDAP, SAML/OIDC-based SSO) for authentication to enterprise applications. Local application accounts should be minimized and justified. Centralized authentication enables consistent policy enforcement and simplifies de-provisioning.",
+      "test_procedure": "1. Obtain an inventory of in-scope applications. 2. For each application, determine authentication method (SSO, LDAP, local). 3. Identify applications using local authentication and verify business justification. 4. Test SSO login flow for a sample of 5 integrated applications. 5. Verify that SSO session timeout and re-authentication policies are configured.",
+      "expected_evidence": "Application inventory with authentication method, SSO/IdP configuration, list of applications with local accounts and justifications, SSO session policy configuration",
+      "framework_mapping": {
+        "ISO 27001": "A.5.17 Authentication Information",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-7 Users are authenticated",
+        "PCI-DSS": "8.3 Secure authentication for users and administrators"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "AC-015",
+      "title": "Temporary and Emergency Access Procedures",
+      "description": "Verify that formal procedures exist for granting temporary or emergency access (break-glass accounts). Such access should be time-limited, require senior management approval, be fully logged, and be subject to post-use review. Break-glass credentials should be securely stored and changed after each use.",
+      "test_procedure": "1. Review the temporary/emergency access procedure. 2. Identify all break-glass accounts and their storage mechanism. 3. Review the last 6 months of emergency access usage events. 4. For each emergency access event, verify approval, time limitation, and post-use review. 5. Confirm break-glass credentials were changed after each use.",
+      "expected_evidence": "Emergency access procedure document, break-glass account inventory, usage log entries, approval records for each use, credential rotation evidence post-use, post-use review documentation",
+      "framework_mapping": {
+        "ISO 27001": "A.5.18 Access Rights",
+        "COBIT": "DSS05.04 Manage User Identity and Logical Access",
+        "NIST CSF": "PR.AC-4 Access permissions are managed",
+        "PCI-DSS": "7.2 Access control systems"
+      },
+      "risk_weight": 4
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+# === Master .gitignore ===
+
+# Original setup/prompt files (do not upload)
+CLAUDE_CODE_SETUP_AND_PROMPTS.md
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+
+# Documents (do not upload)
+*.docx
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.pytest_cache/
+htmlcov/
+.coverage
+venv/
+env/
+.venv/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfplan
+terraform.tfvars
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Database files (generated at runtime)
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+*.log
+logs/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Report outputs (generated at runtime)
+reports/*.html
+output/
+
+# Hardhat/Solidity
+artifacts/
+cache/
+typechain-types/
+
+# Misc
+*.tmp
+*.bak
+*.orig
+_generate_data.py

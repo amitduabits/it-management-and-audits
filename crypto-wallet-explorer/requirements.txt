@@ -1,0 +1,38 @@
+# Crypto Wallet Explorer -- Dependencies
+# =======================================
+#
+# WARNING: EDUCATIONAL USE ONLY -- TESTNET ONLY
+# Never use this project for real cryptocurrency management.
+#
+# Install with: pip install -r requirements.txt
+
+# Ethereum account management, transaction signing, and key handling
+eth-account>=0.11.0,<1.0.0
+
+# Web3.py -- Ethereum JSON-RPC client
+web3>=6.15.0,<7.0.0
+
+# BIP-39 mnemonic generation and validation
+mnemonic>=0.20,<1.0.0
+
+# Rich terminal formatting (tables, trees, panels, colors)
+rich>=13.7.0,<14.0.0
+
+# Click -- command-line interface framework
+click>=8.1.0,<9.0.0
+
+# HTTP requests for Etherscan API calls
+requests>=2.31.0,<3.0.0
+
+# Environment variable management
+python-dotenv>=1.0.0,<2.0.0
+
+# Ethereum key utilities
+eth-keys>=0.5.0,<1.0.0
+
+# Ethereum utility functions (checksums, encoding)
+eth-utils>=4.0.0,<5.0.0
+
+# Testing
+pytest>=8.0.0,<9.0.0
+pytest-mock>=3.12.0,<4.0.0

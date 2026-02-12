@@ -1,0 +1,143 @@
+# SecureAudit Pro - Risk Thresholds and Severity Configuration
+# =============================================================
+#
+# Defines risk scoring parameters, severity thresholds, and
+# category weights for the risk assessment engine.
+
+# Risk score thresholds (0-10 scale)
+risk_levels:
+  critical:
+    min: 8.0
+    max: 10.0
+    label: "Critical"
+    color: "#dc2626"
+    description: "Immediate action required. Active exploitation likely."
+    response_time: "24 hours"
+
+  high:
+    min: 6.0
+    max: 7.99
+    label: "High"
+    color: "#f97316"
+    description: "Urgent remediation needed. Significant risk to operations."
+    response_time: "7 days"
+
+  medium:
+    min: 4.0
+    max: 5.99
+    label: "Medium"
+    color: "#eab308"
+    description: "Planned remediation required. Moderate risk exposure."
+    response_time: "30 days"
+
+  low:
+    min: 2.0
+    max: 3.99
+    label: "Low"
+    color: "#22c55e"
+    description: "Address during next maintenance window."
+    response_time: "90 days"
+
+  minimal:
+    min: 0.0
+    max: 1.99
+    label: "Minimal"
+    color: "#06b6d4"
+    description: "Informational. Monitor and address as resources allow."
+    response_time: "365 days"
+
+# CVSS-aligned severity scoring
+severity_scores:
+  critical: 9.5
+  high: 7.5
+  medium: 5.0
+  low: 2.5
+  info: 0.5
+
+# Risk category weights (must sum to 1.0)
+category_weights:
+  network_security: 0.25      # Network infrastructure, ports, services
+  application_security: 0.20  # Web application, headers, CORS, cookies
+  data_protection: 0.20       # Encryption, SSL/TLS, email security
+  compliance: 0.15            # Framework compliance gaps
+  operational_security: 0.10  # Configuration, change management
+  third_party_risk: 0.10      # Third-party integrations, supply chain
+
+# Compliance score thresholds
+compliance_thresholds:
+  excellent:
+    min: 90
+    label: "Excellent"
+    color: "#22c55e"
+  good:
+    min: 70
+    label: "Good"
+    color: "#84cc16"
+  acceptable:
+    min: 50
+    label: "Acceptable"
+    color: "#eab308"
+  poor:
+    min: 30
+    label: "Poor"
+    color: "#f97316"
+  critical:
+    min: 0
+    label: "Critical"
+    color: "#ef4444"
+
+# Risk matrix configuration (5x5)
+risk_matrix:
+  likelihood_levels:
+    1: "Rare"
+    2: "Unlikely"
+    3: "Possible"
+    4: "Likely"
+    5: "Almost Certain"
+
+  impact_levels:
+    1: "Negligible"
+    2: "Minor"
+    3: "Moderate"
+    4: "Major"
+    5: "Catastrophic"
+
+  # Risk appetite - maximum acceptable risk score
+  risk_appetite: 8  # Risks scoring above this require immediate attention
+
+# Remediation phase timeframes
+remediation_phases:
+  quick_wins:
+    label: "Quick Wins"
+    timeframe: "0-30 days"
+    max_effort_hours: 8
+    description: "Low-effort, high-impact configuration changes"
+
+  short_term:
+    label: "Short-Term"
+    timeframe: "30-90 days"
+    max_effort_hours: 80
+    description: "Moderate effort improvements and tool deployments"
+
+  long_term:
+    label: "Long-Term"
+    timeframe: "90-365 days"
+    max_effort_hours: 500
+    description: "Strategic architecture and process improvements"
+
+# Report configuration
+reporting:
+  executive:
+    max_recommendations: 5
+    include_compliance: true
+    include_trend: true
+
+  technical:
+    include_evidence: true
+    include_compliance_refs: true
+    cvss_threshold: 0.0  # Minimum CVSS to include (0 = all)
+
+  roadmap:
+    include_effort_estimates: true
+    include_team_assignments: true
+    include_dependencies: true

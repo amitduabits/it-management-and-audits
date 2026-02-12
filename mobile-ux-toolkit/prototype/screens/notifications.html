@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Notifications — NovaPay</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .notif-header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-5);
+    }
+    .notif-count {
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-500);
+    }
+    .notif-count strong {
+      color: var(--color-primary-600);
+    }
+    .mark-read-btn {
+      font-size: var(--font-size-sm);
+      color: var(--color-primary-600);
+      font-weight: var(--font-weight-medium);
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: auto;
+    }
+    .notif-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .notif-date-label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-neutral-400);
+      padding: var(--space-4) var(--space-5) var(--space-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <div class="screen" style="background:var(--color-neutral-50);">
+
+      <!-- Status Bar -->
+      <div class="status-bar status-bar-light">
+        <span class="status-bar__time">9:41</span>
+        <div class="status-bar__icons">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="app-header__left">
+          <a href="dashboard.html" class="app-header__back" aria-label="Back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </a>
+        </div>
+        <h1 class="app-header__title">Notifications</h1>
+        <div class="app-header__right">
+          <button class="btn-icon btn-ghost" aria-label="Notification settings">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9c.07-.39-.04-.8-.33-1.12l-.06-.06a2 2 0 012.83-2.83l.06.06c.32.29.73.4 1.12.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51c.39.07.8-.04 1.12-.33l.06-.06a2 2 0 012.83 2.83l-.06.06c-.29.32-.4.73-.33 1.12V9c.1.5.51.88 1.01 1H21a2 2 0 010 4h-.09c-.5.1-.88.51-1 1.01z"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Tabs -->
+      <div class="tabs" data-tab-container>
+        <button class="tab tab--active" data-tab="tab-all">All</button>
+        <button class="tab" data-tab="tab-transactions">Transactions</button>
+        <button class="tab" data-tab="tab-alerts">Alerts</button>
+        <button class="tab" data-tab="tab-offers">Offers</button>
+      </div>
+
+      <div class="screen-content">
+
+        <!-- Notification count & actions -->
+        <div class="notif-header-actions">
+          <span class="notif-count"><strong>4</strong> unread notifications</span>
+          <button class="mark-read-btn" onclick="document.querySelectorAll('.notification-item--unread').forEach(function(el){el.classList.remove('notification-item--unread');el.querySelector('.notification-item__dot').style.display='none';});this.textContent='All read';">Mark all read</button>
+        </div>
+
+        <!-- All tab panel -->
+        <div id="tab-all" class="tab-panel tab-panel--active">
+          <p class="notif-date-label">Today</p>
+
+          <div class="notification-item notification-item--unread animate-fade-in-up stagger-1">
+            <div class="notification-item__dot"></div>
+            <div class="notif-icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Payment Received</p>
+              <p class="notification-item__text">You received $250.00 from Alex Johnson. The funds are available in your checking account.</p>
+              <p class="notification-item__time">2 minutes ago</p>
+            </div>
+          </div>
+
+          <div class="notification-item notification-item--unread animate-fade-in-up stagger-2">
+            <div class="notification-item__dot"></div>
+            <div class="notif-icon" style="background:var(--color-danger-50);color:var(--color-danger-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Bill Due Tomorrow</p>
+              <p class="notification-item__text">Your Comcast internet bill of $79.99 is due tomorrow. Tap to pay now.</p>
+              <p class="notification-item__time">1 hour ago</p>
+            </div>
+          </div>
+
+          <div class="notification-item notification-item--unread animate-fade-in-up stagger-3">
+            <div class="notification-item__dot"></div>
+            <div class="notif-icon" style="background:var(--color-primary-50);color:var(--color-primary-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Security Alert</p>
+              <p class="notification-item__text">A new device was used to sign in to your account. If this was you, no action is needed.</p>
+              <p class="notification-item__time">3 hours ago</p>
+            </div>
+          </div>
+
+          <div class="notification-item notification-item--unread animate-fade-in-up stagger-4">
+            <div class="notification-item__dot"></div>
+            <div class="notif-icon" style="background:var(--color-warning-50);color:var(--color-warning-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Spending Alert</p>
+              <p class="notification-item__text">You've reached 68% of your monthly budget. Consider reviewing your spending.</p>
+              <p class="notification-item__time">5 hours ago</p>
+            </div>
+          </div>
+
+          <p class="notif-date-label">Yesterday</p>
+
+          <div class="notification-item animate-fade-in-up stagger-5">
+            <div class="notification-item__dot" style="background:transparent;"></div>
+            <div class="notif-icon" style="background:var(--color-neutral-100);color:var(--color-neutral-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Transaction Complete</p>
+              <p class="notification-item__text">Your payment of $84.32 to Whole Foods Market has been processed.</p>
+              <p class="notification-item__time">Yesterday, 2:34 PM</p>
+            </div>
+          </div>
+
+          <div class="notification-item animate-fade-in-up stagger-6">
+            <div class="notification-item__dot" style="background:transparent;"></div>
+            <div class="notif-icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Salary Deposited</p>
+              <p class="notification-item__text">Your salary of $5,200.00 has been deposited to your checking account.</p>
+              <p class="notification-item__time">Yesterday, 9:00 AM</p>
+            </div>
+          </div>
+
+          <p class="notif-date-label">Earlier This Week</p>
+
+          <div class="notification-item animate-fade-in-up stagger-7">
+            <div class="notification-item__dot" style="background:transparent;"></div>
+            <div class="notif-icon" style="background:#faf5ff;color:#7c3aed;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Special Offer</p>
+              <p class="notification-item__text">Earn 2x rewards points on all grocery purchases this week. Tap to learn more.</p>
+              <p class="notification-item__time">Monday, 10:00 AM</p>
+            </div>
+          </div>
+
+          <div class="notification-item animate-fade-in-up stagger-8">
+            <div class="notification-item__dot" style="background:transparent;"></div>
+            <div class="notif-icon" style="background:var(--color-primary-50);color:var(--color-primary-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="notification-item__content">
+              <p class="notification-item__title">Statement Ready</p>
+              <p class="notification-item__text">Your January bank statement is now available for download.</p>
+              <p class="notification-item__time">Sunday, 8:00 AM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transaction tab panel -->
+        <div id="tab-transactions" class="tab-panel" style="display:none;">
+          <div class="empty-state" style="padding-top:var(--space-12);">
+            <div class="empty-state__icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <p class="empty-state__title">No Transaction Alerts</p>
+            <p class="empty-state__description">Transaction notifications will appear here when you make or receive payments.</p>
+          </div>
+        </div>
+
+        <!-- Alerts tab panel -->
+        <div id="tab-alerts" class="tab-panel" style="display:none;">
+          <div class="empty-state" style="padding-top:var(--space-12);">
+            <div class="empty-state__icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            </div>
+            <p class="empty-state__title">No Alerts</p>
+            <p class="empty-state__description">Security and account alerts will show up here.</p>
+          </div>
+        </div>
+
+        <!-- Offers tab panel -->
+        <div id="tab-offers" class="tab-panel" style="display:none;">
+          <div class="empty-state" style="padding-top:var(--space-12);">
+            <div class="empty-state__icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="empty-state__title">No Offers</p>
+            <p class="empty-state__description">Exclusive offers and promotions will appear here.</p>
+          </div>
+        </div>
+
+        <div style="height:var(--space-6);"></div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="dashboard.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="history.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>History</span>
+        </a>
+        <a href="transfer.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          <span>Transfer</span>
+        </a>
+        <a href="cards.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Cards</span>
+        </a>
+        <a href="profile.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <script src="../js/prototype.js"></script>
+</body>
+</html>

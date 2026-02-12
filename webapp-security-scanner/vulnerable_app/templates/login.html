@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Login - VulnApp{% endblock %}
+
+{% block content %}
+<div style="max-width: 450px; margin: 3rem auto;">
+    <div class="card">
+        <h2 class="text-center">Sign In</h2>
+        <p class="text-muted text-center mb-2" style="margin-bottom: 1.5rem;">
+            Enter your credentials to access the application.
+        </p>
+
+        {% if error %}
+        <div class="alert alert-error">
+            <!-- VULNERABILITY: Error message may reveal SQL syntax errors -->
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- VULNERABILITY: No CSRF token in this form -->
+        <!-- VULNERABILITY: Form action uses HTTP, not HTTPS -->
+        <!-- VULNERABILITY: No rate limiting on login attempts -->
+        <!-- VULNERABILITY: No account lockout after failed attempts -->
+        <form method="POST" action="/login" autocomplete="on">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <!-- VULNERABILITY: No input validation or sanitization -->
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <!-- VULNERABILITY: autocomplete enabled for password -->
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Sign In
+            </button>
+        </form>
+
+        <div class="mt-3 text-center">
+            <p class="text-muted" style="font-size: 0.85rem;">
+                Hint: Try SQL injection on the username field
+            </p>
+            <p class="text-muted" style="font-size: 0.8rem; margin-top: 0.5rem;">
+                Example: <code style="color: #e94560;">' OR '1'='1' --</code>
+            </p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 1rem;">
+        <h3 style="color: #ffa502; font-size: 1.1rem; margin-bottom: 0.8rem;">
+            Test Credentials
+        </h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>admin</td>
+                    <td>admin123</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>john_doe</td>
+                    <td>password123</td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td>jane_smith</td>
+                    <td>letmein</td>
+                    <td>User</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

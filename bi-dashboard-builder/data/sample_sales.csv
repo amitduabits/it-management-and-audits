@@ -1,0 +1,834 @@
+date,product,region,amount,quantity,category
+2023-01-03,Laptop Pro 15,North America,1245.99,3,Electronics
+2023-01-05,Wireless Mouse,Europe,45.50,12,Accessories
+2023-01-07,Standing Desk,Asia Pacific,549.00,2,Furniture
+2023-01-08,Noise-Cancel Headset,North America,249.99,5,Audio
+2023-01-10,External SSD 1TB,Europe,119.95,8,Storage
+2023-01-12,Monitor 27",North America,449.00,4,Electronics
+2023-01-14,Mechanical Keyboard,Latin America,129.99,7,Accessories
+2023-01-16,4K Webcam,Asia Pacific,149.00,6,Electronics
+2023-01-18,Bluetooth Speaker,Middle East,89.99,10,Audio
+2023-01-20,Smart Watch,North America,349.00,3,Wearables
+2023-01-22,USB-C Hub,Europe,59.99,15,Accessories
+2023-01-24,Tablet 10",North America,449.99,2,Electronics
+2023-01-26,Power Bank 20K,Asia Pacific,45.00,20,Accessories
+2023-01-28,Ergonomic Chair,North America,499.00,1,Furniture
+2023-01-30,Desk Lamp LED,Europe,49.99,9,Furniture
+2023-02-01,Phone Case Premium,Africa,29.99,25,Accessories
+2023-02-03,Screen Protector,North America,14.99,22,Accessories
+2023-02-05,HDMI Cable 6ft,Latin America,15.99,18,Accessories
+2023-02-07,Wireless Charger,Asia Pacific,39.99,11,Accessories
+2023-02-09,Laptop Sleeve,Europe,34.99,14,Accessories
+2023-02-11,Laptop Pro 15,North America,1099.00,2,Electronics
+2023-02-13,Monitor 27",Asia Pacific,399.00,3,Electronics
+2023-02-15,Noise-Cancel Headset,Europe,279.99,4,Audio
+2023-02-17,Standing Desk,North America,699.00,1,Furniture
+2023-02-19,External SSD 1TB,Middle East,99.99,7,Storage
+2023-02-21,Mechanical Keyboard,North America,159.99,6,Accessories
+2023-02-23,4K Webcam,Europe,129.00,8,Electronics
+2023-02-25,Wireless Mouse,Latin America,34.99,16,Accessories
+2023-02-27,Bluetooth Speaker,North America,149.99,5,Audio
+2023-03-01,Smart Watch,Asia Pacific,299.00,4,Wearables
+2023-03-03,USB-C Hub,North America,79.99,10,Accessories
+2023-03-05,Tablet 10",Europe,399.99,2,Electronics
+2023-03-07,Ergonomic Chair,North America,599.00,1,Furniture
+2023-03-09,Power Bank 20K,Africa,55.00,15,Accessories
+2023-03-11,Desk Lamp LED,Asia Pacific,39.99,12,Furniture
+2023-03-13,Phone Case Premium,North America,24.99,20,Accessories
+2023-03-15,Laptop Pro 15,Europe,1349.00,3,Electronics
+2023-03-17,Screen Protector,Middle East,12.99,25,Accessories
+2023-03-19,HDMI Cable 6ft,North America,19.99,14,Accessories
+2023-03-21,Wireless Charger,Asia Pacific,49.99,9,Accessories
+2023-03-23,Monitor 27",North America,529.00,2,Electronics
+2023-03-25,Noise-Cancel Headset,Latin America,199.99,6,Audio
+2023-03-27,Standing Desk,Europe,449.00,2,Furniture
+2023-03-29,External SSD 1TB,North America,139.95,5,Storage
+2023-03-31,Mechanical Keyboard,Asia Pacific,89.99,8,Accessories
+2023-04-02,Laptop Pro 15,North America,1189.00,4,Electronics
+2023-04-04,4K Webcam,Europe,169.00,7,Electronics
+2023-04-06,Wireless Mouse,North America,69.50,11,Accessories
+2023-04-08,Bluetooth Speaker,Asia Pacific,119.99,6,Audio
+2023-04-10,Smart Watch,Middle East,399.00,2,Wearables
+2023-04-12,USB-C Hub,North America,49.99,13,Accessories
+2023-04-14,Tablet 10",Latin America,349.99,3,Electronics
+2023-04-16,Ergonomic Chair,Europe,449.00,2,Furniture
+2023-04-18,Power Bank 20K,North America,39.00,18,Accessories
+2023-04-20,Desk Lamp LED,Africa,59.99,7,Furniture
+2023-04-22,Phone Case Premium,Asia Pacific,35.99,22,Accessories
+2023-04-24,Laptop Sleeve,North America,44.99,10,Accessories
+2023-04-26,Screen Protector,Europe,18.99,19,Accessories
+2023-04-28,HDMI Cable 6ft,North America,11.99,16,Accessories
+2023-04-30,Wireless Charger,Asia Pacific,29.99,12,Accessories
+2023-05-02,Monitor 27",North America,479.00,3,Electronics
+2023-05-04,Noise-Cancel Headset,Europe,289.99,5,Audio
+2023-05-06,Standing Desk,North America,599.00,1,Furniture
+2023-05-08,External SSD 1TB,Asia Pacific,109.95,6,Storage
+2023-05-10,Laptop Pro 15,Latin America,949.00,2,Electronics
+2023-05-12,Mechanical Keyboard,North America,139.99,9,Accessories
+2023-05-14,4K Webcam,Middle East,159.00,4,Electronics
+2023-05-16,Wireless Mouse,Europe,55.50,14,Accessories
+2023-05-18,Bluetooth Speaker,North America,79.99,8,Audio
+2023-05-20,Smart Watch,Asia Pacific,249.00,5,Wearables
+2023-05-22,USB-C Hub,North America,69.99,11,Accessories
+2023-05-24,Tablet 10",Europe,499.99,2,Electronics
+2023-05-26,Ergonomic Chair,North America,549.00,1,Furniture
+2023-05-28,Power Bank 20K,Latin America,49.00,17,Accessories
+2023-05-30,Desk Lamp LED,North America,44.99,10,Furniture
+2023-06-01,Phone Case Premium,Europe,19.99,24,Accessories
+2023-06-03,Laptop Pro 15,Asia Pacific,989.00,3,Electronics
+2023-06-05,Screen Protector,North America,9.99,20,Accessories
+2023-06-07,HDMI Cable 6ft,Africa,14.99,13,Accessories
+2023-06-09,Wireless Charger,Europe,44.99,8,Accessories
+2023-06-11,Laptop Sleeve,North America,29.99,15,Accessories
+2023-06-13,Monitor 27",Asia Pacific,349.00,4,Electronics
+2023-06-15,Noise-Cancel Headset,North America,319.99,3,Audio
+2023-06-17,Standing Desk,Europe,499.00,2,Furniture
+2023-06-19,External SSD 1TB,North America,129.95,7,Storage
+2023-06-21,Mechanical Keyboard,Middle East,109.99,5,Accessories
+2023-06-23,4K Webcam,Latin America,99.00,9,Electronics
+2023-06-25,Wireless Mouse,North America,42.50,13,Accessories
+2023-06-27,Bluetooth Speaker,Asia Pacific,169.99,4,Audio
+2023-06-29,Smart Watch,Europe,329.00,3,Wearables
+2023-07-01,USB-C Hub,North America,39.99,16,Accessories
+2023-07-03,Tablet 10",North America,379.99,2,Electronics
+2023-07-05,Laptop Pro 15,Europe,1149.00,2,Electronics
+2023-07-07,Ergonomic Chair,Asia Pacific,389.00,2,Furniture
+2023-07-09,Power Bank 20K,North America,59.00,14,Accessories
+2023-07-11,Desk Lamp LED,Latin America,34.99,11,Furniture
+2023-07-13,Phone Case Premium,North America,42.99,18,Accessories
+2023-07-15,Screen Protector,Europe,22.99,21,Accessories
+2023-07-17,HDMI Cable 6ft,Asia Pacific,12.99,17,Accessories
+2023-07-19,Wireless Charger,North America,54.99,7,Accessories
+2023-07-21,Laptop Sleeve,Middle East,39.99,9,Accessories
+2023-07-23,Monitor 27",North America,559.00,3,Electronics
+2023-07-25,Noise-Cancel Headset,Europe,229.99,6,Audio
+2023-07-27,Standing Desk,North America,379.00,1,Furniture
+2023-07-29,External SSD 1TB,Asia Pacific,89.95,8,Storage
+2023-07-31,Mechanical Keyboard,North America,169.99,4,Accessories
+2023-08-02,4K Webcam,Africa,139.00,5,Electronics
+2023-08-04,Wireless Mouse,Europe,62.50,10,Accessories
+2023-08-06,Laptop Pro 15,North America,1299.00,3,Electronics
+2023-08-08,Bluetooth Speaker,Latin America,99.99,7,Audio
+2023-08-10,Smart Watch,North America,279.00,4,Wearables
+2023-08-12,USB-C Hub,Asia Pacific,84.99,8,Accessories
+2023-08-14,Tablet 10",North America,429.99,2,Electronics
+2023-08-16,Ergonomic Chair,Europe,649.00,1,Furniture
+2023-08-18,Power Bank 20K,North America,42.00,19,Accessories
+2023-08-20,Desk Lamp LED,Middle East,69.99,6,Furniture
+2023-08-22,Phone Case Premium,Asia Pacific,27.99,23,Accessories
+2023-08-24,Laptop Sleeve,North America,49.99,12,Accessories
+2023-08-26,Screen Protector,Europe,16.99,20,Accessories
+2023-08-28,HDMI Cable 6ft,North America,21.99,15,Accessories
+2023-08-30,Wireless Charger,Latin America,34.99,10,Accessories
+2023-09-01,Monitor 27",North America,489.00,4,Electronics
+2023-09-03,Noise-Cancel Headset,Asia Pacific,259.99,5,Audio
+2023-09-05,Standing Desk,Europe,649.00,2,Furniture
+2023-09-07,External SSD 1TB,North America,149.95,6,Storage
+2023-09-09,Laptop Pro 15,Middle East,1049.00,2,Electronics
+2023-09-11,Mechanical Keyboard,North America,99.99,7,Accessories
+2023-09-13,4K Webcam,Europe,179.00,4,Electronics
+2023-09-15,Wireless Mouse,North America,57.50,11,Accessories
+2023-09-17,Bluetooth Speaker,Asia Pacific,129.99,6,Audio
+2023-09-19,Smart Watch,North America,369.00,3,Wearables
+2023-09-21,USB-C Hub,Latin America,55.99,12,Accessories
+2023-09-23,Tablet 10",Europe,469.99,2,Electronics
+2023-09-25,Ergonomic Chair,North America,529.00,1,Furniture
+2023-09-27,Power Bank 20K,Africa,35.00,16,Accessories
+2023-09-29,Desk Lamp LED,Asia Pacific,54.99,8,Furniture
+2023-10-01,Phone Case Premium,North America,32.99,21,Accessories
+2023-10-03,Laptop Pro 15,Europe,1199.00,3,Electronics
+2023-10-05,Screen Protector,North America,19.99,18,Accessories
+2023-10-07,HDMI Cable 6ft,Asia Pacific,16.99,14,Accessories
+2023-10-09,Wireless Charger,North America,42.99,9,Accessories
+2023-10-11,Laptop Sleeve,Europe,37.99,13,Accessories
+2023-10-13,Monitor 27",Latin America,419.00,3,Electronics
+2023-10-15,Noise-Cancel Headset,North America,299.99,4,Audio
+2023-10-17,Standing Desk,Asia Pacific,549.00,2,Furniture
+2023-10-19,External SSD 1TB,Europe,114.95,7,Storage
+2023-10-21,Mechanical Keyboard,North America,149.99,6,Accessories
+2023-10-23,4K Webcam,Middle East,119.00,5,Electronics
+2023-10-25,Wireless Mouse,North America,49.50,12,Accessories
+2023-10-27,Bluetooth Speaker,Europe,159.99,5,Audio
+2023-10-29,Smart Watch,North America,319.00,4,Wearables
+2023-10-31,USB-C Hub,Asia Pacific,74.99,9,Accessories
+2023-11-02,Tablet 10",North America,539.99,3,Electronics
+2023-11-04,Laptop Pro 15,Europe,1499.00,5,Electronics
+2023-11-06,Ergonomic Chair,North America,699.00,2,Furniture
+2023-11-08,Power Bank 20K,Latin America,65.00,22,Accessories
+2023-11-10,Desk Lamp LED,North America,79.99,14,Furniture
+2023-11-12,Phone Case Premium,Asia Pacific,44.99,25,Accessories
+2023-11-14,Screen Protector,Europe,24.99,24,Accessories
+2023-11-16,HDMI Cable 6ft,North America,22.99,20,Accessories
+2023-11-18,Wireless Charger,Middle East,54.99,13,Accessories
+2023-11-20,Laptop Sleeve,North America,54.99,16,Accessories
+2023-11-22,Monitor 27",Asia Pacific,599.00,5,Electronics
+2023-11-24,Noise-Cancel Headset,North America,349.99,7,Audio
+2023-11-26,Standing Desk,Europe,799.00,3,Furniture
+2023-11-28,External SSD 1TB,North America,159.95,9,Storage
+2023-11-30,Mechanical Keyboard,Latin America,179.99,8,Accessories
+2023-12-02,4K Webcam,North America,199.00,10,Electronics
+2023-12-04,Wireless Mouse,Europe,79.50,17,Accessories
+2023-12-06,Laptop Pro 15,Asia Pacific,1389.00,6,Electronics
+2023-12-08,Bluetooth Speaker,North America,199.99,9,Audio
+2023-12-10,Smart Watch,Africa,449.00,5,Wearables
+2023-12-12,USB-C Hub,North America,89.99,14,Accessories
+2023-12-14,Tablet 10",Europe,599.99,4,Electronics
+2023-12-16,Ergonomic Chair,North America,649.00,3,Furniture
+2023-12-18,Power Bank 20K,Asia Pacific,69.00,25,Accessories
+2023-12-20,Desk Lamp LED,Latin America,89.99,12,Furniture
+2023-12-22,Phone Case Premium,North America,49.99,23,Accessories
+2023-12-24,Screen Protector,Europe,29.99,22,Accessories
+2023-12-26,HDMI Cable 6ft,North America,24.99,19,Accessories
+2023-12-28,Wireless Charger,Asia Pacific,59.99,11,Accessories
+2023-12-30,Laptop Sleeve,Middle East,59.99,15,Accessories
+2024-01-02,Laptop Pro 15,North America,1179.00,3,Electronics
+2024-01-04,Monitor 27",Europe,469.00,4,Electronics
+2024-01-06,Wireless Mouse,North America,39.50,13,Accessories
+2024-01-08,Noise-Cancel Headset,Asia Pacific,269.99,5,Audio
+2024-01-10,Standing Desk,North America,579.00,2,Furniture
+2024-01-12,External SSD 1TB,Latin America,104.95,6,Storage
+2024-01-14,Mechanical Keyboard,Europe,119.99,7,Accessories
+2024-01-16,4K Webcam,North America,159.00,8,Electronics
+2024-01-18,Bluetooth Speaker,Middle East,109.99,6,Audio
+2024-01-20,Smart Watch,North America,289.00,4,Wearables
+2024-01-22,USB-C Hub,Asia Pacific,64.99,11,Accessories
+2024-01-24,Tablet 10",North America,459.99,2,Electronics
+2024-01-26,Ergonomic Chair,Europe,479.00,1,Furniture
+2024-01-28,Power Bank 20K,North America,47.00,19,Accessories
+2024-01-30,Desk Lamp LED,Africa,42.99,10,Furniture
+2024-02-01,Phone Case Premium,North America,36.99,21,Accessories
+2024-02-03,Laptop Pro 15,Asia Pacific,1259.00,4,Electronics
+2024-02-05,Screen Protector,Europe,15.99,22,Accessories
+2024-02-07,HDMI Cable 6ft,North America,18.99,16,Accessories
+2024-02-09,Wireless Charger,Latin America,44.99,9,Accessories
+2024-02-11,Laptop Sleeve,North America,42.99,12,Accessories
+2024-02-13,Monitor 27",Asia Pacific,389.00,3,Electronics
+2024-02-15,Noise-Cancel Headset,Europe,309.99,4,Audio
+2024-02-17,Standing Desk,North America,659.00,1,Furniture
+2024-02-19,External SSD 1TB,Middle East,134.95,7,Storage
+2024-02-21,Mechanical Keyboard,North America,145.99,5,Accessories
+2024-02-23,4K Webcam,Europe,134.00,6,Electronics
+2024-02-25,Wireless Mouse,North America,72.50,10,Accessories
+2024-02-27,Bluetooth Speaker,Asia Pacific,139.99,5,Audio
+2024-03-01,Smart Watch,North America,339.00,3,Wearables
+2024-03-03,USB-C Hub,Europe,54.99,14,Accessories
+2024-03-05,Tablet 10",Latin America,379.99,3,Electronics
+2024-03-07,Ergonomic Chair,North America,569.00,2,Furniture
+2024-03-09,Power Bank 20K,Asia Pacific,52.00,17,Accessories
+2024-03-11,Desk Lamp LED,North America,64.99,8,Furniture
+2024-03-13,Phone Case Premium,Europe,28.99,24,Accessories
+2024-03-15,Laptop Pro 15,North America,1329.00,3,Electronics
+2024-03-17,Screen Protector,Middle East,11.99,25,Accessories
+2024-03-19,HDMI Cable 6ft,North America,13.99,18,Accessories
+2024-03-21,Wireless Charger,Asia Pacific,37.99,11,Accessories
+2024-03-23,Laptop Sleeve,Europe,47.99,10,Accessories
+2024-03-25,Monitor 27",North America,509.00,4,Electronics
+2024-03-27,Noise-Cancel Headset,Latin America,239.99,5,Audio
+2024-03-29,Standing Desk,North America,519.00,2,Furniture
+2024-03-31,External SSD 1TB,Europe,124.95,6,Storage
+2024-04-02,Mechanical Keyboard,Asia Pacific,109.99,8,Accessories
+2024-04-04,Laptop Pro 15,North America,1149.00,2,Electronics
+2024-04-06,4K Webcam,North America,149.00,7,Electronics
+2024-04-08,Wireless Mouse,Africa,54.50,12,Accessories
+2024-04-10,Bluetooth Speaker,Europe,94.99,6,Audio
+2024-04-12,Smart Watch,North America,379.00,3,Wearables
+2024-04-14,USB-C Hub,Asia Pacific,79.99,10,Accessories
+2024-04-16,Tablet 10",North America,419.99,2,Electronics
+2024-04-18,Ergonomic Chair,Middle East,519.00,1,Furniture
+2024-04-20,Power Bank 20K,Europe,43.00,20,Accessories
+2024-04-22,Desk Lamp LED,North America,54.99,9,Furniture
+2024-04-24,Phone Case Premium,Latin America,38.99,19,Accessories
+2024-04-26,Laptop Sleeve,North America,32.99,14,Accessories
+2024-04-28,Screen Protector,Asia Pacific,20.99,17,Accessories
+2024-04-30,HDMI Cable 6ft,Europe,17.99,15,Accessories
+2024-05-02,Wireless Charger,North America,49.99,8,Accessories
+2024-05-04,Monitor 27",North America,539.00,3,Electronics
+2024-05-06,Noise-Cancel Headset,Asia Pacific,279.99,4,Audio
+2024-05-08,Standing Desk,Europe,629.00,1,Furniture
+2024-05-10,External SSD 1TB,North America,119.95,7,Storage
+2024-05-12,Laptop Pro 15,Latin America,999.00,3,Electronics
+2024-05-14,Mechanical Keyboard,North America,159.99,6,Accessories
+2024-05-16,4K Webcam,Europe,179.00,5,Electronics
+2024-05-18,Wireless Mouse,North America,47.50,14,Accessories
+2024-05-20,Bluetooth Speaker,Middle East,129.99,7,Audio
+2024-05-22,Smart Watch,Asia Pacific,309.00,4,Wearables
+2024-05-24,USB-C Hub,North America,59.99,12,Accessories
+2024-05-26,Tablet 10",Europe,489.99,2,Electronics
+2024-05-28,Ergonomic Chair,North America,619.00,1,Furniture
+2024-05-30,Power Bank 20K,Africa,38.00,16,Accessories
+2024-06-01,Desk Lamp LED,Asia Pacific,47.99,10,Furniture
+2024-06-03,Phone Case Premium,North America,22.99,22,Accessories
+2024-06-05,Laptop Pro 15,Europe,1079.00,2,Electronics
+2024-06-07,Screen Protector,North America,13.99,21,Accessories
+2024-06-09,HDMI Cable 6ft,Latin America,10.99,19,Accessories
+2024-06-11,Wireless Charger,North America,39.99,10,Accessories
+2024-06-13,Laptop Sleeve,Asia Pacific,27.99,13,Accessories
+2024-06-15,Monitor 27",Europe,359.00,4,Electronics
+2024-06-17,Noise-Cancel Headset,North America,249.99,5,Audio
+2024-06-19,Standing Desk,North America,459.00,2,Furniture
+2024-06-21,External SSD 1TB,Asia Pacific,94.95,8,Storage
+2024-06-23,Mechanical Keyboard,Middle East,129.99,5,Accessories
+2024-06-25,4K Webcam,North America,109.00,6,Electronics
+2024-06-27,Wireless Mouse,Europe,36.50,15,Accessories
+2024-06-29,Bluetooth Speaker,North America,84.99,8,Audio
+2024-07-01,Smart Watch,Latin America,259.00,3,Wearables
+2024-07-03,USB-C Hub,North America,44.99,13,Accessories
+2024-07-05,Tablet 10",Asia Pacific,349.99,3,Electronics
+2024-07-07,Laptop Pro 15,North America,1219.00,2,Electronics
+2024-07-09,Ergonomic Chair,Europe,439.00,2,Furniture
+2024-07-11,Power Bank 20K,North America,56.00,15,Accessories
+2024-07-13,Desk Lamp LED,North America,37.99,11,Furniture
+2024-07-15,Phone Case Premium,Asia Pacific,34.99,20,Accessories
+2024-07-17,Screen Protector,Africa,17.99,19,Accessories
+2024-07-19,HDMI Cable 6ft,Europe,20.99,14,Accessories
+2024-07-21,Wireless Charger,North America,52.99,7,Accessories
+2024-07-23,Laptop Sleeve,North America,44.99,11,Accessories
+2024-07-25,Monitor 27",Asia Pacific,429.00,3,Electronics
+2024-07-27,Noise-Cancel Headset,Europe,289.99,4,Audio
+2024-07-29,Standing Desk,North America,549.00,1,Furniture
+2024-07-31,External SSD 1TB,Latin America,109.95,6,Storage
+2024-08-02,Mechanical Keyboard,North America,139.99,7,Accessories
+2024-08-04,4K Webcam,Europe,169.00,5,Electronics
+2024-08-06,Laptop Pro 15,Asia Pacific,1359.00,3,Electronics
+2024-08-08,Wireless Mouse,North America,65.50,10,Accessories
+2024-08-10,Bluetooth Speaker,Middle East,119.99,6,Audio
+2024-08-12,Smart Watch,North America,349.00,4,Wearables
+2024-08-14,USB-C Hub,Europe,72.99,9,Accessories
+2024-08-16,Tablet 10",North America,459.99,2,Electronics
+2024-08-18,Ergonomic Chair,Asia Pacific,559.00,1,Furniture
+2024-08-20,Power Bank 20K,North America,48.00,18,Accessories
+2024-08-22,Desk Lamp LED,Europe,59.99,8,Furniture
+2024-08-24,Phone Case Premium,Latin America,31.99,23,Accessories
+2024-08-26,Laptop Sleeve,North America,39.99,12,Accessories
+2024-08-28,Screen Protector,Asia Pacific,21.99,20,Accessories
+2024-08-30,HDMI Cable 6ft,North America,15.99,17,Accessories
+2024-09-01,Wireless Charger,Europe,46.99,9,Accessories
+2024-09-03,Monitor 27",North America,499.00,3,Electronics
+2024-09-05,Noise-Cancel Headset,North America,329.99,5,Audio
+2024-09-07,Standing Desk,Asia Pacific,619.00,2,Furniture
+2024-09-09,External SSD 1TB,Europe,144.95,6,Storage
+2024-09-11,Laptop Pro 15,North America,1269.00,4,Electronics
+2024-09-13,Mechanical Keyboard,Middle East,114.99,6,Accessories
+2024-09-15,4K Webcam,Latin America,129.00,7,Electronics
+2024-09-17,Wireless Mouse,North America,58.50,11,Accessories
+2024-09-19,Bluetooth Speaker,Europe,149.99,5,Audio
+2024-09-21,Smart Watch,North America,299.00,3,Wearables
+2024-09-23,USB-C Hub,Asia Pacific,67.99,10,Accessories
+2024-09-25,Tablet 10",North America,509.99,2,Electronics
+2024-09-27,Ergonomic Chair,Africa,489.00,1,Furniture
+2024-09-29,Power Bank 20K,Europe,44.00,16,Accessories
+2024-10-01,Desk Lamp LED,North America,74.99,7,Furniture
+2024-10-03,Phone Case Premium,Asia Pacific,26.99,22,Accessories
+2024-10-05,Laptop Pro 15,Europe,1399.00,3,Electronics
+2024-10-07,Screen Protector,North America,14.99,24,Accessories
+2024-10-09,HDMI Cable 6ft,Middle East,19.99,13,Accessories
+2024-10-11,Wireless Charger,North America,41.99,10,Accessories
+2024-10-13,Laptop Sleeve,Latin America,36.99,14,Accessories
+2024-10-15,Monitor 27",North America,569.00,4,Electronics
+2024-10-17,Noise-Cancel Headset,Asia Pacific,269.99,5,Audio
+2024-10-19,Standing Desk,Europe,699.00,2,Furniture
+2024-10-21,External SSD 1TB,North America,129.95,8,Storage
+2024-10-23,Mechanical Keyboard,North America,169.99,5,Accessories
+2024-10-25,4K Webcam,Europe,189.00,4,Electronics
+2024-10-27,Wireless Mouse,Asia Pacific,52.50,12,Accessories
+2024-10-29,Bluetooth Speaker,North America,174.99,6,Audio
+2024-10-31,Smart Watch,Europe,359.00,3,Wearables
+2024-11-02,USB-C Hub,North America,84.99,11,Accessories
+2024-11-04,Tablet 10",Latin America,549.99,4,Electronics
+2024-11-06,Laptop Pro 15,North America,1549.00,5,Electronics
+2024-11-08,Ergonomic Chair,Asia Pacific,679.00,3,Furniture
+2024-11-10,Power Bank 20K,Europe,62.00,23,Accessories
+2024-11-12,Desk Lamp LED,North America,84.99,13,Furniture
+2024-11-14,Phone Case Premium,Middle East,46.99,25,Accessories
+2024-11-16,Screen Protector,North America,27.99,22,Accessories
+2024-11-18,HDMI Cable 6ft,Asia Pacific,24.99,18,Accessories
+2024-11-20,Wireless Charger,North America,59.99,12,Accessories
+2024-11-22,Laptop Sleeve,Europe,57.99,15,Accessories
+2024-11-24,Monitor 27",North America,619.00,6,Electronics
+2024-11-26,Noise-Cancel Headset,North America,369.99,8,Audio
+2024-11-28,Standing Desk,Latin America,759.00,3,Furniture
+2024-11-30,External SSD 1TB,Europe,169.95,10,Storage
+2024-12-02,Mechanical Keyboard,North America,189.99,9,Accessories
+2024-12-04,4K Webcam,Asia Pacific,209.00,8,Electronics
+2024-12-06,Wireless Mouse,North America,82.50,16,Accessories
+2024-12-08,Laptop Pro 15,Europe,1479.00,6,Electronics
+2024-12-10,Bluetooth Speaker,North America,209.99,10,Audio
+2024-12-12,Smart Watch,Africa,429.00,5,Wearables
+2024-12-14,USB-C Hub,North America,94.99,13,Accessories
+2024-12-16,Tablet 10",Middle East,579.99,4,Electronics
+2024-12-18,Ergonomic Chair,North America,729.00,3,Furniture
+2024-12-20,Power Bank 20K,Asia Pacific,72.00,24,Accessories
+2024-12-22,Desk Lamp LED,Europe,94.99,11,Furniture
+2024-12-24,Phone Case Premium,North America,52.99,25,Accessories
+2024-12-26,Screen Protector,Latin America,32.99,21,Accessories
+2024-12-28,HDMI Cable 6ft,North America,26.99,20,Accessories
+2024-12-30,Wireless Charger,Asia Pacific,64.99,14,Accessories
+2025-01-02,Laptop Pro 15,North America,1289.00,3,Electronics
+2025-01-04,Monitor 27",Europe,489.00,4,Electronics
+2025-01-06,Wireless Mouse,Asia Pacific,43.50,13,Accessories
+2025-01-08,Noise-Cancel Headset,North America,289.99,5,Audio
+2025-01-10,Standing Desk,North America,599.00,2,Furniture
+2025-01-12,External SSD 1TB,Latin America,114.95,7,Storage
+2025-01-14,Mechanical Keyboard,Europe,129.99,6,Accessories
+2025-01-16,4K Webcam,North America,164.00,7,Electronics
+2025-01-18,Bluetooth Speaker,Middle East,114.99,6,Audio
+2025-01-20,Smart Watch,Asia Pacific,319.00,4,Wearables
+2025-01-22,USB-C Hub,North America,69.99,11,Accessories
+2025-01-24,Tablet 10",Europe,449.99,3,Electronics
+2025-01-26,Ergonomic Chair,North America,549.00,2,Furniture
+2025-01-28,Power Bank 20K,Africa,51.00,18,Accessories
+2025-01-30,Desk Lamp LED,North America,49.99,10,Furniture
+2025-02-01,Phone Case Premium,Asia Pacific,33.99,22,Accessories
+2025-02-03,Laptop Pro 15,North America,1359.00,4,Electronics
+2025-02-05,Screen Protector,Europe,17.99,20,Accessories
+2025-02-07,HDMI Cable 6ft,North America,14.99,17,Accessories
+2025-02-09,Wireless Charger,Latin America,42.99,10,Accessories
+2025-02-11,Laptop Sleeve,North America,47.99,13,Accessories
+2025-02-13,Monitor 27",North America,519.00,3,Electronics
+2025-02-15,Noise-Cancel Headset,Asia Pacific,299.99,4,Audio
+2025-02-17,Standing Desk,Europe,679.00,2,Furniture
+2025-02-19,External SSD 1TB,North America,139.95,6,Storage
+2025-02-21,Mechanical Keyboard,Middle East,149.99,5,Accessories
+2025-02-23,4K Webcam,North America,144.00,8,Electronics
+2025-02-25,Wireless Mouse,Europe,59.50,11,Accessories
+2025-02-27,Bluetooth Speaker,North America,134.99,7,Audio
+2025-03-01,Smart Watch,Latin America,289.00,3,Wearables
+2025-03-03,USB-C Hub,North America,74.99,10,Accessories
+2025-03-05,Tablet 10",Asia Pacific,409.99,2,Electronics
+2025-03-07,Ergonomic Chair,Europe,589.00,1,Furniture
+2025-03-09,Power Bank 20K,North America,47.00,17,Accessories
+2025-03-11,Desk Lamp LED,North America,57.99,9,Furniture
+2025-03-13,Phone Case Premium,Middle East,29.99,24,Accessories
+2025-03-15,Laptop Pro 15,North America,1229.00,3,Electronics
+2025-03-17,Screen Protector,Asia Pacific,12.99,23,Accessories
+2025-03-19,HDMI Cable 6ft,Europe,16.99,15,Accessories
+2025-03-21,Wireless Charger,North America,52.99,8,Accessories
+2025-03-23,Laptop Sleeve,Latin America,41.99,11,Accessories
+2025-03-25,Monitor 27",North America,549.00,4,Electronics
+2025-03-27,Noise-Cancel Headset,Europe,319.99,5,Audio
+2025-03-29,Standing Desk,North America,549.00,2,Furniture
+2025-03-31,External SSD 1TB,Asia Pacific,109.95,7,Storage
+2025-04-02,Mechanical Keyboard,North America,134.99,7,Accessories
+2025-04-04,4K Webcam,Africa,154.00,5,Electronics
+2025-04-06,Wireless Mouse,North America,67.50,10,Accessories
+2025-04-08,Laptop Pro 15,Europe,1419.00,3,Electronics
+2025-04-10,Bluetooth Speaker,North America,104.99,6,Audio
+2025-04-12,Smart Watch,Asia Pacific,349.00,4,Wearables
+2025-04-14,USB-C Hub,North America,82.99,9,Accessories
+2025-04-16,Tablet 10",Middle East,479.99,2,Electronics
+2025-04-18,Ergonomic Chair,North America,629.00,1,Furniture
+2025-04-20,Power Bank 20K,Europe,54.00,19,Accessories
+2025-04-22,Desk Lamp LED,Latin America,44.99,11,Furniture
+2025-04-24,Phone Case Premium,North America,39.99,20,Accessories
+2025-04-26,Laptop Sleeve,Asia Pacific,34.99,14,Accessories
+2025-04-28,Screen Protector,North America,19.99,18,Accessories
+2025-04-30,HDMI Cable 6ft,Europe,21.99,13,Accessories
+2025-05-02,Wireless Charger,North America,44.99,9,Accessories
+2025-05-04,Monitor 27",North America,579.00,3,Electronics
+2025-05-06,Noise-Cancel Headset,Latin America,249.99,5,Audio
+2025-05-08,Standing Desk,North America,619.00,1,Furniture
+2025-05-10,External SSD 1TB,Europe,134.95,6,Storage
+2025-05-12,Laptop Pro 15,Asia Pacific,1099.00,4,Electronics
+2025-05-14,Mechanical Keyboard,North America,159.99,5,Accessories
+2025-05-16,4K Webcam,North America,174.00,6,Electronics
+2025-05-18,Wireless Mouse,Middle East,51.50,12,Accessories
+2025-05-20,Bluetooth Speaker,Europe,144.99,5,Audio
+2025-05-22,Smart Watch,North America,329.00,3,Wearables
+2025-05-24,USB-C Hub,Asia Pacific,62.99,11,Accessories
+2025-05-26,Tablet 10",North America,529.99,2,Electronics
+2025-05-28,Ergonomic Chair,Latin America,499.00,2,Furniture
+2025-05-30,Power Bank 20K,North America,41.00,16,Accessories
+2025-06-01,Desk Lamp LED,Europe,52.99,10,Furniture
+2025-06-03,Phone Case Premium,North America,24.99,23,Accessories
+2025-06-05,Laptop Pro 15,North America,979.00,2,Electronics
+2025-06-07,Screen Protector,Africa,10.99,22,Accessories
+2025-06-09,HDMI Cable 6ft,Asia Pacific,12.99,16,Accessories
+2025-06-11,Wireless Charger,North America,34.99,10,Accessories
+2025-06-13,Laptop Sleeve,Europe,29.99,15,Accessories
+2025-06-15,Monitor 27",North America,369.00,3,Electronics
+2025-06-17,Noise-Cancel Headset,Asia Pacific,229.99,4,Audio
+2025-06-19,Standing Desk,North America,449.00,2,Furniture
+2025-06-21,External SSD 1TB,Middle East,89.95,8,Storage
+2025-06-23,Mechanical Keyboard,Europe,99.99,6,Accessories
+2025-06-25,4K Webcam,North America,109.00,7,Electronics
+2025-06-27,Wireless Mouse,Latin America,38.50,14,Accessories
+2025-06-29,Bluetooth Speaker,North America,79.99,7,Audio
+2025-07-01,Smart Watch,Europe,269.00,3,Wearables
+2025-07-03,USB-C Hub,North America,49.99,12,Accessories
+2025-07-05,Tablet 10",Asia Pacific,359.99,3,Electronics
+2025-07-07,Laptop Pro 15,North America,1139.00,2,Electronics
+2025-07-09,Ergonomic Chair,North America,459.00,1,Furniture
+2025-07-11,Power Bank 20K,Europe,58.00,14,Accessories
+2025-07-13,Desk Lamp LED,Middle East,39.99,9,Furniture
+2025-07-15,Phone Case Premium,North America,37.99,19,Accessories
+2025-07-17,Screen Protector,Asia Pacific,22.99,17,Accessories
+2025-07-19,HDMI Cable 6ft,North America,18.99,15,Accessories
+2025-07-21,Wireless Charger,Europe,47.99,8,Accessories
+2025-07-23,Laptop Sleeve,North America,42.99,10,Accessories
+2025-07-25,Monitor 27",Latin America,399.00,4,Electronics
+2025-07-27,Noise-Cancel Headset,North America,279.99,5,Audio
+2025-07-29,Standing Desk,Asia Pacific,529.00,1,Furniture
+2025-07-31,External SSD 1TB,North America,119.95,6,Storage
+2025-08-02,Mechanical Keyboard,Europe,149.99,7,Accessories
+2025-08-04,4K Webcam,North America,159.00,5,Electronics
+2025-08-06,Laptop Pro 15,Middle East,1319.00,3,Electronics
+2025-08-08,Wireless Mouse,North America,62.50,11,Accessories
+2025-08-10,Bluetooth Speaker,Africa,109.99,6,Audio
+2025-08-12,Smart Watch,North America,389.00,4,Wearables
+2025-08-14,USB-C Hub,Asia Pacific,77.99,9,Accessories
+2025-08-16,Tablet 10",Europe,469.99,2,Electronics
+2025-08-18,Ergonomic Chair,North America,579.00,1,Furniture
+2025-08-20,Power Bank 20K,Latin America,44.00,17,Accessories
+2025-08-22,Desk Lamp LED,North America,62.99,8,Furniture
+2025-08-24,Phone Case Premium,Europe,32.99,21,Accessories
+2025-08-26,Laptop Sleeve,North America,37.99,13,Accessories
+2025-08-28,Screen Protector,Asia Pacific,18.99,19,Accessories
+2025-08-30,HDMI Cable 6ft,North America,16.99,16,Accessories
+2025-09-01,Wireless Charger,North America,54.99,7,Accessories
+2025-09-03,Monitor 27",Europe,529.00,3,Electronics
+2025-09-05,Noise-Cancel Headset,Asia Pacific,299.99,4,Audio
+2025-09-07,Standing Desk,North America,649.00,2,Furniture
+2025-09-09,External SSD 1TB,Middle East,144.95,5,Storage
+2025-09-11,Laptop Pro 15,North America,1389.00,4,Electronics
+2025-09-13,Mechanical Keyboard,Latin America,124.99,6,Accessories
+2025-09-15,4K Webcam,Europe,189.00,4,Electronics
+2025-09-17,Wireless Mouse,North America,56.50,12,Accessories
+2025-09-19,Bluetooth Speaker,North America,159.99,5,Audio
+2025-09-21,Smart Watch,Asia Pacific,309.00,3,Wearables
+2025-09-23,USB-C Hub,Africa,59.99,10,Accessories
+2025-09-25,Tablet 10",North America,499.99,2,Electronics
+2025-09-27,Ergonomic Chair,Europe,609.00,2,Furniture
+2025-09-29,Power Bank 20K,North America,46.00,18,Accessories
+2025-10-01,Desk Lamp LED,Asia Pacific,69.99,7,Furniture
+2025-10-03,Phone Case Premium,North America,41.99,20,Accessories
+2025-10-05,Laptop Pro 15,Middle East,1199.00,3,Electronics
+2025-10-07,Screen Protector,Europe,15.99,22,Accessories
+2025-10-09,HDMI Cable 6ft,North America,22.99,14,Accessories
+2025-10-11,Wireless Charger,Latin America,39.99,11,Accessories
+2025-10-13,Laptop Sleeve,North America,44.99,12,Accessories
+2025-10-15,Monitor 27",North America,559.00,4,Electronics
+2025-10-17,Noise-Cancel Headset,Europe,309.99,5,Audio
+2025-10-19,Standing Desk,Asia Pacific,569.00,2,Furniture
+2025-10-21,External SSD 1TB,North America,134.95,7,Storage
+2025-10-23,Mechanical Keyboard,North America,174.99,5,Accessories
+2025-10-25,4K Webcam,Latin America,144.00,6,Electronics
+2025-10-27,Wireless Mouse,Europe,48.50,13,Accessories
+2025-10-29,Bluetooth Speaker,North America,179.99,6,Audio
+2025-10-31,Smart Watch,North America,359.00,4,Wearables
+2025-11-02,USB-C Hub,Asia Pacific,89.99,11,Accessories
+2025-11-04,Tablet 10",North America,559.99,4,Electronics
+2025-11-06,Laptop Pro 15,Europe,1569.00,5,Electronics
+2025-11-08,Ergonomic Chair,North America,719.00,3,Furniture
+2025-11-10,Power Bank 20K,Middle East,68.00,22,Accessories
+2025-11-12,Desk Lamp LED,North America,89.99,13,Furniture
+2025-11-14,Phone Case Premium,Asia Pacific,48.99,24,Accessories
+2025-11-16,Screen Protector,Latin America,28.99,23,Accessories
+2025-11-18,HDMI Cable 6ft,North America,26.99,19,Accessories
+2025-11-20,Wireless Charger,Europe,62.99,12,Accessories
+2025-11-22,Laptop Sleeve,North America,56.99,16,Accessories
+2025-11-24,Monitor 27",North America,639.00,6,Electronics
+2025-11-26,Noise-Cancel Headset,Africa,359.99,7,Audio
+2025-11-28,Standing Desk,North America,789.00,3,Furniture
+2025-11-30,External SSD 1TB,Asia Pacific,164.95,9,Storage
+2025-12-02,Mechanical Keyboard,Europe,199.99,8,Accessories
+2025-12-04,4K Webcam,North America,219.00,9,Electronics
+2025-12-06,Wireless Mouse,North America,85.50,17,Accessories
+2025-12-08,Laptop Pro 15,Middle East,1459.00,6,Electronics
+2025-12-10,Bluetooth Speaker,Latin America,219.99,9,Audio
+2025-12-12,Smart Watch,North America,449.00,6,Wearables
+2025-12-14,USB-C Hub,Europe,99.99,14,Accessories
+2025-12-16,Tablet 10",North America,619.99,4,Electronics
+2025-12-18,Ergonomic Chair,Asia Pacific,699.00,3,Furniture
+2025-12-20,Power Bank 20K,North America,74.00,25,Accessories
+2025-12-22,Desk Lamp LED,North America,99.99,12,Furniture
+2025-12-24,Phone Case Premium,Europe,54.99,25,Accessories
+2025-12-26,Screen Protector,North America,34.99,22,Accessories
+2025-12-28,HDMI Cable 6ft,Asia Pacific,28.99,19,Accessories
+2025-12-30,Wireless Charger,North America,69.99,14,Accessories
+2023-01-15,Laptop Pro 15,Europe,1189.99,4,Electronics
+2023-02-10,Monitor 27",North America,379.00,5,Electronics
+2023-03-20,Noise-Cancel Headset,Asia Pacific,219.99,7,Audio
+2023-04-12,External SSD 1TB,North America,129.95,9,Storage
+2023-05-08,Smart Watch,Europe,289.00,4,Wearables
+2023-06-14,Standing Desk,Latin America,399.00,2,Furniture
+2023-07-22,Wireless Mouse,North America,55.50,15,Accessories
+2023-08-18,Bluetooth Speaker,Middle East,139.99,8,Audio
+2023-09-10,Mechanical Keyboard,North America,119.99,6,Accessories
+2023-10-06,USB-C Hub,Europe,69.99,12,Accessories
+2023-11-15,Laptop Pro 15,Asia Pacific,1449.00,5,Electronics
+2023-12-12,Tablet 10",North America,579.99,4,Electronics
+2024-01-18,Ergonomic Chair,Europe,549.00,2,Furniture
+2024-02-14,4K Webcam,North America,159.00,7,Electronics
+2024-03-22,Desk Lamp LED,Latin America,54.99,10,Furniture
+2024-04-16,Power Bank 20K,North America,45.00,18,Accessories
+2024-05-12,Laptop Sleeve,Asia Pacific,39.99,14,Accessories
+2024-06-08,Phone Case Premium,Europe,29.99,22,Accessories
+2024-07-14,Screen Protector,North America,16.99,20,Accessories
+2024-08-10,HDMI Cable 6ft,Africa,18.99,16,Accessories
+2024-09-06,Wireless Charger,North America,49.99,9,Accessories
+2024-10-02,Laptop Pro 15,Middle East,1249.00,3,Electronics
+2024-11-14,Monitor 27",North America,599.00,5,Electronics
+2024-12-08,Smart Watch,Europe,419.00,5,Wearables
+2025-01-06,Noise-Cancel Headset,Latin America,269.99,5,Audio
+2025-02-12,Standing Desk,North America,639.00,2,Furniture
+2025-03-18,Bluetooth Speaker,Asia Pacific,124.99,7,Audio
+2025-04-14,External SSD 1TB,Europe,139.95,6,Storage
+2025-05-10,Mechanical Keyboard,North America,144.99,7,Accessories
+2025-06-06,USB-C Hub,Middle East,59.99,11,Accessories
+2025-07-02,Wireless Mouse,North America,44.50,14,Accessories
+2025-08-08,Tablet 10",Asia Pacific,389.99,3,Electronics
+2025-09-04,Ergonomic Chair,Europe,569.00,2,Furniture
+2025-10-10,4K Webcam,North America,179.00,5,Electronics
+2025-11-06,Desk Lamp LED,Latin America,79.99,11,Furniture
+2025-12-04,Power Bank 20K,North America,66.00,22,Accessories
+2023-02-14,Laptop Pro 15,North America,1329.00,3,Electronics
+2023-03-10,Wireless Mouse,Europe,42.50,14,Accessories
+2023-04-22,Standing Desk,Asia Pacific,579.00,1,Furniture
+2023-05-18,Noise-Cancel Headset,North America,259.99,5,Audio
+2023-06-12,Monitor 27",Latin America,429.00,3,Electronics
+2023-07-08,External SSD 1TB,North America,109.95,8,Storage
+2023-08-14,Smart Watch,Europe,339.00,3,Wearables
+2023-09-20,4K Webcam,Middle East,149.00,6,Electronics
+2023-10-16,Bluetooth Speaker,North America,99.99,7,Audio
+2023-11-22,Mechanical Keyboard,Asia Pacific,179.99,9,Accessories
+2023-12-18,USB-C Hub,North America,89.99,12,Accessories
+2024-01-14,Tablet 10",Europe,479.99,3,Electronics
+2024-02-20,Ergonomic Chair,North America,629.00,2,Furniture
+2024-03-16,Desk Lamp LED,Africa,49.99,10,Furniture
+2024-04-12,Power Bank 20K,Asia Pacific,55.00,17,Accessories
+2024-05-08,Phone Case Premium,North America,34.99,21,Accessories
+2024-06-14,Screen Protector,Europe,19.99,19,Accessories
+2024-07-20,HDMI Cable 6ft,North America,14.99,18,Accessories
+2024-08-16,Wireless Charger,Latin America,44.99,10,Accessories
+2024-09-12,Laptop Sleeve,North America,49.99,11,Accessories
+2024-10-08,Laptop Pro 15,Asia Pacific,1319.00,4,Electronics
+2024-11-14,Monitor 27",Europe,589.00,5,Electronics
+2024-12-10,Noise-Cancel Headset,North America,359.99,7,Audio
+2025-01-16,Standing Desk,North America,589.00,2,Furniture
+2025-02-12,Wireless Mouse,Middle East,59.50,12,Accessories
+2025-03-08,Bluetooth Speaker,Latin America,114.99,6,Audio
+2025-04-14,External SSD 1TB,Europe,129.95,7,Storage
+2025-05-10,Smart Watch,North America,319.00,4,Wearables
+2025-06-16,Mechanical Keyboard,Asia Pacific,109.99,6,Accessories
+2025-07-12,USB-C Hub,North America,67.99,10,Accessories
+2025-08-08,4K Webcam,North America,169.00,5,Electronics
+2025-09-14,Tablet 10",Europe,519.99,2,Electronics
+2025-10-10,Ergonomic Chair,Latin America,539.00,2,Furniture
+2025-11-16,Desk Lamp LED,North America,92.99,12,Furniture
+2025-12-12,Power Bank 20K,Asia Pacific,69.00,23,Accessories
+2023-01-25,Laptop Pro 15,Europe,1099.00,2,Electronics
+2023-02-22,4K Webcam,North America,119.00,8,Electronics
+2023-03-28,Smart Watch,Latin America,279.00,4,Wearables
+2023-04-14,Bluetooth Speaker,Asia Pacific,109.99,6,Audio
+2023-05-12,Standing Desk,North America,499.00,2,Furniture
+2023-06-20,External SSD 1TB,Europe,129.95,5,Storage
+2023-07-16,Monitor 27",North America,459.00,3,Electronics
+2023-08-22,Wireless Mouse,Middle East,47.50,11,Accessories
+2023-09-14,Noise-Cancel Headset,Asia Pacific,239.99,4,Audio
+2023-10-20,Mechanical Keyboard,North America,154.99,7,Accessories
+2023-11-12,USB-C Hub,Europe,79.99,14,Accessories
+2023-12-08,Tablet 10",North America,529.99,3,Electronics
+2024-01-22,Power Bank 20K,Latin America,42.00,20,Accessories
+2024-02-18,Phone Case Premium,North America,31.99,23,Accessories
+2024-03-24,Screen Protector,Asia Pacific,14.99,22,Accessories
+2024-04-20,HDMI Cable 6ft,Europe,19.99,15,Accessories
+2024-05-16,Wireless Charger,North America,39.99,11,Accessories
+2024-06-22,Laptop Sleeve,Africa,34.99,12,Accessories
+2024-07-18,Desk Lamp LED,North America,44.99,9,Furniture
+2024-08-14,Ergonomic Chair,Asia Pacific,499.00,1,Furniture
+2024-09-20,Laptop Pro 15,North America,1179.00,3,Electronics
+2024-10-16,Noise-Cancel Headset,Europe,289.99,5,Audio
+2024-11-22,Standing Desk,North America,749.00,3,Furniture
+2024-12-18,Bluetooth Speaker,Middle East,199.99,9,Audio
+2025-01-14,Wireless Mouse,North America,49.50,13,Accessories
+2025-02-20,Monitor 27",Latin America,439.00,3,Electronics
+2025-03-16,Smart Watch,Europe,329.00,3,Wearables
+2025-04-22,External SSD 1TB,North America,124.95,6,Storage
+2025-05-18,Mechanical Keyboard,Asia Pacific,134.99,5,Accessories
+2025-06-14,4K Webcam,North America,139.00,7,Electronics
+2025-07-20,USB-C Hub,Europe,72.99,10,Accessories
+2025-08-16,Tablet 10",North America,459.99,2,Electronics
+2025-09-22,Laptop Pro 15,Latin America,1149.00,3,Electronics
+2025-10-18,Ergonomic Chair,North America,599.00,2,Furniture
+2025-11-14,Power Bank 20K,Europe,64.00,21,Accessories
+2025-12-20,Desk Lamp LED,Asia Pacific,89.99,14,Furniture
+2023-03-05,Laptop Pro 15,Middle East,1059.00,2,Electronics
+2023-04-08,Monitor 27",North America,399.00,4,Electronics
+2023-05-15,Wireless Mouse,Asia Pacific,38.50,16,Accessories
+2023-06-22,Noise-Cancel Headset,Europe,269.99,5,Audio
+2023-07-12,Standing Desk,North America,629.00,1,Furniture
+2023-08-18,Smart Watch,Latin America,309.00,3,Wearables
+2023-09-08,External SSD 1TB,North America,119.95,7,Storage
+2023-10-14,Bluetooth Speaker,Europe,149.99,6,Audio
+2023-11-20,4K Webcam,Asia Pacific,189.00,8,Electronics
+2023-12-06,Mechanical Keyboard,North America,149.99,6,Accessories
+2024-01-12,USB-C Hub,Africa,59.99,11,Accessories
+2024-02-08,Tablet 10",North America,439.99,2,Electronics
+2024-03-14,Ergonomic Chair,Europe,569.00,1,Furniture
+2024-04-18,Power Bank 20K,Middle East,49.00,18,Accessories
+2024-05-22,Desk Lamp LED,North America,59.99,8,Furniture
+2024-06-12,Phone Case Premium,Asia Pacific,36.99,20,Accessories
+2024-07-08,Screen Protector,Latin America,13.99,22,Accessories
+2024-08-14,HDMI Cable 6ft,North America,17.99,16,Accessories
+2024-09-18,Wireless Charger,Europe,52.99,9,Accessories
+2024-10-22,Laptop Sleeve,North America,42.99,13,Accessories
+2024-11-08,Laptop Pro 15,Asia Pacific,1529.00,5,Electronics
+2024-12-14,Monitor 27",North America,609.00,6,Electronics
+2025-01-18,Noise-Cancel Headset,Middle East,279.99,5,Audio
+2025-02-22,Standing Desk,North America,679.00,2,Furniture
+2025-03-12,Wireless Mouse,Latin America,42.50,14,Accessories
+2025-04-08,Bluetooth Speaker,Europe,129.99,6,Audio
+2025-05-14,Smart Watch,North America,339.00,4,Wearables
+2025-06-18,External SSD 1TB,Asia Pacific,114.95,7,Storage
+2025-07-08,Mechanical Keyboard,North America,164.99,5,Accessories
+2025-08-14,4K Webcam,Europe,184.00,4,Electronics
+2025-09-18,USB-C Hub,North America,79.99,9,Accessories
+2025-10-12,Tablet 10",Latin America,449.99,3,Electronics
+2025-11-08,Ergonomic Chair,North America,689.00,3,Furniture
+2025-12-14,Laptop Pro 15,Europe,1529.00,6,Electronics
+2023-02-08,Power Bank 20K,North America,39.00,19,Accessories
+2023-04-18,Phone Case Premium,Europe,24.99,24,Accessories
+2023-06-28,Screen Protector,Asia Pacific,11.99,21,Accessories
+2023-08-08,HDMI Cable 6ft,North America,19.99,14,Accessories
+2023-10-08,Wireless Charger,Latin America,44.99,8,Accessories
+2023-12-14,Laptop Sleeve,Europe,49.99,15,Accessories
+2024-02-04,Desk Lamp LED,Middle East,54.99,7,Furniture
+2024-04-14,Ergonomic Chair,North America,589.00,2,Furniture
+2024-06-04,Laptop Pro 15,Asia Pacific,1029.00,2,Electronics
+2024-08-04,Monitor 27",Europe,459.00,3,Electronics
+2024-10-14,Noise-Cancel Headset,North America,319.99,5,Audio
+2024-12-24,Standing Desk,Asia Pacific,749.00,3,Furniture
+2025-02-04,Smart Watch,North America,299.00,4,Wearables
+2025-04-04,Bluetooth Speaker,Middle East,119.99,6,Audio
+2025-06-04,External SSD 1TB,North America,109.95,8,Storage
+2025-08-04,Wireless Mouse,Latin America,52.50,12,Accessories
+2025-10-04,Mechanical Keyboard,Europe,139.99,6,Accessories
+2025-12-04,4K Webcam,North America,199.00,8,Electronics
+2023-01-09,USB-C Hub,Africa,49.99,10,Accessories
+2023-03-09,Tablet 10",North America,419.99,3,Electronics
+2023-05-09,Ergonomic Chair,Asia Pacific,479.00,1,Furniture
+2023-07-09,Power Bank 20K,Europe,47.00,16,Accessories
+2023-09-09,Desk Lamp LED,North America,44.99,9,Furniture
+2023-11-09,Phone Case Premium,Latin America,39.99,22,Accessories
+2024-01-09,Screen Protector,North America,17.99,20,Accessories
+2024-03-09,HDMI Cable 6ft,Asia Pacific,15.99,17,Accessories
+2024-05-09,Wireless Charger,Europe,42.99,10,Accessories
+2024-07-09,Laptop Sleeve,North America,37.99,14,Accessories
+2024-09-09,Laptop Pro 15,Middle East,1219.00,3,Electronics
+2024-11-09,Monitor 27",North America,629.00,5,Electronics
+2025-01-09,Noise-Cancel Headset,Europe,299.99,5,Audio
+2025-03-09,Standing Desk,North America,579.00,2,Furniture
+2025-05-09,Wireless Mouse,Asia Pacific,46.50,13,Accessories
+2025-07-09,Bluetooth Speaker,Latin America,94.99,7,Audio
+2025-09-09,Smart Watch,North America,369.00,3,Wearables
+2025-11-09,External SSD 1TB,Europe,154.95,9,Storage
+2023-04-05,Mechanical Keyboard,North America,129.99,8,Accessories
+2023-06-05,4K Webcam,Latin America,109.00,5,Electronics
+2023-08-05,USB-C Hub,Europe,74.99,11,Accessories
+2023-10-05,Tablet 10",North America,459.99,2,Electronics
+2023-12-05,Ergonomic Chair,Asia Pacific,649.00,2,Furniture
+2024-02-15,Power Bank 20K,North America,55.00,17,Accessories
+2024-04-25,Desk Lamp LED,Africa,39.99,10,Furniture
+2024-06-15,Phone Case Premium,North America,27.99,23,Accessories
+2024-08-25,Screen Protector,Middle East,21.99,18,Accessories
+2024-10-15,HDMI Cable 6ft,Europe,16.99,15,Accessories
+2024-12-05,Wireless Charger,North America,57.99,11,Accessories
+2025-02-15,Laptop Sleeve,Asia Pacific,44.99,12,Accessories
+2025-04-25,Laptop Pro 15,North America,1279.00,3,Electronics
+2025-06-15,Monitor 27",Europe,379.00,4,Electronics
+2025-08-25,Noise-Cancel Headset,Latin America,259.99,4,Audio
+2025-10-15,Standing Desk,North America,629.00,2,Furniture
+2025-12-25,Wireless Mouse,Asia Pacific,79.50,16,Accessories
+2023-05-25,Bluetooth Speaker,Middle East,129.99,5,Audio
+2023-07-25,Smart Watch,North America,349.00,4,Wearables
+2023-09-25,External SSD 1TB,Europe,139.95,6,Storage
+2023-11-25,4K Webcam,North America,199.00,9,Electronics
+2024-01-25,Mechanical Keyboard,Asia Pacific,109.99,7,Accessories
+2024-03-25,USB-C Hub,Latin America,64.99,12,Accessories
+2024-05-25,Tablet 10",North America,499.99,2,Electronics
+2024-07-25,Ergonomic Chair,Europe,519.00,1,Furniture
+2024-09-25,Power Bank 20K,North America,48.00,16,Accessories
+2024-11-25,Desk Lamp LED,Asia Pacific,84.99,14,Furniture
+2025-01-25,Phone Case Premium,Europe,35.99,20,Accessories
+2025-03-25,Screen Protector,North America,16.99,21,Accessories
+2025-05-25,HDMI Cable 6ft,Middle East,20.99,14,Accessories
+2025-07-25,Wireless Charger,North America,49.99,9,Accessories
+2025-09-25,Laptop Sleeve,Latin America,39.99,11,Accessories
+2025-11-25,Laptop Pro 15,North America,1599.00,6,Electronics
+2023-02-18,Monitor 27",Asia Pacific,369.00,3,Electronics
+2023-04-28,Noise-Cancel Headset,North America,279.99,6,Audio
+2023-06-18,Standing Desk,Europe,559.00,2,Furniture
+2023-08-28,Wireless Mouse,Latin America,45.50,13,Accessories
+2023-10-28,Bluetooth Speaker,North America,119.99,7,Audio
+2023-12-28,Smart Watch,Middle East,399.00,4,Wearables
+2024-02-28,External SSD 1TB,North America,124.95,8,Storage
+2024-04-28,4K Webcam,Asia Pacific,139.00,6,Electronics
+2024-06-28,Mechanical Keyboard,Europe,119.99,5,Accessories
+2024-08-28,USB-C Hub,North America,69.99,10,Accessories
+2024-10-28,Tablet 10",Latin America,469.99,3,Electronics
+2024-12-28,Ergonomic Chair,North America,699.00,3,Furniture
+2025-02-28,Power Bank 20K,Asia Pacific,56.00,18,Accessories
+2025-04-28,Desk Lamp LED,Europe,59.99,9,Furniture
+2025-06-28,Phone Case Premium,North America,26.99,22,Accessories
+2025-08-28,Laptop Pro 15,North America,1349.00,3,Electronics
+2025-10-28,Monitor 27",Middle East,539.00,4,Electronics
+2025-12-28,Noise-Cancel Headset,Europe,349.99,7,Audio
+2023-01-11,Standing Desk,North America,469.00,2,Furniture
+2023-03-11,Smart Watch,Europe,319.00,3,Wearables
+2023-05-11,External SSD 1TB,Asia Pacific,99.95,7,Storage
+2023-07-11,Wireless Mouse,North America,52.50,12,Accessories
+2023-09-11,Bluetooth Speaker,Latin America,109.99,5,Audio
+2023-11-11,Laptop Pro 15,North America,1469.00,5,Electronics
+2024-01-11,4K Webcam,Europe,149.00,7,Electronics
+2024-03-11,Mechanical Keyboard,Middle East,134.99,6,Accessories
+2024-05-11,Monitor 27",North America,499.00,3,Electronics
+2024-07-11,Noise-Cancel Headset,Asia Pacific,259.99,4,Audio
+2024-09-11,USB-C Hub,Latin America,54.99,11,Accessories
+2024-11-11,Tablet 10",North America,569.99,4,Electronics
+2025-01-11,Ergonomic Chair,Europe,539.00,2,Furniture
+2025-03-11,Power Bank 20K,North America,49.00,17,Accessories
+2025-05-11,Desk Lamp LED,Africa,54.99,10,Furniture
+2025-07-11,Phone Case Premium,Asia Pacific,37.99,19,Accessories
+2025-09-11,Screen Protector,North America,19.99,20,Accessories
+2025-11-11,HDMI Cable 6ft,Europe,24.99,18,Accessories
+2023-04-11,Wireless Charger,North America,49.99,8,Accessories
+2023-06-11,Laptop Sleeve,Asia Pacific,29.99,14,Accessories
+2023-08-11,Laptop Pro 15,Europe,1199.00,3,Electronics
+2023-10-11,Monitor 27",North America,479.00,3,Electronics
+2023-12-11,Standing Desk,Latin America,729.00,3,Furniture
+2024-02-11,Bluetooth Speaker,North America,129.99,6,Audio
+2024-04-11,Smart Watch,Middle East,349.00,3,Wearables
+2024-06-11,External SSD 1TB,Europe,104.95,7,Storage
+2024-08-11,Wireless Mouse,North America,59.50,10,Accessories
+2024-10-11,Noise-Cancel Headset,Asia Pacific,279.99,4,Audio
+2024-12-11,Mechanical Keyboard,North America,179.99,8,Accessories
+2025-02-11,4K Webcam,Latin America,134.00,6,Electronics
+2025-04-11,USB-C Hub,Europe,64.99,11,Accessories
+2025-06-11,Tablet 10",North America,439.99,2,Electronics
+2025-08-11,Ergonomic Chair,Middle East,559.00,1,Furniture
+2025-10-11,Power Bank 20K,North America,52.00,16,Accessories
+2025-12-11,Desk Lamp LED,Asia Pacific,94.99,13,Furniture
+2023-02-28,Phone Case Premium,North America,34.99,22,Accessories
+2023-05-28,Screen Protector,Europe,14.99,21,Accessories
+2023-08-28,HDMI Cable 6ft,Asia Pacific,12.99,17,Accessories
+2023-11-28,Wireless Charger,North America,54.99,12,Accessories
+2024-02-28,Laptop Sleeve,Latin America,39.99,13,Accessories
+2024-05-28,Laptop Pro 15,Africa,1049.00,2,Electronics
+2024-08-28,Monitor 27",North America,479.00,4,Electronics
+2024-11-28,Standing Desk,Europe,779.00,3,Furniture
+2025-02-28,Bluetooth Speaker,North America,139.99,6,Audio
+2025-05-28,Smart Watch,Asia Pacific,299.00,3,Wearables
+2025-08-28,External SSD 1TB,Europe,129.95,7,Storage
+2025-11-28,Wireless Mouse,North America,79.50,15,Accessories
+2023-03-18,4K Webcam,Latin America,129.00,5,Electronics
+2023-06-18,Mechanical Keyboard,North America,109.99,7,Accessories
+2023-09-18,USB-C Hub,Middle East,59.99,10,Accessories
+2023-12-18,Tablet 10",Europe,579.99,4,Electronics
+2024-03-18,Ergonomic Chair,North America,549.00,2,Furniture
+2024-06-18,Power Bank 20K,Asia Pacific,42.00,18,Accessories
+2024-09-18,Desk Lamp LED,Latin America,49.99,9,Furniture
+2024-12-18,Phone Case Premium,North America,49.99,24,Accessories
+2025-03-18,Screen Protector,Europe,14.99,22,Accessories
+2025-06-18,HDMI Cable 6ft,North America,15.99,16,Accessories
+2025-09-18,Wireless Charger,Asia Pacific,49.99,8,Accessories
+2025-12-18,Laptop Sleeve,North America,54.99,15,Accessories

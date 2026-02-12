@@ -1,0 +1,29 @@
+# SecureAudit Pro - Python Dependencies
+# ======================================
+
+# Web framework for dashboard
+Flask>=2.3.0
+
+# Template engine (included with Flask, listed for clarity)
+Jinja2>=3.1.0
+
+# CLI framework
+click>=8.1.0
+
+# Terminal formatting and tables
+rich>=13.0.0
+
+# YAML configuration parsing
+PyYAML>=6.0
+
+# HTTP requests for web scanning
+requests>=2.31.0
+
+# DNS enumeration (optional but recommended)
+dnspython>=2.4.0
+
+# --- Development Dependencies ---
+# pytest>=7.4.0
+# pytest-cov>=4.1.0
+# flake8>=6.1.0
+# black>=23.0.0

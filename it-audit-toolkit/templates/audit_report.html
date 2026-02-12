@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Audit Report - {{ engagement.client }}</title>
+    <style>
+        /* === Reset & Base === */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 0;
+        }
+
+        /* === Print Styles === */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .page-break { page-break-before: always; }
+            .no-print { display: none; }
+            .container { box-shadow: none; max-width: 100%; }
+        }
+
+        /* === Container === */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: #fff;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        /* === Header === */
+        .report-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            color: #fff;
+            padding: 50px 60px;
+        }
+        .report-header h1 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        .report-header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .report-header .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        .report-header .meta-grid dt { font-weight: 600; display: inline; }
+        .report-header .meta-grid dd { display: inline; margin-left: 8px; }
+
+        /* === Section === */
+        .section {
+            padding: 40px 60px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .section:last-child { border-bottom: none; }
+        .section h2 {
+            font-size: 1.5em;
+            color: #1a237e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3949ab;
+        }
+        .section h3 {
+            font-size: 1.15em;
+            color: #333;
+            margin: 25px 0 12px 0;
+        }
+
+        /* === Metric Cards === */
+        .metric-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .metric-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #3949ab;
+        }
+        .metric-card .value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1a237e;
+        }
+        .metric-card .label {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .metric-card.critical { border-left-color: #dc3545; }
+        .metric-card.critical .value { color: #dc3545; }
+        .metric-card.warning { border-left-color: #fd7e14; }
+        .metric-card.warning .value { color: #fd7e14; }
+        .metric-card.success { border-left-color: #28a745; }
+        .metric-card.success .value { color: #28a745; }
+
+        /* === Severity Badges === */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-critical { background: #dc3545; color: #fff; }
+        .badge-high { background: #fd7e14; color: #fff; }
+        .badge-medium { background: #ffc107; color: #212529; }
+        .badge-low { background: #28a745; color: #fff; }
+        .badge-informational { background: #17a2b8; color: #fff; }
+
+        /* === Tables === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th {
+            background: #f0f0f0;
+            color: #333;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #ddd;
+        }
+        td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        tr:hover { background: #f9f9f9; }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+
+        /* === Compliance Bar === */
+        .compliance-bar-container {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .compliance-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* === Risk Heat Map === */
+        .heat-map-container { margin: 25px 0; overflow-x: auto; }
+        .heat-map {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        .heat-map th {
+            background: #f0f0f0;
+            padding: 10px;
+            font-size: 0.8em;
+            text-align: center;
+            min-width: 80px;
+        }
+        .heat-map td {
+            width: 80px;
+            height: 50px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+        .heat-map .label-cell {
+            background: #f0f0f0;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.8em;
+            text-align: right;
+            padding-right: 10px;
+            width: 100px;
+        }
+
+        /* === Finding Cards === */
+        .finding-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .finding-card-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .finding-card-header.critical { background: #dc3545; color: #fff; }
+        .finding-card-header.high { background: #fd7e14; color: #fff; }
+        .finding-card-header.medium { background: #ffc107; color: #212529; }
+        .finding-card-header.low { background: #28a745; color: #fff; }
+        .finding-card-header.informational { background: #17a2b8; color: #fff; }
+        .finding-card-header h4 { margin: 0; font-size: 1.05em; }
+        .finding-card-body {
+            padding: 20px;
+        }
+        .finding-card-body .field {
+            margin-bottom: 15px;
+        }
+        .finding-card-body .field-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .finding-card-body .field-value {
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* === Roadmap === */
+        .roadmap-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .roadmap-item:last-child { border-bottom: none; }
+        .roadmap-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3949ab;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+        .roadmap-content { flex: 1; }
+        .roadmap-content .title { font-weight: 600; margin-bottom: 4px; }
+        .roadmap-content .timeline { color: #666; font-size: 0.9em; }
+
+        /* === Footer === */
+        .report-footer {
+            background: #f0f0f0;
+            padding: 20px 60px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        /* === Scope and Methodology === */
+        .scope-list {
+            list-style: none;
+            padding: 0;
+        }
+        .scope-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+        }
+        .scope-list li::before {
+            content: "\25B8";
+            position: absolute;
+            left: 0;
+            color: #3949ab;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- === REPORT HEADER === -->
+        <div class="report-header">
+            <h1>IT Audit Report</h1>
+            <div class="subtitle">{{ engagement.name }}</div>
+            <div class="meta-grid">
+                <div><dt>Client:</dt><dd>{{ engagement.client }}</dd></div>
+                <div><dt>Report Date:</dt><dd>{{ engagement.report_date }}</dd></div>
+                <div><dt>Lead Auditor:</dt><dd>{{ engagement.lead_auditor }}</dd></div>
+                <div><dt>Engagement ID:</dt><dd>{{ engagement.id }}</dd></div>
+                <div><dt>Audit Period:</dt><dd>{{ engagement.start_date }} to {{ engagement.end_date }}</dd></div>
+                <div><dt>Status:</dt><dd>{{ engagement.status | upper }}</dd></div>
+            </div>
+        </div>
+
+        <!-- === TABLE OF CONTENTS === -->
+        <div class="section no-print">
+            <h2>Table of Contents</h2>
+            <ol style="padding-left:20px; line-height:2">
+                <li><a href="#exec-summary" style="color:#3949ab">Executive Summary</a></li>
+                <li><a href="#scope" style="color:#3949ab">Scope and Methodology</a></li>
+                <li><a href="#compliance" style="color:#3949ab">Compliance Dashboard</a></li>
+                <li><a href="#risk-heatmap" style="color:#3949ab">Risk Heat Map</a></li>
+                <li><a href="#findings" style="color:#3949ab">Detailed Findings</a></li>
+                <li><a href="#remediation" style="color:#3949ab">Remediation Roadmap</a></li>
+            </ol>
+        </div>
+
+        <!-- === EXECUTIVE SUMMARY === -->
+        <div class="section" id="exec-summary">
+            <h2>1. Executive Summary</h2>
+
+            <p>This report presents the results of the IT audit engagement for
+            <strong>{{ engagement.client }}</strong>. The audit was conducted
+            under the direction of <strong>{{ engagement.lead_auditor }}</strong>
+            covering the period from {{ engagement.start_date }} to {{ engagement.end_date }}.
+            The audit assessed {{ exec_summary.total_controls }} IT controls
+            across {{ exec_summary.total_areas }} audit domains using a risk-based
+            methodology aligned with ISACA IT Audit Framework standards.</p>
+
+            <div class="metric-cards">
+                <div class="metric-card {% if exec_summary.overall_compliance_pct >= 80 %}success{% elif exec_summary.overall_compliance_pct >= 60 %}warning{% else %}critical{% endif %}">
+                    <div class="value">{{ "%.1f"|format(exec_summary.overall_compliance_pct) }}%</div>
+                    <div class="label">Overall Compliance</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">{{ "%.1f"|format(exec_summary.overall_risk_score) }}</div>
+                    <div class="label">Risk Score (of 25)</div>
+                </div>
+                <div class="metric-card {% if exec_summary.total_findings > 5 %}critical{% elif exec_summary.total_findings > 2 %}warning{% else %}success{% endif %}">
+                    <div class="value">{{ exec_summary.total_findings }}</div>
+                    <div class="label">Total Findings</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">{{ exec_summary.total_controls_tested }}</div>
+                    <div class="label">Controls Tested</div>
+                </div>
+            </div>
+
+            <h3>Finding Severity Distribution</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th class="text-center">Count</th>
+                        <th>Distribution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set max_finding_count = [exec_summary.critical_findings, exec_summary.high_findings, exec_summary.medium_findings, exec_summary.low_findings, exec_summary.informational_findings] | max %}
+                    <tr>
+                        <td><span class="badge badge-critical">CRITICAL</span></td>
+                        <td class="text-center">{{ exec_summary.critical_findings }}</td>
+                        <td>
+                            <div class="compliance-bar-container">
+                                <div class="compliance-bar" style="width:{{ (exec_summary.critical_findings / max_finding_count * 100) if max_finding_count > 0 else 0 }}%;background:#dc3545"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-high">HIGH</span></td>
+                        <td class="text-center">{{ exec_summary.high_findings }}</td>
+                        <td>
+                            <div class="compliance-bar-container">
+                                <div class="compliance-bar" style="width:{{ (exec_summary.high_findings / max_finding_count * 100) if max_finding_count > 0 else 0 }}%;background:#fd7e14"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-medium">MEDIUM</span></td>
+                        <td class="text-center">{{ exec_summary.medium_findings }}</td>
+                        <td>
+                            <div class="compliance-bar-container">
+                                <div class="compliance-bar" style="width:{{ (exec_summary.medium_findings / max_finding_count * 100) if max_finding_count > 0 else 0 }}%;background:#ffc107"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-low">LOW</span></td>
+                        <td class="text-center">{{ exec_summary.low_findings }}</td>
+                        <td>
+                            <div class="compliance-bar-container">
+                                <div class="compliance-bar" style="width:{{ (exec_summary.low_findings / max_finding_count * 100) if max_finding_count > 0 else 0 }}%;background:#28a745"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-informational">INFO</span></td>
+                        <td class="text-center">{{ exec_summary.informational_findings }}</td>
+                        <td>
+                            <div class="compliance-bar-container">
+                                <div class="compliance-bar" style="width:{{ (exec_summary.informational_findings / max_finding_count * 100) if max_finding_count > 0 else 0 }}%;background:#17a2b8"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- === SCOPE AND METHODOLOGY === -->
+        <div class="section page-break" id="scope">
+            <h2>2. Scope and Methodology</h2>
+
+            {% if engagement.scope_description %}
+            <h3>Audit Scope</h3>
+            <p>{{ engagement.scope_description }}</p>
+            {% endif %}
+
+            <h3>Audit Objectives</h3>
+            <ul class="scope-list">
+            {% for obj in engagement.objectives %}
+                <li>{{ obj }}</li>
+            {% endfor %}
+            </ul>
+
+            <h3>Methodology</h3>
+            <p>{{ engagement.methodology }}</p>
+
+            <h3>Audit Domains Covered</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th class="text-center">Controls</th>
+                        <th class="text-center">Tested</th>
+                        <th class="text-center">Findings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for area in area_summaries %}
+                    <tr>
+                        <td><strong>{{ area.name }}</strong></td>
+                        <td class="text-center">{{ area.total_controls }}</td>
+                        <td class="text-center">{{ area.tested_controls }}</td>
+                        <td class="text-center">{{ area.finding_count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- === COMPLIANCE DASHBOARD === -->
+        <div class="section page-break" id="compliance">
+            <h2>3. Compliance Dashboard</h2>
+
+            <p>The following table summarizes compliance status across each audit domain.
+            Compliance percentage reflects the ratio of effective controls to total tested
+            controls, with partially effective controls weighted at 50%.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Audit Area</th>
+                        <th class="text-center">Compliance</th>
+                        <th style="min-width:200px">Progress</th>
+                        <th class="text-center">Avg Risk</th>
+                        <th class="text-center">Findings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for area in area_summaries %}
+                    {% set pct = area.compliance_pct %}
+                    {% if pct >= 80 %}
+                        {% set bar_color = "#28a745" %}
+                    {% elif pct >= 60 %}
+                        {% set bar_color = "#ffc107" %}
+                    {% elif pct >= 40 %}
+                        {% set bar_color = "#fd7e14" %}
+                    {% else %}
+                        {% set bar_color = "#dc3545" %}
+                    {% endif %}
+                    <tr>
+                        <td><strong>{{ area.name }}</strong></td>
+                        <td class="text-center" style="font-weight:700;color:{{ bar_color }}">{{ "%.1f"|format(pct) }}%</td>
+                        <td>
+                            <div class="compliance-bar-container">
+                                <div class="compliance-bar" style="width:{{ pct }}%;background:{{ bar_color }}"></div>
+                            </div>
+                        </td>
+                        <td class="text-center">{{ "%.1f"|format(area.average_risk_score) }}</td>
+                        <td class="text-center">{{ area.finding_count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- === RISK HEAT MAP === -->
+        <div class="section page-break" id="risk-heatmap">
+            <h2>4. Risk Heat Map</h2>
+
+            <p>The risk heat map below visualizes the distribution of control risk assessments
+            across a 5x5 likelihood-impact matrix. Each cell shows the number of controls
+            assessed at that risk intersection. Color intensity indicates severity level.</p>
+
+            <div class="heat-map-container">
+                <table class="heat-map">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            {% for label in heat_map.impact_labels %}
+                            <th>{{ label }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th style="text-align:right;font-size:0.75em">Likelihood \ Impact</th>
+                            {% for i in range(1, 6) %}
+                            <th style="font-size:0.75em">{{ i }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for l_idx in range(4, -1, -1) %}
+                        <tr>
+                            <td class="label-cell">{{ heat_map.likelihood_labels[l_idx] }} ({{ l_idx + 1 }})</td>
+                            {% for i_idx in range(5) %}
+                            {% set cell = heat_map.heat_map[l_idx][i_idx] %}
+                            <td style="background:{{ cell.color }};{% if cell.count > 0 %}opacity:1{% else %}opacity:0.5{% endif %}">
+                                {% if cell.count > 0 %}{{ cell.count }}{% endif %}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top:20px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap">
+                <span><span style="display:inline-block;width:20px;height:14px;background:#dc3545;border-radius:3px;vertical-align:middle"></span> Critical (20-25)</span>
+                <span><span style="display:inline-block;width:20px;height:14px;background:#fd7e14;border-radius:3px;vertical-align:middle"></span> High (12-19)</span>
+                <span><span style="display:inline-block;width:20px;height:14px;background:#ffc107;border-radius:3px;vertical-align:middle"></span> Medium (6-11)</span>
+                <span><span style="display:inline-block;width:20px;height:14px;background:#28a745;border-radius:3px;vertical-align:middle"></span> Low (2-5)</span>
+                <span><span style="display:inline-block;width:20px;height:14px;background:#17a2b8;border-radius:3px;vertical-align:middle"></span> Informational (1)</span>
+            </div>
+        </div>
+
+        <!-- === DETAILED FINDINGS === -->
+        <div class="section page-break" id="findings">
+            <h2>5. Detailed Findings</h2>
+
+            {% if findings %}
+            <p>The following {{ findings|length }} finding(s) were identified during the audit.
+            Findings are presented in order of severity, with the most critical issues listed first.</p>
+
+            {% for finding in findings %}
+            <div class="finding-card">
+                <div class="finding-card-header {{ finding.severity }}">
+                    <h4>{{ finding.get('finding_id', 'N/A') }}: {{ finding.title }}</h4>
+                    <span class="badge badge-{{ finding.severity }}">{{ finding.severity | upper }}</span>
+                </div>
+                <div class="finding-card-body">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px;font-size:0.9em;color:#666">
+                        <div><strong>Audit Area:</strong> {{ finding.audit_area }}</div>
+                        <div><strong>Status:</strong> {{ finding.get('status', 'open') | upper }}</div>
+                        <div><strong>Identified:</strong> {{ finding.get('identified_date', 'N/A') }}</div>
+                        <div><strong>Deadline:</strong> {{ finding.get('remediation_deadline', 'Not set') or 'Not set' }}</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">Description</div>
+                        <div class="field-value">{{ finding.description }}</div>
+                    </div>
+
+                    {% if finding.root_cause %}
+                    <div class="field">
+                        <div class="field-label">Root Cause</div>
+                        <div class="field-value">{{ finding.root_cause }}</div>
+                    </div>
+                    {% endif %}
+
+                    {% if finding.business_impact %}
+                    <div class="field">
+                        <div class="field-label">Business Impact</div>
+                        <div class="field-value">{{ finding.business_impact }}</div>
+                    </div>
+                    {% endif %}
+
+                    {% if finding.recommendation %}
+                    <div class="field">
+                        <div class="field-label">Recommendation</div>
+                        <div class="field-value">{{ finding.recommendation }}</div>
+                    </div>
+                    {% endif %}
+
+                    {% if finding.management_response %}
+                    <div class="field">
+                        <div class="field-label">Management Response</div>
+                        <div class="field-value">{{ finding.management_response }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <p>No findings were identified during this audit engagement.</p>
+            {% endif %}
+        </div>
+
+        <!-- === REMEDIATION ROADMAP === -->
+        <div class="section page-break" id="remediation">
+            <h2>6. Remediation Roadmap</h2>
+
+            {% if remediation_roadmap %}
+            <p>The following prioritized remediation roadmap outlines the recommended order
+            for addressing identified findings. Priority is determined by severity classification
+            and risk score.</p>
+
+            {% for item in remediation_roadmap %}
+            <div class="roadmap-item">
+                <div class="roadmap-number">{{ item.priority_order }}</div>
+                <div class="roadmap-content">
+                    <div class="title">
+                        {{ item.title }}
+                        <span class="badge badge-{{ item.severity }}">{{ item.severity | upper }}</span>
+                    </div>
+                    <div class="timeline">
+                        Risk Score: {{ item.risk_score }} |
+                        Timeline: {{ item.remediation_timeline }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <p>No remediation items to display. No findings were identified.</p>
+            {% endif %}
+        </div>
+
+        <!-- === FOOTER === -->
+        <div class="report-footer">
+            <p><strong>CONFIDENTIAL</strong> - This report is intended solely for the use of
+            {{ engagement.client }} management and those charged with governance.
+            Distribution to third parties requires prior written consent.</p>
+            <p style="margin-top:8px">Report generated on {{ report_generated_at }} |
+            IT Audit Toolkit v1.0.0</p>
+        </div>
+
+    </div>
+</body>
+</html>

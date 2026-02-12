@@ -1,0 +1,75 @@
+# ============================================================
+# Crypto Wallet Explorer -- .gitignore
+# ============================================================
+# SECURITY: Never commit private keys, mnemonics, seeds, or
+# API keys to version control.
+# ============================================================
+
+# --- Environment and Secrets ---
+# CRITICAL: Never commit .env files containing API keys
+.env
+.env.local
+.env.production
+*.key
+*.pem
+*.secret
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# --- Virtual Environments ---
+venv/
+env/
+.venv/
+ENV/
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Testing ---
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Distribution ---
+*.tar.gz
+*.whl
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Wallet data (NEVER commit) ---
+# Any files that might contain wallet data
+wallets/
+*.wallet
+*.keystore
+*.json.bak
+mnemonic.txt
+seed.txt
+private_key.txt

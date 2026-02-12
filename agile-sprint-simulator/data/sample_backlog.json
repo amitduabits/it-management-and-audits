@@ -1,0 +1,435 @@
+{
+  "stories": [
+    {
+      "story_id": "US-001",
+      "title": "User Login with Biometrics",
+      "description": "As a mobile banking user, I want to log in using fingerprint or face recognition so that I can securely access my account without typing a password.",
+      "priority": "Must Have",
+      "story_points": 8,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "User can authenticate via fingerprint on supported devices",
+        "User can authenticate via Face ID on supported devices",
+        "Fallback to PIN entry if biometric fails 3 times",
+        "Session token is securely stored in device keychain"
+      ],
+      "tags": ["auth", "security", "mobile"],
+      "tasks": [
+        {"title": "Integrate biometric SDK", "hours_estimated": 6.0, "hours_remaining": 6.0, "status": "To Do"},
+        {"title": "Build fallback PIN screen", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Implement session token storage", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Write unit tests for auth flow", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "QA testing on iOS and Android", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-002",
+      "title": "Account Balance Dashboard",
+      "description": "As a user, I want to see all my account balances on a single dashboard so that I can quickly check my financial position.",
+      "priority": "Must Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Dashboard shows checking, savings, and credit card balances",
+        "Balances refresh on pull-to-refresh gesture",
+        "Last updated timestamp is displayed",
+        "Currency formatting follows user locale"
+      ],
+      "tags": ["dashboard", "ui", "api"],
+      "tasks": [
+        {"title": "Design dashboard layout", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Build balance API endpoint", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Implement pull-to-refresh", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Add locale-aware currency formatting", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-003",
+      "title": "Fund Transfer Between Own Accounts",
+      "description": "As a user, I want to transfer money between my own accounts so that I can manage my funds conveniently.",
+      "priority": "Must Have",
+      "story_points": 8,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "User can select source and destination accounts",
+        "Transfer amount is validated against available balance",
+        "Confirmation screen shows transfer details before execution",
+        "Transfer receipt is generated and stored in history",
+        "Real-time balance update after transfer"
+      ],
+      "tags": ["transfers", "backend", "api"],
+      "tasks": [
+        {"title": "Build transfer API with validation", "hours_estimated": 6.0, "hours_remaining": 6.0, "status": "To Do"},
+        {"title": "Create transfer form UI", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Implement confirmation screen", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Build receipt generation service", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Integration and QA testing", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-004",
+      "title": "Push Notification for Transactions",
+      "description": "As a user, I want to receive push notifications for every transaction so that I am immediately aware of account activity.",
+      "priority": "Must Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Push notification sent within 5 seconds of transaction",
+        "Notification includes transaction type, amount, and balance",
+        "User can configure notification preferences",
+        "Notifications work on both iOS and Android"
+      ],
+      "tags": ["notifications", "backend", "mobile"],
+      "tasks": [
+        {"title": "Set up push notification service (FCM/APNs)", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Build notification preferences screen", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Implement transaction event triggers", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Test on both platforms", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-005",
+      "title": "Transaction History with Search",
+      "description": "As a user, I want to view my transaction history with search and filter capabilities so that I can find specific transactions easily.",
+      "priority": "Must Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Transaction list shows last 90 days by default",
+        "User can search by merchant name or amount",
+        "Filter by date range, transaction type, and amount range",
+        "Pagination with infinite scroll",
+        "Transaction detail view on tap"
+      ],
+      "tags": ["transactions", "ui", "api", "search"],
+      "tasks": [
+        {"title": "Build transaction list API with pagination", "hours_estimated": 5.0, "hours_remaining": 5.0, "status": "To Do"},
+        {"title": "Implement search and filter logic", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Create transaction list UI with infinite scroll", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Build transaction detail screen", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-006",
+      "title": "Bill Payment Integration",
+      "description": "As a user, I want to pay my utility bills directly from the app so that I can manage all my payments in one place.",
+      "priority": "Should Have",
+      "story_points": 8,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Integration with at least 5 major utility providers",
+        "User can save billers for quick access",
+        "Payment schedule and confirmation flow",
+        "Payment receipt stored in transaction history"
+      ],
+      "tags": ["payments", "integrations", "backend"],
+      "tasks": [
+        {"title": "Research and integrate biller APIs", "hours_estimated": 6.0, "hours_remaining": 6.0, "status": "To Do"},
+        {"title": "Build biller selection and payment UI", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Implement saved billers feature", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Payment confirmation and receipt flow", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "End-to-end testing with sandbox APIs", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-007",
+      "title": "Spending Analytics Dashboard",
+      "description": "As a user, I want to see a breakdown of my spending by category so that I can understand my financial habits.",
+      "priority": "Should Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Pie chart showing spending categories",
+        "Monthly comparison bar chart",
+        "Category drill-down with transaction list",
+        "Customizable time period selector"
+      ],
+      "tags": ["analytics", "ui", "data"],
+      "tasks": [
+        {"title": "Build spending categorization engine", "hours_estimated": 5.0, "hours_remaining": 5.0, "status": "To Do"},
+        {"title": "Create chart components (pie and bar)", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Implement category drill-down view", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Add time period selector", "hours_estimated": 1.5, "hours_remaining": 1.5, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-008",
+      "title": "QR Code Payment",
+      "description": "As a user, I want to make payments by scanning a QR code so that I can pay merchants quickly at point of sale.",
+      "priority": "Should Have",
+      "story_points": 8,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Camera-based QR scanner integrated in app",
+        "Support for UPI and merchant-specific QR formats",
+        "Amount pre-filled from QR data where available",
+        "Payment confirmation with merchant details"
+      ],
+      "tags": ["payments", "mobile", "camera"],
+      "tasks": [
+        {"title": "Integrate camera QR scanner library", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Parse multiple QR payment formats", "hours_estimated": 5.0, "hours_remaining": 5.0, "status": "To Do"},
+        {"title": "Build payment confirmation flow", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "QA testing with sample QR codes", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-009",
+      "title": "Profile Management",
+      "description": "As a user, I want to view and edit my profile information so that my banking details are always up to date.",
+      "priority": "Should Have",
+      "story_points": 3,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Display current profile information",
+        "Edit phone number with OTP verification",
+        "Edit email with confirmation link",
+        "Upload and crop profile photo",
+        "Address update with document verification flow"
+      ],
+      "tags": ["profile", "ui", "api"],
+      "tasks": [
+        {"title": "Build profile display screen", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Implement edit fields with validation", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Add OTP and email verification flows", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Photo upload with cropping", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-010",
+      "title": "Card Management (Freeze/Unfreeze)",
+      "description": "As a user, I want to freeze and unfreeze my debit/credit cards from the app so that I can quickly respond to suspected fraud.",
+      "priority": "Must Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Toggle switch to freeze/unfreeze each card",
+        "Immediate effect on card transactions",
+        "Push notification confirming status change",
+        "Card detail view showing current status and last 4 digits"
+      ],
+      "tags": ["cards", "security", "api"],
+      "tasks": [
+        {"title": "Build card management API", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Create card list and detail UI", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Implement freeze/unfreeze toggle", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Trigger push notification on status change", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-011",
+      "title": "Recurring Payment Setup",
+      "description": "As a user, I want to set up recurring payments for regular bills so that I never miss a payment deadline.",
+      "priority": "Should Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "User can schedule weekly, monthly, or custom recurrence",
+        "Edit or cancel upcoming scheduled payments",
+        "Notification 2 days before scheduled payment",
+        "Payment failure retry logic with user notification"
+      ],
+      "tags": ["payments", "scheduling", "backend"],
+      "tasks": [
+        {"title": "Build scheduling engine with cron-like rules", "hours_estimated": 5.0, "hours_remaining": 5.0, "status": "To Do"},
+        {"title": "Create recurring payment management UI", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Implement payment reminder notifications", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Add failure retry logic", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-012",
+      "title": "Multi-Currency Support",
+      "description": "As a user who travels internationally, I want to view balances and transact in multiple currencies so that I can manage foreign transactions.",
+      "priority": "Could Have",
+      "story_points": 8,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Display balances in user-selected currency",
+        "Real-time exchange rate display",
+        "Currency conversion calculator",
+        "Transaction history shows original and converted amounts"
+      ],
+      "tags": ["currency", "api", "data"],
+      "tasks": [
+        {"title": "Integrate exchange rate API", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Build currency conversion service", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Update dashboard for multi-currency display", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Add currency calculator widget", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Test with edge cases (rate fluctuations)", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-013",
+      "title": "In-App Customer Support Chat",
+      "description": "As a user, I want to chat with customer support directly in the app so that I can resolve issues without calling the helpline.",
+      "priority": "Should Have",
+      "story_points": 8,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Real-time chat with support agents",
+        "Chat history persists across sessions",
+        "File and screenshot attachment support",
+        "Typing indicator and read receipts",
+        "Fallback to FAQ/help articles when agents unavailable"
+      ],
+      "tags": ["support", "chat", "ui", "websocket"],
+      "tasks": [
+        {"title": "Set up WebSocket-based chat infrastructure", "hours_estimated": 6.0, "hours_remaining": 6.0, "status": "To Do"},
+        {"title": "Build chat UI with message bubbles", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Implement file attachment and preview", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Add typing indicators and read receipts", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Build FAQ fallback screen", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-014",
+      "title": "Savings Goal Tracker",
+      "description": "As a user, I want to create savings goals and track my progress so that I can stay motivated toward financial targets.",
+      "priority": "Could Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Create named savings goals with target amount and deadline",
+        "Visual progress bar and percentage tracker",
+        "Auto-deduct feature from checking to savings goal",
+        "Milestone notifications at 25%, 50%, 75%, and 100%"
+      ],
+      "tags": ["savings", "ui", "notifications"],
+      "tasks": [
+        {"title": "Build savings goal data model and API", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Create goal tracking UI with progress visualization", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Implement auto-deduction scheduling", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Set up milestone notification triggers", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-015",
+      "title": "Two-Factor Authentication Setup",
+      "description": "As a security-conscious user, I want to enable two-factor authentication so that my account has an additional layer of protection.",
+      "priority": "Must Have",
+      "story_points": 5,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Support for SMS-based OTP",
+        "Support for authenticator app (TOTP)",
+        "Backup recovery codes generated on setup",
+        "2FA required for high-value transactions"
+      ],
+      "tags": ["auth", "security", "backend"],
+      "tasks": [
+        {"title": "Implement SMS OTP service", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Build TOTP integration (Google Authenticator compatible)", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Generate and store backup recovery codes", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Add 2FA challenge to high-value transaction flow", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-016",
+      "title": "Statement Download (PDF)",
+      "description": "As a user, I want to download my account statements as PDF files so that I can keep records for tax filing and personal accounting.",
+      "priority": "Should Have",
+      "story_points": 3,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Generate statement for selected date range",
+        "PDF includes bank logo, account details, and transactions",
+        "Download or share via device share sheet",
+        "Statements available for last 24 months"
+      ],
+      "tags": ["statements", "pdf", "backend"],
+      "tasks": [
+        {"title": "Build PDF generation service", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Create date range selector UI", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Implement download and share functionality", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-017",
+      "title": "Dark Mode Theme",
+      "description": "As a user, I want to switch to dark mode so that the app is comfortable to use in low-light environments.",
+      "priority": "Could Have",
+      "story_points": 3,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Toggle between light and dark themes in settings",
+        "Follow system-level theme preference by default",
+        "All screens and components support both themes",
+        "Smooth transition animation between themes"
+      ],
+      "tags": ["ui", "theme", "mobile"],
+      "tasks": [
+        {"title": "Define dark mode color palette and tokens", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Update all UI components for theme support", "hours_estimated": 5.0, "hours_remaining": 5.0, "status": "To Do"},
+        {"title": "Implement theme toggle and system preference detection", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "QA visual regression testing across screens", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-018",
+      "title": "Beneficiary Management",
+      "description": "As a user, I want to add, edit, and delete beneficiaries so that I can quickly transfer money to frequent recipients.",
+      "priority": "Should Have",
+      "story_points": 3,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Add beneficiary with name, account number, and bank",
+        "Edit existing beneficiary details",
+        "Delete with confirmation prompt",
+        "Search and filter beneficiary list",
+        "Verification step when adding new beneficiaries"
+      ],
+      "tags": ["transfers", "ui", "api"],
+      "tasks": [
+        {"title": "Build beneficiary CRUD API", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Create beneficiary list and form UI", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Add search and filter functionality", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Implement verification flow", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-019",
+      "title": "App Onboarding Tour",
+      "description": "As a new user, I want a guided onboarding tour so that I can quickly learn how to use the key features of the app.",
+      "priority": "Could Have",
+      "story_points": 3,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "Step-by-step overlay highlighting key features",
+        "Skip option available at any point",
+        "Tour automatically shown on first login only",
+        "User can replay tour from settings"
+      ],
+      "tags": ["onboarding", "ui", "mobile"],
+      "tasks": [
+        {"title": "Design onboarding flow and copy", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Build tooltip overlay component", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Implement first-login detection and tour trigger", "hours_estimated": 2.0, "hours_remaining": 2.0, "status": "To Do"},
+        {"title": "Add replay option in settings", "hours_estimated": 1.0, "hours_remaining": 1.0, "status": "To Do"}
+      ]
+    },
+    {
+      "story_id": "US-020",
+      "title": "Accessibility Compliance (WCAG 2.1)",
+      "description": "As a user with disabilities, I want the app to meet WCAG 2.1 AA standards so that I can use all features with assistive technologies.",
+      "priority": "Should Have",
+      "story_points": 8,
+      "status": "To Do",
+      "acceptance_criteria": [
+        "All interactive elements have accessible labels",
+        "Screen reader navigation works on all screens",
+        "Color contrast meets AA ratio requirements",
+        "Touch targets are at least 44x44 points",
+        "Focus order follows logical reading sequence"
+      ],
+      "tags": ["accessibility", "ui", "compliance"],
+      "tasks": [
+        {"title": "Audit all screens for accessibility issues", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"},
+        {"title": "Add accessible labels and hints", "hours_estimated": 5.0, "hours_remaining": 5.0, "status": "To Do"},
+        {"title": "Fix color contrast violations", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Ensure correct focus order and touch targets", "hours_estimated": 3.0, "hours_remaining": 3.0, "status": "To Do"},
+        {"title": "Verify with VoiceOver and TalkBack", "hours_estimated": 4.0, "hours_remaining": 4.0, "status": "To Do"}
+      ]
+    }
+  ]
+}

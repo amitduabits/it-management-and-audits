@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Reports (generated output)
+reports/
+*.html
+!templates/*.html
+
+# Evidence (never commit actual evidence files)
+evidence/
+*.raw
+*.img
+*.E01
+*.dd
+*.pcap
+*.pcapng
+
+# Logs
+*.log
+
+# Secrets and credentials
+.env
+.env.local
+*.key
+*.pem
+*.crt
+credentials.json
+secrets.yaml

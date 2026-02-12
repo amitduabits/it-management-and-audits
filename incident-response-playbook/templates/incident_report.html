@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Report - {{ incident.incident_id }}</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --success: #28a745;
+            --info: #17a2b8;
+            --text: #333333;
+            --text-light: #6c757d;
+            --border: #dee2e6;
+            --bg-light: #f8f9fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: #ffffff;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .report-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: #ffffff;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .report-header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .report-header .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 20px;
+        }
+
+        .header-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .header-meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 16px;
+            border-radius: 6px;
+        }
+
+        .header-meta-item label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            display: block;
+        }
+
+        .header-meta-item span {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .classification-banner {
+            background: var(--danger);
+            color: #ffffff;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .content { padding: 0 40px 40px; }
+
+        .section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .section h3 {
+            font-size: 16px;
+            color: var(--secondary);
+            margin: 15px 0 10px;
+            font-weight: 600;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .severity-critical { background: var(--danger); color: #fff; }
+        .severity-high { background: #fd7e14; color: #fff; }
+        .severity-medium { background: var(--warning); color: #333; }
+        .severity-low { background: var(--success); color: #fff; }
+        .severity-informational { background: var(--info); color: #fff; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-new { background: #e3f2fd; color: #1565c0; }
+        .status-investigating { background: #fff3e0; color: #e65100; }
+        .status-containing { background: #fce4ec; color: #c62828; }
+        .status-closed { background: #e8f5e9; color: #2e7d32; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-light);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--text-light);
+        }
+
+        tr:hover { background: #f8f9fa; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 30px;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item label {
+            font-weight: 600;
+            min-width: 180px;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .info-item span { font-size: 14px; }
+
+        .timeline-container { position: relative; padding-left: 30px; }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-event {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 16px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .timeline-event .time {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .timeline-event .description {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .timeline-event .actor {
+            font-size: 12px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .ioc-table td:first-child {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .ioc-table td:nth-child(2) {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        .score-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .score-item {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .score-item .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .score-item .label {
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .evidence-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .evidence-card .ev-id {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .evidence-card .ev-hash {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .recommendations {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: var(--bg-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .recommendations li::before {
+            content: '\2713';
+            margin-right: 10px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .footer {
+            border-top: 2px solid var(--border);
+            padding: 20px 40px;
+            font-size: 12px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        @media print {
+            body { max-width: 100%; }
+            .report-header { break-after: avoid; }
+            .section { break-inside: avoid; }
+            .classification-banner { position: running(header); }
+        }
+
+        @page {
+            margin: 2cm;
+            @top-center { content: "CONFIDENTIAL - RESTRICTED DISTRIBUTION"; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="classification-banner">{{ report_classification }}</div>
+
+<div class="report-header">
+    <h1>Incident Report</h1>
+    <div class="subtitle">{{ incident.incident_id }} | Generated: {{ generated_at }}</div>
+
+    <div class="header-meta">
+        <div class="header-meta-item">
+            <label>Incident Title</label>
+            <span>{{ incident.title }}</span>
+        </div>
+        <div class="header-meta-item">
+            <label>Severity</label>
+            <span class="severity-badge severity-{{ incident.severity.value }}">{{ incident.severity.value }}</span>
+        </div>
+        <div class="header-meta-item">
+            <label>Status</label>
+            <span>{{ incident.status.value | upper }}</span>
+        </div>
+        <div class="header-meta-item">
+            <label>Category</label>
+            <span>{{ incident.category.value | replace('_', ' ') | title }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <!-- Executive Summary -->
+    <div class="section">
+        <h2>1. Executive Summary</h2>
+        <p>{{ incident.description }}</p>
+
+        <div class="score-card">
+            <div class="score-item">
+                <div class="value">{{ incident.severity.value | upper }}</div>
+                <div class="label">Severity Level</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ incident.affected_systems | length }}</div>
+                <div class="label">Systems Affected</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ duration_hours or 'N/A' }}</div>
+                <div class="label">Duration (Hours)</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ incident.business_impact_score }}/10</div>
+                <div class="label">Business Impact</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incident Details -->
+    <div class="section">
+        <h2>2. Incident Details</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <label>Incident ID:</label>
+                <span>{{ incident.incident_id }}</span>
+            </div>
+            <div class="info-item">
+                <label>Detection Time:</label>
+                <span>{{ incident.detected_at | datetime_format if incident.detected_at else 'N/A' }}</span>
+            </div>
+            <div class="info-item">
+                <label>Reported By:</label>
+                <span>{{ incident.reported_by or 'N/A' }}</span>
+            </div>
+            <div class="info-item">
+                <label>Incident Commander:</label>
+                <span>{{ incident.incident_commander or 'N/A' }}</span>
+            </div>
+            <div class="info-item">
+                <label>Attack Vector:</label>
+                <span>{{ incident.attack_vector or 'Under Investigation' }}</span>
+            </div>
+            <div class="info-item">
+                <label>Affected Users:</label>
+                <span>{{ '{:,}'.format(incident.affected_users) }}</span>
+            </div>
+        </div>
+
+        <h3>Affected Systems</h3>
+        <table>
+            <thead>
+                <tr><th>#</th><th>System</th></tr>
+            </thead>
+            <tbody>
+                {% for system in incident.affected_systems %}
+                <tr><td>{{ loop.index }}</td><td>{{ system }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Severity Assessment -->
+    {% if severity %}
+    <div class="section">
+        <h2>3. Severity Assessment</h2>
+        <div class="score-card">
+            <div class="score-item">
+                <div class="value">{{ severity.composite_score }}</div>
+                <div class="label">Composite Score (0-10)</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ severity.technical_score }}</div>
+                <div class="label">Technical Score</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ severity.business_impact_score }}</div>
+                <div class="label">Business Impact</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ severity.regulatory_risk | upper }}</div>
+                <div class="label">Regulatory Risk</div>
+            </div>
+        </div>
+
+        <h3>Assessment Justification</h3>
+        <ul>
+            {% for j in severity.justification %}
+            <li>{{ j }}</li>
+            {% endfor %}
+        </ul>
+
+        <p><strong>Recommended Response Time:</strong> {{ severity.recommended_response_time }}</p>
+        {% if severity.financial_impact_estimate > 0 %}
+        <p><strong>Estimated Financial Impact:</strong> ${{ '{:,.2f}'.format(severity.financial_impact_estimate) }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Indicators of Compromise -->
+    <div class="section">
+        <h2>4. Indicators of Compromise (IOCs)</h2>
+        {% if iocs %}
+        <table class="ioc-table">
+            <thead>
+                <tr><th>Type</th><th>Value</th><th>Confidence</th><th>Discovered</th></tr>
+            </thead>
+            <tbody>
+                {% for ioc in iocs %}
+                <tr>
+                    <td>{{ ioc.type }}</td>
+                    <td>{{ ioc.value }}</td>
+                    <td>{{ ioc.confidence | default('N/A') }}</td>
+                    <td>{{ ioc.discovered_at | datetime_format if ioc.discovered_at else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No indicators of compromise have been documented.</p>
+        {% endif %}
+    </div>
+
+    <!-- Timeline -->
+    <div class="section">
+        <h2>5. Incident Timeline</h2>
+        {% if timeline_events %}
+        <div class="timeline-container">
+            {% for event in timeline_events[:25] %}
+            <div class="timeline-event">
+                <div class="time">{{ event.timestamp | datetime_format }}</div>
+                <div class="description">{{ event.description }}</div>
+                <div class="actor">{{ event.actor }} | Phase: {{ event.phase }}</div>
+            </div>
+            {% endfor %}
+            {% if timeline_events | length > 25 %}
+            <p><em>... and {{ timeline_events | length - 25 }} more events. See full timeline in case management system.</em></p>
+            {% endif %}
+        </div>
+        {% else %}
+        <p>No timeline events have been recorded.</p>
+        {% endif %}
+    </div>
+
+    <!-- Evidence -->
+    <div class="section">
+        <h2>6. Evidence Summary</h2>
+        {% if evidence_items %}
+        {% for ev in evidence_items %}
+        <div class="evidence-card">
+            <span class="ev-id">{{ ev.evidence_id }}</span> -
+            {{ ev.evidence_type }} | {{ ev.description }}
+            <br>
+            <small>Collected by {{ ev.collected_by }} from {{ ev.source_system }} at {{ ev.collected_at | datetime_format }}</small>
+            <br>
+            {% if ev.file_hash_sha256 %}
+            <span class="ev-hash">SHA-256: {{ ev.file_hash_sha256 | truncate_hash }}</span>
+            {% endif %}
+            {% if ev.integrity_verified %}
+            <span style="color: var(--success); font-weight: 600;"> Integrity Verified</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No evidence items have been registered. Evidence collection should be initiated per the applicable playbook.</p>
+        {% endif %}
+    </div>
+
+    <!-- Actions Taken -->
+    <div class="section">
+        <h2>7. Response Actions</h2>
+        {% if actions_taken %}
+        <table>
+            <thead>
+                <tr><th>Action ID</th><th>Type</th><th>Title</th><th>Status</th><th>Assigned To</th></tr>
+            </thead>
+            <tbody>
+                {% for action in actions_taken %}
+                <tr>
+                    <td>{{ action.action_id }}</td>
+                    <td>{{ action.action_type }}</td>
+                    <td>{{ action.title }}</td>
+                    <td>{{ action.status }}</td>
+                    <td>{{ action.assigned_to or 'Unassigned' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Response actions are documented in the case management system.</p>
+        {% endif %}
+    </div>
+
+    <!-- Simulation Results -->
+    {% if simulation %}
+    <div class="section">
+        <h2>8. Simulation Results</h2>
+        <div class="score-card">
+            <div class="score-item">
+                <div class="value">{{ simulation.total_score }}/{{ simulation.max_score }}</div>
+                <div class="label">Total Score</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ simulation.percentage }}%</div>
+                <div class="label">Percentage</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ simulation.rating }}</div>
+                <div class="label">Rating</div>
+            </div>
+            <div class="score-item">
+                <div class="value">{{ simulation.duration_minutes }} min</div>
+                <div class="label">Duration</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Root Cause & Lessons Learned -->
+    <div class="section">
+        <h2>9. Root Cause Analysis</h2>
+        {% if incident.root_cause %}
+        <p>{{ incident.root_cause }}</p>
+        {% else %}
+        <p>Root cause analysis is pending completion of the forensic investigation.</p>
+        {% endif %}
+
+        {% if incident.containment_strategy %}
+        <h3>Containment Strategy</h3>
+        <p>{{ incident.containment_strategy }}</p>
+        {% endif %}
+    </div>
+
+    {% if incident.lessons_learned %}
+    <div class="section">
+        <h2>10. Lessons Learned & Recommendations</h2>
+        <ul class="recommendations">
+            {% for lesson in incident.lessons_learned %}
+            <li>{{ lesson }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Regulatory Notifications -->
+    {% if incident.regulatory_notifications %}
+    <div class="section">
+        <h2>11. Regulatory Notifications</h2>
+        <table>
+            <thead><tr><th>#</th><th>Notification</th></tr></thead>
+            <tbody>
+                {% for notification in incident.regulatory_notifications %}
+                <tr><td>{{ loop.index }}</td><td>{{ notification }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+</div>
+
+<div class="footer">
+    <p>{{ report_classification }}</p>
+    <p>This report is generated for authorized personnel only. Unauthorized distribution is prohibited.</p>
+    <p>Report ID: {{ incident.incident_id }} | Generated: {{ generated_at }}</p>
+</div>
+
+</body>
+</html>

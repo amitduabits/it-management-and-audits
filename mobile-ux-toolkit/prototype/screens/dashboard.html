@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a56db">
+  <title>Dashboard — NovaPay</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-500) 100%);
+      color: var(--color-neutral-0);
+      padding: 0 var(--space-5) var(--space-6);
+      position: relative;
+      overflow: hidden;
+    }
+    .dashboard-header::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .dashboard-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) 0;
+    }
+    .dashboard-greeting {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .dashboard-greeting__avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      backdrop-filter: blur(8px);
+    }
+    .dashboard-greeting__text h2 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+    }
+    .dashboard-greeting__text p {
+      font-size: var(--font-size-xs);
+      opacity: 0.7;
+    }
+    .dashboard-top-bar__actions {
+      display: flex;
+      gap: var(--space-2);
+    }
+    .top-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      position: relative;
+      transition: background var(--duration-fast) var(--ease-default);
+    }
+    .top-icon-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    .top-icon-btn .notif-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 8px;
+      height: 8px;
+      background: #ef4444;
+      border-radius: 50%;
+      border: 2px solid var(--color-primary-600);
+    }
+    .balance-section {
+      margin-top: var(--space-4);
+    }
+    .balance-section__label {
+      font-size: var(--font-size-sm);
+      opacity: 0.75;
+      margin-bottom: var(--space-1);
+    }
+    .balance-section__amount {
+      font-size: 36px;
+      font-weight: var(--font-weight-bold);
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .balance-section__cents {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-medium);
+      opacity: 0.7;
+    }
+    .balance-section__change {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--font-size-xs);
+      background: rgba(16,185,129,0.2);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      margin-top: var(--space-2);
+      font-weight: var(--font-weight-medium);
+    }
+    .accounts-row {
+      display: flex;
+      gap: var(--space-3);
+      padding: 0 var(--space-5);
+      margin-top: calc(var(--space-4) * -1);
+      position: relative;
+      z-index: 2;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .accounts-row::-webkit-scrollbar { display: none; }
+    .account-chip {
+      background: var(--color-neutral-0);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      min-width: 160px;
+      box-shadow: var(--shadow-md);
+      flex-shrink: 0;
+    }
+    .account-chip__name {
+      font-size: var(--font-size-xs);
+      color: var(--color-neutral-500);
+      margin-bottom: var(--space-1);
+    }
+    .account-chip__balance {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-neutral-900);
+    }
+    .account-chip__number {
+      font-size: 10px;
+      color: var(--color-neutral-400);
+      font-family: var(--font-family-mono);
+      margin-top: var(--space-1);
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <div class="screen" style="background:var(--color-neutral-50);">
+
+      <!-- Status Bar -->
+      <div class="status-bar status-bar-dark" style="background: var(--color-primary-700);">
+        <span class="status-bar__time">9:41</span>
+        <div class="status-bar__icons">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Dashboard Header -->
+      <div class="dashboard-header animate-fade-in">
+        <div class="dashboard-top-bar">
+          <div class="dashboard-greeting">
+            <div class="dashboard-greeting__avatar">SM</div>
+            <div class="dashboard-greeting__text">
+              <h2>Good morning, Sarah</h2>
+              <p>Wednesday, Feb 12</p>
+            </div>
+          </div>
+          <div class="dashboard-top-bar__actions">
+            <a href="notifications.html" class="top-icon-btn" aria-label="Notifications">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+              <span class="notif-dot"></span>
+            </a>
+            <a href="profile.html" class="top-icon-btn" aria-label="Settings">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="balance-section animate-fade-in-up">
+          <p class="balance-section__label">Total Balance</p>
+          <div class="balance-section__amount">
+            <span>$24,856</span>
+            <span class="balance-section__cents">.43</span>
+          </div>
+          <span class="balance-section__change">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            +2.4% this month
+          </span>
+        </div>
+      </div>
+
+      <div class="screen-content" data-pull-refresh>
+
+        <!-- Account Chips -->
+        <div class="accounts-row" style="padding-top:var(--space-6);padding-bottom:var(--space-4);">
+          <div class="account-chip animate-fade-in-up stagger-1">
+            <p class="account-chip__name">Checking</p>
+            <p class="account-chip__balance">$12,456.43</p>
+            <p class="account-chip__number">****4521</p>
+          </div>
+          <div class="account-chip animate-fade-in-up stagger-2">
+            <p class="account-chip__name">Savings</p>
+            <p class="account-chip__balance">$8,250.00</p>
+            <p class="account-chip__number">****7832</p>
+          </div>
+          <div class="account-chip animate-fade-in-up stagger-3">
+            <p class="account-chip__name">Investment</p>
+            <p class="account-chip__balance">$4,150.00</p>
+            <p class="account-chip__number">****9104</p>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-header" style="padding-bottom:0;">
+          <h3 class="section-header__title">Quick Actions</h3>
+        </div>
+        <div class="quick-actions">
+          <a href="transfer.html" class="quick-action">
+            <div class="quick-action__icon" style="background:var(--color-primary-50);color:var(--color-primary-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </div>
+            <span class="quick-action__label">Transfer</span>
+          </a>
+          <a href="payments.html" class="quick-action">
+            <div class="quick-action__icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <span class="quick-action__label">Pay Bills</span>
+          </a>
+          <a href="cards.html" class="quick-action">
+            <div class="quick-action__icon" style="background:var(--color-warning-50);color:var(--color-warning-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <span class="quick-action__label">My Cards</span>
+          </a>
+          <a href="history.html" class="quick-action">
+            <div class="quick-action__icon" style="background:var(--color-danger-50);color:var(--color-danger-600);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="quick-action__label">History</span>
+          </a>
+        </div>
+
+        <!-- Spending Insight -->
+        <div style="padding:0 var(--space-5);margin-bottom:var(--space-4);">
+          <div class="card" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid var(--color-primary-200);">
+            <div class="d-flex items-center gap-3 mb-3">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--color-primary-600);display:flex;align-items:center;justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <div>
+                <p class="text-small text-body-medium" style="color:var(--color-primary-800);">Monthly Spending</p>
+                <p class="text-caption" style="color:var(--color-primary-600);">You've spent 68% of your budget</p>
+              </div>
+            </div>
+            <div class="progress-bar" style="height:8px;">
+              <div class="progress-bar__fill" style="width:68%;"></div>
+            </div>
+            <div class="d-flex justify-between mt-2">
+              <span class="text-caption" style="color:var(--color-primary-600);">$3,400 spent</span>
+              <span class="text-caption" style="color:var(--color-primary-600);">$5,000 budget</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="section-header">
+          <h3 class="section-header__title">Recent Transactions</h3>
+          <a href="history.html" class="section-header__action">See All</a>
+        </div>
+
+        <div class="list-group" style="margin:0 var(--space-5);margin-bottom:var(--space-4);">
+          <div class="list-item" data-animate-on-scroll>
+            <div class="list-item__icon list-item__icon--danger">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Whole Foods Market</p>
+              <p class="list-item__subtitle">Groceries &middot; Today</p>
+            </div>
+            <div class="list-item__trailing">
+              <span class="list-item__amount list-item__amount--negative">-$84.32</span>
+            </div>
+          </div>
+          <div class="list-item" data-animate-on-scroll>
+            <div class="list-item__icon list-item__icon--success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Salary Deposit</p>
+              <p class="list-item__subtitle">Income &middot; Feb 10</p>
+            </div>
+            <div class="list-item__trailing">
+              <span class="list-item__amount list-item__amount--positive">+$5,200.00</span>
+            </div>
+          </div>
+          <div class="list-item" data-animate-on-scroll>
+            <div class="list-item__icon list-item__icon--primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Netflix Subscription</p>
+              <p class="list-item__subtitle">Entertainment &middot; Feb 9</p>
+            </div>
+            <div class="list-item__trailing">
+              <span class="list-item__amount list-item__amount--negative">-$15.99</span>
+            </div>
+          </div>
+          <div class="list-item" data-animate-on-scroll>
+            <div class="list-item__icon list-item__icon--warning">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Starbucks</p>
+              <p class="list-item__subtitle">Food &amp; Drink &middot; Feb 8</p>
+            </div>
+            <div class="list-item__trailing">
+              <span class="list-item__amount list-item__amount--negative">-$6.45</span>
+            </div>
+          </div>
+          <div class="list-item" data-animate-on-scroll>
+            <div class="list-item__icon list-item__icon--neutral">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Transfer to Alex</p>
+              <p class="list-item__subtitle">Transfer &middot; Feb 7</p>
+            </div>
+            <div class="list-item__trailing">
+              <span class="list-item__amount list-item__amount--negative">-$250.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:var(--space-4);"></div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="dashboard.html" class="bottom-nav__item bottom-nav__item--active" aria-current="page">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="history.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>History</span>
+        </a>
+        <a href="transfer.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          <span>Transfer</span>
+        </a>
+        <a href="cards.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Cards</span>
+        </a>
+        <a href="profile.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+  <script src="../js/prototype.js"></script>
+</body>
+</html>

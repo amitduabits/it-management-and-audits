@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Scan Report - {{ target_url }}</title>
+    <style>
+        /* ================================================================
+           Web Application Security Scanner - Report Template
+           ================================================================ */
+
+        :root {
+            --critical: #dc3545;
+            --high: #e94560;
+            --medium: #ffa502;
+            --low: #2ed573;
+            --info: #3498db;
+            --bg-dark: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --bg-card-alt: #1f1f35;
+            --border: #2a2a4a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606080;
+            --accent: #e94560;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .report-header {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #16213e 100%);
+            padding: 2.5rem 3rem;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .report-header h1 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .report-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .report-header .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .report-header .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .report-header .meta-label {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .report-header .meta-value {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Disclaimer Banner */
+        .disclaimer-banner {
+            background: linear-gradient(90deg, var(--critical) 0%, #c23152 100%);
+            color: #fff;
+            text-align: center;
+            padding: 0.8rem 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* Cards */
+        .card {
+            background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-card-alt) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Summary Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .summary-card .count {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .summary-card .label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .severity-critical { border-left: 4px solid var(--critical); }
+        .severity-critical .count { color: var(--critical); }
+
+        .severity-high { border-left: 4px solid var(--high); }
+        .severity-high .count { color: var(--high); }
+
+        .severity-medium { border-left: 4px solid var(--medium); }
+        .severity-medium .count { color: var(--medium); }
+
+        .severity-low { border-left: 4px solid var(--low); }
+        .severity-low .count { color: var(--low); }
+
+        .severity-info { border-left: 4px solid var(--info); }
+        .severity-info .count { color: var(--info); }
+
+        .severity-total {
+            border-left: 4px solid var(--text-primary);
+            background: var(--bg-card-alt);
+        }
+        .severity-total .count { color: var(--text-primary); }
+
+        /* Risk Score */
+        .risk-score-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem;
+        }
+
+        .risk-gauge {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .risk-critical { background: rgba(220, 53, 69, 0.2); border: 3px solid var(--critical); color: var(--critical); }
+        .risk-high { background: rgba(233, 69, 96, 0.2); border: 3px solid var(--high); color: var(--high); }
+        .risk-medium { background: rgba(255, 165, 2, 0.2); border: 3px solid var(--medium); color: var(--medium); }
+        .risk-low { background: rgba(46, 213, 115, 0.2); border: 3px solid var(--low); color: var(--low); }
+        .risk-minimal { background: rgba(52, 152, 219, 0.2); border: 3px solid var(--info); color: var(--info); }
+
+        .risk-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-details p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Severity Bar Chart */
+        .severity-bar {
+            display: flex;
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+            background: var(--border);
+        }
+
+        .severity-bar-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #fff;
+            min-width: 2%;
+            transition: width 0.5s ease;
+        }
+
+        /* Vulnerability Findings */
+        .finding {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .finding-header {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .finding-header:hover {
+            background: rgba(233, 69, 96, 0.05);
+        }
+
+        .finding-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+
+        .badge-critical { background: rgba(220, 53, 69, 0.2); color: var(--critical); border: 1px solid var(--critical); }
+        .badge-high { background: rgba(233, 69, 96, 0.2); color: var(--high); border: 1px solid var(--high); }
+        .badge-medium { background: rgba(255, 165, 2, 0.2); color: var(--medium); border: 1px solid var(--medium); }
+        .badge-low { background: rgba(46, 213, 115, 0.2); color: var(--low); border: 1px solid var(--low); }
+        .badge-informational { background: rgba(52, 152, 219, 0.2); color: var(--info); border: 1px solid var(--info); }
+
+        .finding-body {
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .finding-detail {
+            margin-top: 1rem;
+        }
+
+        .finding-detail-label {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .finding-detail-value {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .finding-detail-value code {
+            background: var(--bg-dark);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            word-break: break-all;
+        }
+
+        .evidence-box {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            color: var(--medium);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .remediation-box {
+            background: rgba(46, 213, 115, 0.05);
+            border: 1px solid rgba(46, 213, 115, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--low);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .owasp-tag {
+            display: inline-block;
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            color: var(--info);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        .cwe-tag {
+            display: inline-block;
+            background: rgba(255, 165, 2, 0.1);
+            border: 1px solid rgba(255, 165, 2, 0.3);
+            color: var(--medium);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* Modules Table */
+        .modules-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .modules-table th,
+        .modules-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modules-table th {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        .report-footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 1.5rem 3rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .report-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: #fff;
+                color: #333;
+            }
+            .card, .finding, .summary-card {
+                background: #fff;
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+            .finding-header { background: none; }
+        }
+
+        /* No vulnerabilities message */
+        .no-findings {
+            text-align: center;
+            padding: 3rem;
+            color: var(--low);
+        }
+
+        .no-findings h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Disclaimer Banner -->
+    <div class="disclaimer-banner">
+        CONFIDENTIAL - This report contains security vulnerability information.
+        Handle according to your organization's information security policy.
+        Authorized recipients only.
+    </div>
+
+    <!-- Report Header -->
+    <header class="report-header">
+        <h1>Web Application Security Scan Report</h1>
+        <p class="subtitle">Automated vulnerability assessment based on OWASP Top 10 methodology</p>
+
+        <div class="meta">
+            <div class="meta-item">
+                <span class="meta-label">Target</span>
+                <span class="meta-value">{{ target_url }}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Scan Start</span>
+                <span class="meta-value">{{ scan_start }}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Scan End</span>
+                <span class="meta-value">{{ scan_end }}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Duration</span>
+                <span class="meta-value">{{ scan_duration }}s</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Total Requests</span>
+                <span class="meta-value">{{ total_requests }}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Report Generated</span>
+                <span class="meta-value">{{ generated_at }}</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2 class="section-title">Executive Summary</h2>
+
+            <!-- Severity Summary Cards -->
+            <div class="summary-grid">
+                <div class="summary-card severity-critical">
+                    <span class="count">{{ summary.get('Critical', 0) }}</span>
+                    <span class="label">Critical</span>
+                </div>
+                <div class="summary-card severity-high">
+                    <span class="count">{{ summary.get('High', 0) }}</span>
+                    <span class="label">High</span>
+                </div>
+                <div class="summary-card severity-medium">
+                    <span class="count">{{ summary.get('Medium', 0) }}</span>
+                    <span class="label">Medium</span>
+                </div>
+                <div class="summary-card severity-low">
+                    <span class="count">{{ summary.get('Low', 0) }}</span>
+                    <span class="label">Low</span>
+                </div>
+                <div class="summary-card severity-info">
+                    <span class="count">{{ summary.get('Informational', 0) }}</span>
+                    <span class="label">Informational</span>
+                </div>
+                <div class="summary-card severity-total">
+                    <span class="count">{{ summary.get('Total', 0) }}</span>
+                    <span class="label">Total</span>
+                </div>
+            </div>
+
+            <!-- Severity Distribution Bar -->
+            {% set total = summary.get('Total', 1) %}
+            {% if total > 0 %}
+            <div class="card">
+                <h3 style="margin-bottom: 0.5rem;">Severity Distribution</h3>
+                <div class="severity-bar">
+                    {% if summary.get('Critical', 0) > 0 %}
+                    <div class="severity-bar-segment" style="width: {{ (summary.Critical / total * 100)|round }}%; background: var(--critical);">
+                        {{ summary.Critical }}
+                    </div>
+                    {% endif %}
+                    {% if summary.get('High', 0) > 0 %}
+                    <div class="severity-bar-segment" style="width: {{ (summary.High / total * 100)|round }}%; background: var(--high);">
+                        {{ summary.High }}
+                    </div>
+                    {% endif %}
+                    {% if summary.get('Medium', 0) > 0 %}
+                    <div class="severity-bar-segment" style="width: {{ (summary.Medium / total * 100)|round }}%; background: var(--medium);">
+                        {{ summary.Medium }}
+                    </div>
+                    {% endif %}
+                    {% if summary.get('Low', 0) > 0 %}
+                    <div class="severity-bar-segment" style="width: {{ (summary.Low / total * 100)|round }}%; background: var(--low);">
+                        {{ summary.Low }}
+                    </div>
+                    {% endif %}
+                    {% if summary.get('Informational', 0) > 0 %}
+                    <div class="severity-bar-segment" style="width: {{ (summary.Informational / total * 100)|round }}%; background: var(--info);">
+                        {{ summary.Informational }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Risk Score -->
+            <div class="card">
+                <div class="risk-score-container">
+                    <div class="risk-gauge {% if risk_score >= 8 %}risk-critical{% elif risk_score >= 6 %}risk-high{% elif risk_score >= 4 %}risk-medium{% elif risk_score >= 2 %}risk-low{% else %}risk-minimal{% endif %}">
+                        {{ risk_score }}
+                    </div>
+                    <div class="risk-details">
+                        <h3>Overall Risk Score: {{ risk_score }}/10.0</h3>
+                        <p>
+                            {% if risk_score >= 8 %}
+                            CRITICAL RISK - Immediate remediation is required. The application has severe vulnerabilities that could lead to complete compromise.
+                            {% elif risk_score >= 6 %}
+                            HIGH RISK - Vulnerabilities should be addressed promptly. The application is at significant risk of exploitation.
+                            {% elif risk_score >= 4 %}
+                            MEDIUM RISK - Plan remediation efforts. Several vulnerabilities need attention within a reasonable timeframe.
+                            {% elif risk_score >= 2 %}
+                            LOW RISK - Monitor and address in the regular development cycle. Minor issues were identified.
+                            {% else %}
+                            MINIMAL RISK - Continue regular security practices. No significant issues were detected.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modules Executed -->
+        <div class="section">
+            <h2 class="section-title">Modules Executed</h2>
+            <div class="card">
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for module in modules_executed %}
+                        <tr>
+                            <td>{{ module }}</td>
+                            <td style="color: var(--low);">Completed</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Detailed Findings -->
+        <div class="section">
+            <h2 class="section-title">Detailed Findings ({{ summary.get('Total', 0) }})</h2>
+
+            {% if vulnerabilities %}
+                {% for vuln in vulnerabilities %}
+                <div class="finding">
+                    <div class="finding-header">
+                        <span class="finding-title">
+                            #{{ loop.index }} - {{ vuln.title }}
+                        </span>
+                        <span class="severity-badge badge-{{ vuln.severity|lower }}">
+                            {{ vuln.severity }}
+                        </span>
+                    </div>
+                    <div class="finding-body">
+                        <!-- URL and Parameter -->
+                        <div class="finding-detail">
+                            <div class="finding-detail-label">Affected URL</div>
+                            <div class="finding-detail-value">
+                                <code>{{ vuln.url }}</code>
+                                {% if vuln.parameter %}
+                                &nbsp; Parameter: <code>{{ vuln.parameter }}</code>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="finding-detail">
+                            <div class="finding-detail-label">Category</div>
+                            <div class="finding-detail-value">{{ vuln.category }}</div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="finding-detail">
+                            <div class="finding-detail-label">Description</div>
+                            <div class="finding-detail-value">{{ vuln.description }}</div>
+                        </div>
+
+                        <!-- Evidence -->
+                        <div class="finding-detail">
+                            <div class="finding-detail-label">Evidence</div>
+                            <div class="evidence-box">{{ vuln.evidence }}</div>
+                        </div>
+
+                        <!-- Remediation -->
+                        <div class="finding-detail">
+                            <div class="finding-detail-label">Remediation</div>
+                            <div class="remediation-box">{{ vuln.remediation }}</div>
+                        </div>
+
+                        <!-- OWASP and CWE Tags -->
+                        <div class="finding-detail">
+                            <div class="finding-detail-label">References</div>
+                            <div class="finding-detail-value">
+                                {% if vuln.owasp_category %}
+                                <span class="owasp-tag">{{ vuln.owasp_category }}</span>
+                                {% endif %}
+                                {% if vuln.cwe_id %}
+                                <span class="cwe-tag">{{ vuln.cwe_id }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Module -->
+                        <div class="finding-detail">
+                            <div class="finding-detail-label">Detected By</div>
+                            <div class="finding-detail-value" style="color: var(--text-muted);">
+                                {{ vuln.module }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="card no-findings">
+                    <h3>No Vulnerabilities Found</h3>
+                    <p>The scan did not detect any vulnerabilities. This does not guarantee
+                    the application is secure. Manual testing and code review are recommended.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Recommendations -->
+        <div class="section">
+            <h2 class="section-title">Prioritized Recommendations</h2>
+            <div class="card">
+                <ol style="padding-left: 1.5rem; color: var(--text-secondary); line-height: 2;">
+                    {% if summary.get('Critical', 0) > 0 %}
+                    <li><strong style="color: var(--critical);">IMMEDIATE:</strong> Address all Critical severity findings first. These represent the highest risk to the application.</li>
+                    {% endif %}
+                    {% if summary.get('High', 0) > 0 %}
+                    <li><strong style="color: var(--high);">URGENT:</strong> Remediate High severity findings within the next sprint or maintenance window.</li>
+                    {% endif %}
+                    {% if summary.get('Medium', 0) > 0 %}
+                    <li><strong style="color: var(--medium);">PLANNED:</strong> Schedule Medium severity fixes in the regular development cycle.</li>
+                    {% endif %}
+                    <li>Implement a Web Application Firewall (WAF) as a defense-in-depth measure.</li>
+                    <li>Conduct regular security assessments and penetration testing.</li>
+                    <li>Establish a vulnerability management program with defined SLAs.</li>
+                    <li>Train development teams on secure coding practices.</li>
+                    <li>Implement automated security testing in the CI/CD pipeline.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="section">
+            <h2 class="section-title">Disclaimer</h2>
+            <div class="card" style="border-left: 4px solid var(--critical);">
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    This report is generated by an automated security scanning tool and is
+                    intended for authorized security assessment purposes only. The findings
+                    represent vulnerabilities detected at the time of the scan and may not
+                    be exhaustive. Manual verification of findings is recommended before
+                    remediation. The absence of findings does not guarantee the application
+                    is free of vulnerabilities. This report should be handled as confidential
+                    and shared only with authorized personnel. The scanner operators and
+                    developers assume no liability for the accuracy of findings or for any
+                    actions taken based on this report.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="report-footer">
+        <p>Web Application Security Scanner v1.0.0</p>
+        <p style="margin-top: 0.3rem;">
+            Report generated on {{ generated_at }} |
+            Methodology based on OWASP Top 10 (2021)
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+            This tool is for authorized security testing only.
+            Unauthorized use is prohibited and may be illegal.
+        </p>
+    </footer>
+
+</body>
+</html>

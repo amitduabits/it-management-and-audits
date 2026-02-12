@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureAudit Pro - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">SA</div>
+            <span>SecureAudit Pro</span>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="active"><a href="/">Risk Overview</a></li>
+            <li><a href="/findings">Findings</a></li>
+            <li><a href="/compliance">Compliance</a></li>
+            <li><a href="/remediation">Remediation</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <small>Last Scan: {{ scan_data.get('scan_date', 'N/A') }}</small>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header class="content-header">
+            <div>
+                <h1>Risk Overview</h1>
+                <p class="subtitle">Security posture at a glance</p>
+            </div>
+            <div class="header-actions">
+                <span class="status-badge status-{{ risk_data.get('overall_risk_level', 'minimal') }}">
+                    {{ risk_data.get('overall_risk_level', 'N/A') | upper }}
+                </span>
+            </div>
+        </header>
+
+        <!-- Key Metrics Row -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value risk-score-lg">{{ risk_data.get('overall_risk_score', 0) }}<span class="metric-unit">/10</span></div>
+                <div class="metric-label">Overall Risk Score</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value text-critical">{{ risk_data.get('severity_distribution', {}).get('critical', 0) }}</div>
+                <div class="metric-label">Critical Findings</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value text-high">{{ risk_data.get('severity_distribution', {}).get('high', 0) }}</div>
+                <div class="metric-label">High Findings</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ risk_data.get('total_findings', 0) }}</div>
+                <div class="metric-label">Total Findings</div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+            <div class="chart-card">
+                <h3>Severity Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="severityChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Risk by Category</h3>
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="section-header">
+            <h2>Risk Categories</h2>
+        </div>
+        <div class="category-grid">
+            {% for cat in risk_data.get('categories', []) %}
+            <div class="category-card">
+                <div class="category-header">
+                    <h4>{{ cat.display_name }}</h4>
+                    <span class="category-score status-badge status-{{ cat.risk_level }}">{{ cat.raw_score }}/10</span>
+                </div>
+                <div class="category-bar">
+                    <div class="category-bar-fill severity-bg-{{ cat.risk_level }}" style="width: {{ cat.raw_score * 10 }}%;"></div>
+                </div>
+                <div class="category-stats">
+                    <span>{{ cat.finding_count }} findings</span>
+                    <span>Weight: {{ (cat.weight * 100)|round(0)|int }}%</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Compliance Quick View -->
+        <div class="section-header">
+            <h2>Compliance Summary</h2>
+            <a href="/compliance" class="link-btn">View Details</a>
+        </div>
+        <div class="compliance-row">
+            {% for key, fw in compliance_data.items() %}
+            <div class="compliance-mini-card">
+                <h4>{{ fw.get('framework', key) }}</h4>
+                <div class="compliance-gauge" data-score="{{ fw.get('overall_percentage', 0) }}">
+                    <svg viewBox="0 0 100 100" class="gauge-svg">
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="8"
+                            stroke-dasharray="{{ fw.get('overall_percentage', 0) * 2.64 }} 264"
+                            stroke-dashoffset="0" transform="rotate(-90 50 50)"
+                            class="gauge-fill"/>
+                    </svg>
+                    <span class="gauge-text">{{ fw.get('overall_percentage', 0)|round(0)|int }}%</span>
+                </div>
+                <div class="compliance-mini-stats">
+                    <span class="text-pass">{{ fw.get('passed', 0) }} passed</span>
+                    <span class="text-fail">{{ fw.get('failed', 0) }} failed</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Top Recommendations -->
+        <div class="section-header">
+            <h2>Top Recommendations</h2>
+            <a href="/remediation" class="link-btn">View Roadmap</a>
+        </div>
+        <div class="recommendations-list">
+            {% for rec in risk_data.get('recommendations', [])[:5] %}
+            <div class="rec-row">
+                <div class="rec-priority">{{ rec.priority }}</div>
+                <div class="rec-content">
+                    <strong>{{ rec.category }}</strong>
+                    <p>{{ rec.recommendation }}</p>
+                </div>
+                <span class="urgency-badge urgency-{{ rec.urgency }}">{{ rec.timeframe }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script>
+        const severityData = {{ risk_data.get('severity_distribution', {}) | tojson }};
+        const categoryData = {{ risk_data.get('categories', []) | tojson }};
+        initSeverityChart('severityChart', severityData);
+        initCategoryChart('categoryChart', categoryData);
+    </script>
+</body>
+</html>

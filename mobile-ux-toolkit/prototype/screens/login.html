@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a56db">
+  <title>Login — NovaPay</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .login-screen {
+      background: linear-gradient(180deg, var(--color-primary-700) 0%, var(--color-primary-600) 40%, var(--color-neutral-50) 40%);
+      min-height: 100vh;
+    }
+    .login-header {
+      text-align: center;
+      padding: var(--space-10) var(--space-6) var(--space-12);
+      color: var(--color-neutral-0);
+    }
+    .login-header__logo {
+      width: 72px;
+      height: 72px;
+      background: rgba(255,255,255,0.15);
+      border-radius: var(--radius-2xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-4);
+      backdrop-filter: blur(10px);
+    }
+    .login-header__title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-1);
+    }
+    .login-header__greeting {
+      font-size: var(--font-size-sm);
+      opacity: 0.8;
+    }
+    .login-card {
+      background: var(--color-neutral-0);
+      border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+      padding: var(--space-8) var(--space-6);
+      margin-top: -var(--space-6);
+      min-height: 60vh;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    }
+    .login-card__title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      text-align: center;
+      margin-bottom: var(--space-2);
+    }
+    .login-card__subtitle {
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-500);
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+    .biometric-section {
+      text-align: center;
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-neutral-200);
+    }
+    .biometric-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--color-primary-50);
+      border: 2px solid var(--color-primary-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-3);
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-default);
+      color: var(--color-primary-600);
+    }
+    .biometric-btn:hover {
+      background: var(--color-primary-100);
+      border-color: var(--color-primary-400);
+      transform: scale(1.05);
+    }
+    .biometric-btn:active {
+      transform: scale(0.95);
+    }
+    .forgot-link {
+      display: block;
+      text-align: center;
+      margin-top: var(--space-4);
+      font-size: var(--font-size-sm);
+      color: var(--color-primary-600);
+      font-weight: var(--font-weight-medium);
+    }
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+      font-size: var(--font-size-xs);
+      color: var(--color-neutral-400);
+    }
+    .secure-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <div class="screen login-screen">
+
+      <!-- Status Bar -->
+      <div class="status-bar status-bar-dark">
+        <span class="status-bar__time">9:41</span>
+        <div class="status-bar__icons">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Login Header -->
+      <div class="login-header animate-fade-in">
+        <div class="login-header__logo">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 10h20"/>
+          </svg>
+        </div>
+        <h1 class="login-header__title">NovaPay</h1>
+        <p class="login-header__greeting">Welcome back, Sarah</p>
+      </div>
+
+      <!-- Login Card -->
+      <div class="login-card animate-fade-in-up">
+        <h2 class="login-card__title">Enter your PIN</h2>
+        <p class="login-card__subtitle">Enter your 6-digit security PIN to continue</p>
+
+        <!-- PIN Input -->
+        <div class="pin-input-group" role="group" aria-label="PIN input">
+          <input type="password" class="pin-input" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="PIN digit 1" autofocus>
+          <input type="password" class="pin-input" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="PIN digit 2">
+          <input type="password" class="pin-input" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="PIN digit 3">
+          <input type="password" class="pin-input" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="PIN digit 4">
+          <input type="password" class="pin-input" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="PIN digit 5">
+          <input type="password" class="pin-input" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="PIN digit 6">
+        </div>
+
+        <a href="#" class="forgot-link">Forgot PIN?</a>
+
+        <!-- Biometric -->
+        <div class="biometric-section">
+          <p class="text-small text-secondary mb-3">Or sign in with biometrics</p>
+          <button class="biometric-btn" data-biometric-trigger aria-label="Sign in with fingerprint">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 018 4"/>
+              <path d="M5 19.5C5.5 18 6 15 6 12c0-3.3 2.7-6 6-6 1.8 0 3.4.8 4.5 2"/>
+              <path d="M10 12c0-1.1.9-2 2-2s2 .9 2 2c0 4-1.5 7-3 8.5"/>
+              <path d="M14 12c0 2.5-.5 5-1.5 7"/>
+              <path d="M18 11c0 4-1 7.5-3 10"/>
+              <path d="M22 12c0 4.5-1.5 8.5-4 11"/>
+            </svg>
+          </button>
+          <p class="text-caption text-secondary">Touch to authenticate</p>
+        </div>
+
+        <div class="secure-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>256-bit encrypted connection</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/prototype.js"></script>
+  <script>
+    // Auto-navigate to dashboard when PIN is complete
+    document.querySelector('.pin-input-group').addEventListener('pin-complete', function(e) {
+      const inputs = this.querySelectorAll('.pin-input');
+      inputs.forEach(i => { i.style.borderColor = 'var(--color-success-500)'; i.style.background = 'var(--color-success-50)'; });
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+    });
+  </script>
+</body>
+</html>

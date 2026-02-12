@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Help &amp; Support — NovaPay</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .support-hero {
+      background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-500));
+      color: white;
+      padding: var(--space-6) var(--space-5);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .support-hero::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .support-hero__title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-2);
+      position: relative;
+    }
+    .support-hero__subtitle {
+      font-size: var(--font-size-sm);
+      opacity: 0.8;
+      margin-bottom: var(--space-5);
+      position: relative;
+    }
+    .support-search {
+      position: relative;
+    }
+    .support-search input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4) var(--space-3) 44px;
+      border-radius: var(--radius-lg);
+      border: none;
+      font-size: var(--font-size-base);
+      background: rgba(255,255,255,0.15);
+      color: white;
+      backdrop-filter: blur(8px);
+      min-height: 48px;
+    }
+    .support-search input::placeholder { color: rgba(255,255,255,0.6); }
+    .support-search input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+    }
+    .support-search svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.6);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+    }
+    .contact-card {
+      background: var(--color-neutral-0);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-default);
+      border: 1px solid var(--color-neutral-100);
+    }
+    .contact-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .contact-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-2);
+    }
+    .contact-card__title {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-800);
+    }
+    .contact-card__subtitle {
+      font-size: 10px;
+      color: var(--color-neutral-500);
+      margin-top: 2px;
+    }
+    .faq-item {
+      background: var(--color-neutral-0);
+      border-bottom: 1px solid var(--color-neutral-100);
+      overflow: hidden;
+    }
+    .faq-item__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-5);
+      cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-default);
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-800);
+    }
+    .faq-item__header:hover { background: var(--color-neutral-50); }
+    .faq-item__icon {
+      width: 24px;
+      height: 24px;
+      color: var(--color-neutral-400);
+      flex-shrink: 0;
+      transition: transform var(--duration-fast) var(--ease-default);
+    }
+    .faq-item--open .faq-item__icon { transform: rotate(180deg); }
+    .faq-item__body {
+      padding: 0 var(--space-5) var(--space-4);
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-500);
+      line-height: var(--line-height-relaxed);
+      display: none;
+    }
+    .faq-item--open .faq-item__body { display: block; animation: fadeIn 200ms ease; }
+    .emergency-banner {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-danger-50);
+      border: 1px solid var(--color-danger-200);
+      border-radius: var(--radius-lg);
+      margin: 0 var(--space-5) var(--space-4);
+      cursor: pointer;
+    }
+    .emergency-banner__icon {
+      width: 40px;
+      height: 40px;
+      background: var(--color-danger-600);
+      color: white;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .emergency-banner__title {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-danger-800);
+    }
+    .emergency-banner__text {
+      font-size: var(--font-size-xs);
+      color: var(--color-danger-600);
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <div class="screen" style="background:var(--color-neutral-50);">
+
+      <!-- Status Bar -->
+      <div class="status-bar status-bar-dark" style="background:var(--color-primary-600);">
+        <span class="status-bar__time">9:41</span>
+        <div class="status-bar__icons">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="app-header" style="background:var(--color-primary-600);color:white;">
+        <div class="app-header__left">
+          <a href="dashboard.html" class="app-header__back" style="color:white;" aria-label="Back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </a>
+        </div>
+        <h1 class="app-header__title" style="color:white;">Help &amp; Support</h1>
+        <div class="app-header__right"></div>
+      </header>
+
+      <div class="screen-content">
+
+        <!-- Support Hero -->
+        <div class="support-hero animate-fade-in">
+          <h2 class="support-hero__title">How can we help you?</h2>
+          <p class="support-hero__subtitle">Search our help center or get in touch with our team</p>
+          <div class="support-search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" placeholder="Search for help topics..." aria-label="Search help topics">
+          </div>
+        </div>
+
+        <!-- Contact Options -->
+        <div class="section-header">
+          <h3 class="section-header__title">Get in Touch</h3>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card animate-fade-in-up stagger-1" onclick="window.PrototypeKit.Toast.show('Connecting to live chat...', 'default');">
+            <div class="contact-card__icon" style="background:var(--color-primary-50);color:var(--color-primary-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <p class="contact-card__title">Live Chat</p>
+            <p class="contact-card__subtitle">Available 24/7</p>
+          </div>
+          <div class="contact-card animate-fade-in-up stagger-2">
+            <div class="contact-card__icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <p class="contact-card__title">Call Us</p>
+            <p class="contact-card__subtitle">1-800-555-0199</p>
+          </div>
+          <div class="contact-card animate-fade-in-up stagger-3">
+            <div class="contact-card__icon" style="background:var(--color-warning-50);color:var(--color-warning-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <p class="contact-card__title">Email</p>
+            <p class="contact-card__subtitle">Within 24 hrs</p>
+          </div>
+        </div>
+
+        <!-- Emergency -->
+        <div class="emergency-banner animate-fade-in-up" onclick="window.PrototypeKit.Toast.show('Connecting to fraud department...', 'warning');">
+          <div class="emergency-banner__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <p class="emergency-banner__title">Report Fraud or Lost Card</p>
+            <p class="emergency-banner__text">Get immediate assistance for urgent issues</p>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-danger-400)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <!-- FAQs -->
+        <div class="section-header">
+          <h3 class="section-header__title">Frequently Asked Questions</h3>
+        </div>
+
+        <div style="margin:0 var(--space-5);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);">
+          <div class="faq-item faq-item--open">
+            <button class="faq-item__header" onclick="this.parentElement.classList.toggle('faq-item--open');">
+              <span>How do I reset my PIN?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-item__body">
+              Go to Profile > Security > Change PIN. You'll need to verify your identity using your registered email or phone number before setting a new PIN. The process takes less than 2 minutes.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__header" onclick="this.parentElement.classList.toggle('faq-item--open');">
+              <span>How do I freeze my card?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-item__body">
+              Navigate to the Cards screen and tap the "Freeze" button below your card. This instantly disables all transactions. You can unfreeze at any time. If your card is lost or stolen, we recommend reporting it instead.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__header" onclick="this.parentElement.classList.toggle('faq-item--open');">
+              <span>What are the transfer limits?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-item__body">
+              Standard accounts can transfer up to $5,000 per day and $25,000 per month. Premium members have higher limits of $15,000 daily and $75,000 monthly. Contact support to request a temporary limit increase.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__header" onclick="this.parentElement.classList.toggle('faq-item--open');">
+              <span>How do I set up automatic payments?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-item__body">
+              Go to Payments > select a payee > tap "Schedule". You can set up weekly, bi-weekly, or monthly recurring payments. You'll receive a notification before each payment is processed.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__header" onclick="this.parentElement.classList.toggle('faq-item--open');">
+              <span>Is my data secure?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-item__body">
+              We use 256-bit AES encryption for all data at rest and TLS 1.3 for data in transit. Biometric authentication adds an extra layer of security. We comply with PCI DSS standards and undergo regular third-party security audits.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__header" onclick="this.parentElement.classList.toggle('faq-item--open');">
+              <span>How do I dispute a transaction?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-item__body">
+              Find the transaction in your History, tap on it, and select "Dispute Transaction". Fill out the dispute form with the reason. Our team will investigate within 5-10 business days and notify you of the outcome.
+            </div>
+          </div>
+        </div>
+
+        <div style="height:var(--space-8);"></div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="dashboard.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="history.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>History</span>
+        </a>
+        <a href="transfer.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          <span>Transfer</span>
+        </a>
+        <a href="cards.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Cards</span>
+        </a>
+        <a href="profile.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+  <script src="../js/prototype.js"></script>
+</body>
+</html>

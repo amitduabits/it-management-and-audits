@@ -1,0 +1,152 @@
+{
+    "title": "Sales Performance Dashboard",
+    "description": "Comprehensive sales analytics with revenue tracking, regional performance, product analysis, and trend monitoring.",
+    "version": "1.0.0",
+    "refresh_interval": 300,
+    "kpis": [
+        {
+            "label": "Total Revenue",
+            "column": "amount",
+            "function": "sum",
+            "format": "currency",
+            "compare_periods": true,
+            "icon": "dollar-sign"
+        },
+        {
+            "label": "Total Orders",
+            "column": "amount",
+            "function": "count",
+            "format": "integer",
+            "compare_periods": true,
+            "icon": "shopping-cart"
+        },
+        {
+            "label": "Avg Order Value",
+            "column": "amount",
+            "function": "mean",
+            "format": "currency",
+            "compare_periods": true,
+            "icon": "trending-up"
+        },
+        {
+            "label": "Total Quantity",
+            "column": "quantity",
+            "function": "sum",
+            "format": "compact",
+            "compare_periods": true,
+            "icon": "package"
+        },
+        {
+            "label": "Avg Quantity",
+            "column": "quantity",
+            "function": "mean",
+            "format": "decimal",
+            "compare_periods": true,
+            "icon": "bar-chart"
+        },
+        {
+            "label": "Max Sale",
+            "column": "amount",
+            "function": "max",
+            "format": "currency",
+            "compare_periods": false,
+            "icon": "arrow-up-circle"
+        }
+    ],
+    "charts": [
+        {
+            "type": "line",
+            "title": "Revenue Over Time",
+            "x": "date",
+            "y": "amount",
+            "agg": "sum",
+            "color_scheme": "blue",
+            "fill": true,
+            "height": 420
+        },
+        {
+            "type": "bar",
+            "title": "Revenue by Region",
+            "x": "region",
+            "y": "amount",
+            "agg": "sum",
+            "color_scheme": "corporate",
+            "top_n": 15,
+            "height": 420
+        },
+        {
+            "type": "pie",
+            "title": "Revenue by Category",
+            "labels": "category",
+            "values": "amount",
+            "agg": "sum",
+            "color_scheme": "viridis",
+            "height": 420
+        },
+        {
+            "type": "bar",
+            "title": "Top Products by Revenue",
+            "x": "product",
+            "y": "amount",
+            "agg": "sum",
+            "color_scheme": "cool",
+            "top_n": 10,
+            "height": 420
+        },
+        {
+            "type": "stacked_bar",
+            "title": "Revenue by Region and Category",
+            "x": "region",
+            "y": "amount",
+            "stack_by": "category",
+            "agg": "sum",
+            "color_scheme": "viridis",
+            "height": 450
+        },
+        {
+            "type": "scatter",
+            "title": "Amount vs Quantity",
+            "x": "amount",
+            "y": "quantity",
+            "color": "category",
+            "height": 420
+        },
+        {
+            "type": "histogram",
+            "title": "Order Amount Distribution",
+            "x": "amount",
+            "bins": 40,
+            "color_scheme": "blue",
+            "height": 380
+        },
+        {
+            "type": "box",
+            "title": "Amount Distribution by Category",
+            "x": "category",
+            "y": "amount",
+            "height": 400
+        }
+    ],
+    "filters": {
+        "region": {
+            "type": "select",
+            "label": "Region"
+        },
+        "category": {
+            "type": "select",
+            "label": "Category"
+        },
+        "product": {
+            "type": "select",
+            "label": "Product"
+        },
+        "date": {
+            "type": "date_range",
+            "label": "Date Range"
+        }
+    },
+    "layout": {
+        "kpi_columns": 3,
+        "chart_columns": 2
+    }
+}

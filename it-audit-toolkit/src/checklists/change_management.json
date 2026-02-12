@@ -1,0 +1,176 @@
+{
+  "domain": "Change Management",
+  "version": "1.0",
+  "description": "Controls for managing changes to IT systems, applications, and infrastructure. Covers the complete change lifecycle from request through post-implementation review, including emergency change procedures and segregation of development/production environments.",
+  "framework_references": ["ISO 27001:2022 A.8.32", "COBIT 2019 BAI06", "ITIL 4 Change Enablement", "SOX Section 404 ITGC"],
+  "controls": [
+    {
+      "id": "CM-001",
+      "title": "Change Management Policy and Process",
+      "description": "Verify that a formal change management policy exists defining the process for requesting, evaluating, approving, implementing, and reviewing changes to IT systems. The policy should classify changes by risk level (standard, normal, emergency) with appropriate approval workflows for each category.",
+      "test_procedure": "1. Obtain the current change management policy and procedure documents. 2. Verify the policy was approved by appropriate management and is current (reviewed within 12 months). 3. Confirm the policy defines change categories, approval authorities, and required documentation. 4. Verify the policy addresses rollback procedures and post-implementation review. 5. Interview 3 IT staff to confirm awareness and adherence to the policy.",
+      "expected_evidence": "Change management policy document with approval signatures, change process flowchart, RACI matrix for change roles, interview notes",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.01 Evaluate, Prioritize, and Authorize Change Requests",
+        "ITIL": "Change Enablement Practice",
+        "SOX": "ITGC - Change Management Process"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "CM-002",
+      "title": "Change Request Documentation",
+      "description": "Verify that all changes are formally documented in a change request (CR) or ticket that includes: description of the change, business justification, risk assessment, affected systems, implementation plan, rollback plan, testing requirements, and required approvals.",
+      "test_procedure": "1. Select a sample of 25 changes implemented in the past 6 months from the change log. 2. For each sampled change, verify that a complete change request ticket exists. 3. Confirm each CR includes all required fields (description, justification, risk, rollback plan). 4. Verify implementation dates align with approved change windows. 5. Identify any changes deployed without a corresponding CR (unauthorized changes).",
+      "expected_evidence": "Sample change request tickets (25), change log/register, change request template showing required fields, evidence of any undocumented changes identified",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.01 Evaluate, Prioritize, and Authorize Change Requests",
+        "ITIL": "Change Enablement - Change Models",
+        "SOX": "ITGC - Change Documentation"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "CM-003",
+      "title": "Change Approval Authority",
+      "description": "Verify that changes are approved by authorized personnel prior to implementation. Approval authority should be commensurate with the risk level of the change. High-risk changes should require Change Advisory Board (CAB) or senior management approval. The approver should be independent from the individual implementing the change.",
+      "test_procedure": "1. Review the approval authority matrix defining who can approve each change category. 2. For the 25 sampled changes, verify appropriate approval was obtained before implementation. 3. Confirm that the approver is different from the implementer (segregation of duties). 4. For high-risk/major changes, verify CAB meeting minutes documenting the approval decision. 5. Identify any changes implemented before approval was received.",
+      "expected_evidence": "Approval authority matrix, change tickets with approval timestamps and approver identities, CAB meeting minutes for major changes, approval workflow configuration in ITSM tool",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.01 Evaluate, Prioritize, and Authorize Change Requests",
+        "ITIL": "Change Enablement - Change Authority",
+        "SOX": "ITGC - Change Approval"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "CM-004",
+      "title": "Change Testing and Validation",
+      "description": "Verify that changes are tested in a non-production environment before deployment to production. Testing should validate that the change functions as intended and does not introduce regressions. Test results should be documented and reviewed prior to production deployment.",
+      "test_procedure": "1. Confirm that separate development, test/staging, and production environments exist. 2. For the 25 sampled changes, verify test evidence exists (test plans, test results, QA sign-off). 3. Confirm testing was performed in a non-production environment. 4. Verify that user acceptance testing (UAT) was performed for business-impacting changes. 5. Check for any changes deployed directly to production without testing.",
+      "expected_evidence": "Environment architecture diagram, test plans and results for sampled changes, UAT sign-off records, environment promotion logs showing progression through test environments",
+      "framework_mapping": {
+        "ISO 27001": "A.8.29 Security Testing in Development and Acceptance",
+        "COBIT": "BAI06.02 Manage Emergency Changes",
+        "ITIL": "Change Enablement - Change Evaluation",
+        "SOX": "ITGC - Testing Before Production"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "CM-005",
+      "title": "Segregation of Development and Production Environments",
+      "description": "Verify that development, testing, and production environments are logically or physically separated. Developers should not have write access to production systems. Production data should not be used in development/test environments without proper sanitization.",
+      "test_procedure": "1. Review environment architecture documentation. 2. Verify that separate servers/instances exist for dev, test, and production. 3. Review access controls to confirm developers cannot deploy directly to production. 4. Check whether production data is used in lower environments and if so, verify data masking/sanitization. 5. Verify network segmentation between environments.",
+      "expected_evidence": "Environment architecture diagram, access control lists for production vs. non-production, developer access rights report, data masking procedure (if applicable), network segmentation evidence",
+      "framework_mapping": {
+        "ISO 27001": "A.8.31 Separation of Development, Test, and Production Environments",
+        "COBIT": "BAI03.05 Build Solutions",
+        "ITIL": "Service Design - Environment Management",
+        "SOX": "ITGC - Environment Segregation"
+      },
+      "risk_weight": 5
+    },
+    {
+      "id": "CM-006",
+      "title": "Emergency Change Procedures",
+      "description": "Verify that a defined emergency change process exists for urgent changes required to restore service or prevent imminent security incidents. Emergency changes should have expedited but documented approval, be implemented with appropriate controls, and be subject to retrospective review and formal documentation within a defined timeframe.",
+      "test_procedure": "1. Review the emergency change procedure. 2. Identify all emergency changes in the past 6 months. 3. For each emergency change, verify that expedited approval was obtained (even if verbal, later documented). 4. Confirm that emergency changes received post-implementation review within the defined timeframe (e.g., 5 business days). 5. Verify that the proportion of emergency changes is reasonable (typically <10% of all changes).",
+      "expected_evidence": "Emergency change procedure, emergency change tickets with approval records, post-implementation review documentation, emergency change metrics (count and percentage of total)",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.02 Manage Emergency Changes",
+        "ITIL": "Change Enablement - Emergency Changes",
+        "SOX": "ITGC - Emergency Change Process"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "CM-007",
+      "title": "Change Rollback Capability",
+      "description": "Verify that all changes have a documented rollback plan that can be executed if the change fails or causes unintended consequences. Rollback plans should define criteria for triggering a rollback, the steps to revert the change, and the responsible parties.",
+      "test_procedure": "1. For the 25 sampled changes, verify each has a documented rollback plan. 2. Assess the quality of rollback plans (specific steps, not just 'restore from backup'). 3. Identify any changes where rollback was actually executed and verify it was successful. 4. For database changes, verify that backup was taken immediately prior to implementation. 5. Confirm rollback testing has been performed for critical system changes.",
+      "expected_evidence": "Rollback plans within change tickets, pre-change backup evidence, rollback execution records (if any), rollback test results for critical changes",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.01 Evaluate, Prioritize, and Authorize Change Requests",
+        "ITIL": "Change Enablement - Remediation Planning",
+        "SOX": "ITGC - Rollback Procedures"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "CM-008",
+      "title": "Post-Implementation Review",
+      "description": "Verify that changes are reviewed after implementation to confirm they achieved their objectives, did not introduce issues, and were properly documented. Post-implementation reviews should be completed within a defined timeframe and any issues identified should be tracked to resolution.",
+      "test_procedure": "1. Review the post-implementation review (PIR) policy/requirements. 2. For major/high-risk changes in the sample, verify that PIR was completed. 3. Confirm PIRs were completed within the required timeframe. 4. Review PIR content for completeness (success criteria met, issues identified, lessons learned). 5. For PIRs that identified issues, verify tracking and resolution.",
+      "expected_evidence": "Post-implementation review records for sampled changes, PIR template, issue tracking evidence for PIR findings, PIR completion metrics",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.03 Track and Report Change Status",
+        "ITIL": "Change Enablement - Change Review",
+        "SOX": "ITGC - Post-Implementation Review"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "CM-009",
+      "title": "Configuration Management and Baseline",
+      "description": "Verify that baseline configurations are established and maintained for critical systems, and that deviations from baseline are detected and managed through the change process. Configuration items should be tracked in a Configuration Management Database (CMDB) or equivalent.",
+      "test_procedure": "1. Review the configuration management policy and CMDB. 2. Verify that baseline configurations exist for critical system types (servers, network devices, databases). 3. Run a configuration compliance scan comparing current state to baseline for a sample of 10 systems. 4. For identified deviations, verify they correspond to approved changes. 5. Confirm CMDB is updated as part of the change implementation process.",
+      "expected_evidence": "Configuration management policy, baseline configuration documents, CMDB extract for in-scope systems, configuration compliance scan results, CMDB update evidence within change tickets",
+      "framework_mapping": {
+        "ISO 27001": "A.8.9 Configuration Management",
+        "COBIT": "BAI10 Manage Configuration",
+        "ITIL": "Service Configuration Management",
+        "SOX": "ITGC - Configuration Management"
+      },
+      "risk_weight": 3
+    },
+    {
+      "id": "CM-010",
+      "title": "Release Management and Deployment",
+      "description": "Verify that a structured release management process governs the deployment of changes to production. Releases should be packaged, tested as a unit, deployed through an automated pipeline where possible, and tracked for version control. Deployment windows should be defined to minimize business impact.",
+      "test_procedure": "1. Review the release management process and deployment procedures. 2. Verify defined change/release windows and confirm adherence for sampled changes. 3. Review the CI/CD pipeline configuration for automated deployment controls. 4. Confirm that deployment artifacts are versioned and stored in a repository. 5. Verify that deployment to production requires authorized promotion (not developer self-service).",
+      "expected_evidence": "Release management procedure, CI/CD pipeline configuration, deployment logs showing authorized promotion, release calendar, artifact repository configuration",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI07 Manage IT Change Acceptance and Transitioning",
+        "ITIL": "Release Management Practice",
+        "SOX": "ITGC - Deployment Controls"
+      },
+      "risk_weight": 4
+    },
+    {
+      "id": "CM-011",
+      "title": "Change Management Metrics and Reporting",
+      "description": "Verify that change management metrics are tracked and reported to management. Key metrics should include: total changes by category, change success rate, failed change rate, unauthorized change count, emergency change percentage, and average change lead time.",
+      "test_procedure": "1. Obtain change management reports/dashboards for the past 6 months. 2. Verify that key metrics are tracked (success rate, failure rate, emergency percentage). 3. Confirm reports are distributed to appropriate management. 4. Review the failed change rate and verify root cause analysis for failures. 5. Assess whether metrics indicate a mature, well-functioning change process.",
+      "expected_evidence": "Change management dashboard/reports, metric definitions, management distribution evidence, failed change analysis records, trend analysis",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.03 Track and Report Change Status",
+        "ITIL": "Change Enablement - Measurement and Reporting",
+        "SOX": "ITGC - Change Monitoring"
+      },
+      "risk_weight": 2
+    },
+    {
+      "id": "CM-012",
+      "title": "Database and Schema Change Controls",
+      "description": "Verify that changes to database schemas, stored procedures, and data manipulation are subject to the same change management controls as application changes. Database changes should be version-controlled, tested, approved, and include rollback scripts. Direct production database modifications should be prohibited or tightly controlled.",
+      "test_procedure": "1. Review the database change management procedure. 2. Verify that database changes follow the standard change process. 3. For a sample of 10 database changes, verify change tickets, approvals, and testing evidence. 4. Confirm that database migration scripts are version-controlled. 5. Review database audit logs for direct production modifications outside the change process.",
+      "expected_evidence": "Database change procedure, sample database change tickets with approvals, database migration scripts in version control, database audit logs, DBA access control configuration",
+      "framework_mapping": {
+        "ISO 27001": "A.8.32 Change Management",
+        "COBIT": "BAI06.01 Evaluate, Prioritize, and Authorize Change Requests",
+        "ITIL": "Change Enablement Practice",
+        "SOX": "ITGC - Database Change Controls"
+      },
+      "risk_weight": 4
+    }
+  ]
+}

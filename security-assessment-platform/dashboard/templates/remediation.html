@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remediation - SecureAudit Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">SA</div>
+            <span>SecureAudit Pro</span>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="/">Risk Overview</a></li>
+            <li><a href="/findings">Findings</a></li>
+            <li><a href="/compliance">Compliance</a></li>
+            <li class="active"><a href="/remediation">Remediation</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <header class="content-header">
+            <div>
+                <h1>Remediation Tracker</h1>
+                <p class="subtitle">Prioritized security improvement roadmap</p>
+            </div>
+        </header>
+
+        <!-- Summary Cards -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" style="color:#0f766e;">{{ summary.get('total_items', 0) }}</div>
+                <div class="metric-label">Total Actions</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color:#14b8a6;">{{ summary.get('quick_wins_count', 0) }}</div>
+                <div class="metric-label">Quick Wins</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color:#eab308;">{{ summary.get('short_term_count', 0) }}</div>
+                <div class="metric-label">Short-Term</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color:#6366f1;">{{ summary.get('long_term_count', 0) }}</div>
+                <div class="metric-label">Long-Term</div>
+            </div>
+        </div>
+
+        <!-- Effort Chart -->
+        <div class="chart-card" style="margin-bottom: 30px;">
+            <h3>Effort Distribution</h3>
+            <div class="chart-container" style="height: 250px;">
+                <canvas id="effortChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Phase Sections -->
+        <div class="phase-section">
+            <div class="phase-header-bar phase-quick-wins">
+                <h2>Phase 1: Quick Wins</h2>
+                <span class="phase-meta">0-30 days | {{ quick_wins|length }} items | ~{{ summary.get('phase_breakdown', {}).get('quick_wins', {}).get('hours', 0) }}h effort</span>
+            </div>
+            <div class="phase-items">
+                {% for item in quick_wins %}
+                <div class="remediation-item severity-border-{{ item.severity }}">
+                    <div class="rem-item-header">
+                        <span class="severity-badge severity-{{ item.severity }}">{{ item.severity | upper }}</span>
+                        <span class="rem-title">{{ item.title }}</span>
+                        <div class="rem-badges">
+                            <span class="effort-badge effort-{{ item.effort }}">{{ item.effort }} effort</span>
+                            <span class="hours-badge">~{{ item.estimated_hours }}h</span>
+                        </div>
+                    </div>
+                    <div class="rem-item-body">
+                        <p>{{ item.remediation_steps }}</p>
+                        <div class="rem-team">Assigned to: <strong>{{ item.responsible_team }}</strong></div>
+                    </div>
+                    <div class="rem-item-footer">
+                        <div class="rem-status">
+                            <span class="status-dot status-pending"></span> Pending
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not quick_wins %}
+                <div class="empty-phase">No quick win items identified.</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="phase-section">
+            <div class="phase-header-bar phase-short-term">
+                <h2>Phase 2: Short-Term Actions</h2>
+                <span class="phase-meta">30-90 days | {{ short_term|length }} items | ~{{ summary.get('phase_breakdown', {}).get('short_term', {}).get('hours', 0) }}h effort</span>
+            </div>
+            <div class="phase-items">
+                {% for item in short_term %}
+                <div class="remediation-item severity-border-{{ item.severity }}">
+                    <div class="rem-item-header">
+                        <span class="severity-badge severity-{{ item.severity }}">{{ item.severity | upper }}</span>
+                        <span class="rem-title">{{ item.title }}</span>
+                        <div class="rem-badges">
+                            <span class="effort-badge effort-{{ item.effort }}">{{ item.effort }} effort</span>
+                            <span class="hours-badge">~{{ item.estimated_hours }}h</span>
+                        </div>
+                    </div>
+                    <div class="rem-item-body">
+                        <p>{{ item.remediation_steps }}</p>
+                        <div class="rem-team">Assigned to: <strong>{{ item.responsible_team }}</strong></div>
+                    </div>
+                    <div class="rem-item-footer">
+                        <div class="rem-status">
+                            <span class="status-dot status-pending"></span> Pending
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not short_term %}
+                <div class="empty-phase">No short-term items identified.</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="phase-section">
+            <div class="phase-header-bar phase-long-term">
+                <h2>Phase 3: Long-Term Strategy</h2>
+                <span class="phase-meta">90-365 days | {{ long_term|length }} items | ~{{ summary.get('phase_breakdown', {}).get('long_term', {}).get('hours', 0) }}h effort</span>
+            </div>
+            <div class="phase-items">
+                {% for item in long_term %}
+                <div class="remediation-item severity-border-{{ item.severity }}">
+                    <div class="rem-item-header">
+                        <span class="severity-badge severity-{{ item.severity }}">{{ item.severity | upper }}</span>
+                        <span class="rem-title">{{ item.title }}</span>
+                        <div class="rem-badges">
+                            <span class="effort-badge effort-{{ item.effort }}">{{ item.effort }} effort</span>
+                            <span class="hours-badge">~{{ item.estimated_hours }}h</span>
+                        </div>
+                    </div>
+                    <div class="rem-item-body">
+                        <p>{{ item.remediation_steps }}</p>
+                        <div class="rem-team">Assigned to: <strong>{{ item.responsible_team }}</strong></div>
+                    </div>
+                    <div class="rem-item-footer">
+                        <div class="rem-status">
+                            <span class="status-dot status-pending"></span> Pending
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not long_term %}
+                <div class="empty-phase">No long-term items identified.</div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script>
+        const effortData = {
+            labels: ['Quick Wins', 'Short-Term', 'Long-Term'],
+            counts: [{{ quick_wins|length }}, {{ short_term|length }}, {{ long_term|length }}],
+            hours: [
+                {{ summary.get('phase_breakdown', {}).get('quick_wins', {}).get('hours', 0) }},
+                {{ summary.get('phase_breakdown', {}).get('short_term', {}).get('hours', 0) }},
+                {{ summary.get('phase_breakdown', {}).get('long_term', {}).get('hours', 0) }}
+            ]
+        };
+        initEffortChart('effortChart', effortData);
+    </script>
+</body>
+</html>

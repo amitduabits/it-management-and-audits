@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contract DevKit - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ====================================================================
+         Header / Navigation
+         ==================================================================== -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">&#x2B22;</span>
+                <h1>Smart Contract DevKit</h1>
+            </div>
+            <div class="wallet-section">
+                <div id="network-badge" class="network-badge hidden">
+                    <span class="network-dot"></span>
+                    <span id="network-name">Unknown</span>
+                </div>
+                <button id="connect-btn" class="btn btn-primary">Connect Wallet</button>
+                <span id="wallet-address" class="wallet-address hidden"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================
+         Main Content
+         ==================================================================== -->
+    <main class="main-content">
+        <!-- Status Banner -->
+        <div id="status-banner" class="status-banner hidden">
+            <span id="status-message"></span>
+            <button id="status-close" class="status-close">&times;</button>
+        </div>
+
+        <!-- Contract Navigation Tabs -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="storage">SimpleStorage</button>
+            <button class="tab-btn" data-tab="token">BasicToken</button>
+            <button class="tab-btn" data-tab="escrow">Escrow</button>
+            <button class="tab-btn" data-tab="voting">Voting</button>
+            <button class="tab-btn" data-tab="nft">NFT Marketplace</button>
+        </nav>
+
+        <!-- ================================================================
+             SimpleStorage Tab
+             ================================================================ -->
+        <section id="tab-storage" class="tab-panel active">
+            <div class="panel-header">
+                <h2>SimpleStorage</h2>
+                <p class="panel-description">Store and retrieve unsigned integer values on the blockchain.</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Current Value Display -->
+                <div class="card">
+                    <h3>Current Value</h3>
+                    <div class="value-display">
+                        <span id="storage-current-value" class="big-number">--</span>
+                    </div>
+                    <div class="card-meta">
+                        <span>Update Count: <strong id="storage-update-count">--</strong></span>
+                        <span>Owner: <strong id="storage-owner" class="address-short">--</strong></span>
+                    </div>
+                    <button id="storage-refresh" class="btn btn-secondary">Refresh</button>
+                </div>
+
+                <!-- Set Value -->
+                <div class="card">
+                    <h3>Set Value</h3>
+                    <div class="input-group">
+                        <input type="number" id="storage-set-input" placeholder="Enter a number" min="0">
+                        <button id="storage-set-btn" class="btn btn-primary">Set Value</button>
+                    </div>
+                </div>
+
+                <!-- Increment / Decrement -->
+                <div class="card">
+                    <h3>Increment / Decrement</h3>
+                    <div class="input-group">
+                        <input type="number" id="storage-inc-input" placeholder="Amount" min="0">
+                        <div class="btn-row">
+                            <button id="storage-inc-btn" class="btn btn-success">+ Increment</button>
+                            <button id="storage-dec-btn" class="btn btn-danger">- Decrement</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             BasicToken Tab
+             ================================================================ -->
+        <section id="tab-token" class="tab-panel">
+            <div class="panel-header">
+                <h2>BasicToken (ERC-20)</h2>
+                <p class="panel-description">Interact with the DevKit Token - transfer, approve, mint, and burn.</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Token Info -->
+                <div class="card">
+                    <h3>Token Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Name</label>
+                            <span id="token-name">--</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Symbol</label>
+                            <span id="token-symbol">--</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Total Supply</label>
+                            <span id="token-supply">--</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Your Balance</label>
+                            <span id="token-balance" class="highlight">--</span>
+                        </div>
+                    </div>
+                    <button id="token-refresh" class="btn btn-secondary">Refresh</button>
+                </div>
+
+                <!-- Transfer -->
+                <div class="card">
+                    <h3>Transfer Tokens</h3>
+                    <div class="input-group">
+                        <input type="text" id="token-transfer-to" placeholder="Recipient address (0x...)">
+                        <input type="number" id="token-transfer-amount" placeholder="Amount" min="0" step="0.01">
+                        <button id="token-transfer-btn" class="btn btn-primary">Transfer</button>
+                    </div>
+                </div>
+
+                <!-- Approve -->
+                <div class="card">
+                    <h3>Approve Spender</h3>
+                    <div class="input-group">
+                        <input type="text" id="token-approve-spender" placeholder="Spender address (0x...)">
+                        <input type="number" id="token-approve-amount" placeholder="Amount" min="0" step="0.01">
+                        <button id="token-approve-btn" class="btn btn-primary">Approve</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             Escrow Tab
+             ================================================================ -->
+        <section id="tab-escrow" class="tab-panel">
+            <div class="panel-header">
+                <h2>Escrow</h2>
+                <p class="panel-description">Create and manage secure two-party escrow agreements.</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Create Escrow -->
+                <div class="card card-wide">
+                    <h3>Create New Escrow</h3>
+                    <div class="input-group">
+                        <input type="text" id="escrow-seller" placeholder="Seller address (0x...)">
+                        <input type="text" id="escrow-arbiter" placeholder="Arbiter address (0x...)">
+                        <input type="number" id="escrow-amount" placeholder="Amount (ETH)" min="0" step="0.01">
+                        <input type="number" id="escrow-duration" placeholder="Duration (days)" min="1" value="7">
+                        <input type="text" id="escrow-description" placeholder="Description">
+                        <button id="escrow-create-btn" class="btn btn-primary">Create Escrow</button>
+                    </div>
+                </div>
+
+                <!-- Escrow Lookup -->
+                <div class="card">
+                    <h3>Lookup Escrow</h3>
+                    <div class="input-group">
+                        <input type="number" id="escrow-lookup-id" placeholder="Escrow ID" min="0">
+                        <button id="escrow-lookup-btn" class="btn btn-secondary">Lookup</button>
+                    </div>
+                    <div id="escrow-details" class="info-grid hidden">
+                        <div class="info-item"><label>Buyer</label><span id="escrow-info-buyer">--</span></div>
+                        <div class="info-item"><label>Seller</label><span id="escrow-info-seller">--</span></div>
+                        <div class="info-item"><label>Amount</label><span id="escrow-info-amount">--</span></div>
+                        <div class="info-item"><label>State</label><span id="escrow-info-state">--</span></div>
+                    </div>
+                </div>
+
+                <!-- Escrow Actions -->
+                <div class="card">
+                    <h3>Escrow Actions</h3>
+                    <div class="input-group">
+                        <input type="number" id="escrow-action-id" placeholder="Escrow ID" min="0">
+                        <div class="btn-row">
+                            <button id="escrow-release-btn" class="btn btn-success">Release</button>
+                            <button id="escrow-refund-btn" class="btn btn-warning">Refund</button>
+                            <button id="escrow-dispute-btn" class="btn btn-danger">Dispute</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             Voting Tab
+             ================================================================ -->
+        <section id="tab-voting" class="tab-panel">
+            <div class="panel-header">
+                <h2>Voting</h2>
+                <p class="panel-description">View proposals, cast votes, and delegate your voting power.</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Voting Summary -->
+                <div class="card card-wide">
+                    <h3>Voting Summary</h3>
+                    <div class="info-grid">
+                        <div class="info-item"><label>Title</label><span id="voting-title">--</span></div>
+                        <div class="info-item"><label>Status</label><span id="voting-status">--</span></div>
+                        <div class="info-item"><label>Proposals</label><span id="voting-proposals-count">--</span></div>
+                        <div class="info-item"><label>Voters</label><span id="voting-voters-count">--</span></div>
+                        <div class="info-item"><label>Votes Cast</label><span id="voting-votes-cast">--</span></div>
+                        <div class="info-item"><label>Leader</label><span id="voting-leader" class="highlight">--</span></div>
+                    </div>
+                    <button id="voting-refresh" class="btn btn-secondary">Refresh</button>
+                </div>
+
+                <!-- Proposals List -->
+                <div class="card">
+                    <h3>Proposals</h3>
+                    <div id="voting-proposals-list" class="proposals-list">
+                        <p class="placeholder">Connect wallet to view proposals</p>
+                    </div>
+                </div>
+
+                <!-- Cast Vote -->
+                <div class="card">
+                    <h3>Cast Your Vote</h3>
+                    <div class="input-group">
+                        <input type="number" id="voting-proposal-id" placeholder="Proposal ID" min="0">
+                        <button id="voting-vote-btn" class="btn btn-primary">Vote</button>
+                    </div>
+                    <h3 style="margin-top: 1.5rem;">Delegate Vote</h3>
+                    <div class="input-group">
+                        <input type="text" id="voting-delegate-to" placeholder="Delegate address (0x...)">
+                        <button id="voting-delegate-btn" class="btn btn-secondary">Delegate</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             NFT Marketplace Tab
+             ================================================================ -->
+        <section id="tab-nft" class="tab-panel">
+            <div class="panel-header">
+                <h2>NFT Marketplace</h2>
+                <p class="panel-description">Mint, list, buy, and manage NFTs on the marketplace.</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Mint NFT -->
+                <div class="card">
+                    <h3>Mint New NFT</h3>
+                    <div class="input-group">
+                        <input type="text" id="nft-mint-uri" placeholder="Token URI (ipfs://...)">
+                        <button id="nft-mint-btn" class="btn btn-primary">Mint NFT</button>
+                    </div>
+                    <div class="card-meta">
+                        <span>Total Supply: <strong id="nft-total-supply">--</strong></span>
+                        <span>Your NFTs: <strong id="nft-your-count">--</strong></span>
+                    </div>
+                </div>
+
+                <!-- List NFT -->
+                <div class="card">
+                    <h3>List NFT for Sale</h3>
+                    <div class="input-group">
+                        <input type="number" id="nft-list-id" placeholder="Token ID" min="1">
+                        <input type="number" id="nft-list-price" placeholder="Price (ETH)" min="0" step="0.01">
+                        <button id="nft-list-btn" class="btn btn-primary">List for Sale</button>
+                    </div>
+                </div>
+
+                <!-- Buy NFT -->
+                <div class="card">
+                    <h3>Buy / Cancel Listing</h3>
+                    <div class="input-group">
+                        <input type="number" id="nft-action-id" placeholder="Token ID" min="1">
+                        <div class="btn-row">
+                            <button id="nft-buy-btn" class="btn btn-success">Buy NFT</button>
+                            <button id="nft-cancel-btn" class="btn btn-danger">Cancel Listing</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NFT Lookup -->
+                <div class="card">
+                    <h3>NFT Lookup</h3>
+                    <div class="input-group">
+                        <input type="number" id="nft-lookup-id" placeholder="Token ID" min="1">
+                        <button id="nft-lookup-btn" class="btn btn-secondary">Lookup</button>
+                    </div>
+                    <div id="nft-details" class="info-grid hidden">
+                        <div class="info-item"><label>Owner</label><span id="nft-info-owner">--</span></div>
+                        <div class="info-item"><label>Creator</label><span id="nft-info-creator">--</span></div>
+                        <div class="info-item"><label>URI</label><span id="nft-info-uri">--</span></div>
+                        <div class="info-item"><label>Listed</label><span id="nft-info-listed">--</span></div>
+                        <div class="info-item"><label>Price</label><span id="nft-info-price">--</span></div>
+                    </div>
+                </div>
+
+                <!-- Withdraw -->
+                <div class="card">
+                    <h3>Withdraw Funds</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Pending Balance</label>
+                            <span id="nft-pending-balance" class="highlight">--</span>
+                        </div>
+                    </div>
+                    <button id="nft-withdraw-btn" class="btn btn-primary" style="margin-top: 1rem;">Withdraw</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ====================================================================
+         Transaction Log
+         ==================================================================== -->
+    <aside class="tx-log">
+        <h3>Transaction Log</h3>
+        <div id="tx-log-entries" class="tx-log-entries">
+            <p class="placeholder">No transactions yet. Connect your wallet to get started.</p>
+        </div>
+        <button id="tx-log-clear" class="btn btn-secondary btn-small">Clear Log</button>
+    </aside>
+
+    <!-- ====================================================================
+         Footer
+         ==================================================================== -->
+    <footer class="footer">
+        <p>Smart Contract Development Kit &mdash; Built with Hardhat, Solidity 0.8.x, and ethers.js</p>
+    </footer>
+
+    <!-- Load ethers.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
+    <!-- Load application script -->
+    <script src="app.js"></script>
+</body>
+</html>

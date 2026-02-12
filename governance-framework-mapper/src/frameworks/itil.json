@@ -1,0 +1,232 @@
+{
+  "framework": "ITIL v4",
+  "version": "4",
+  "description": "ITIL v4 Management Practices",
+  "categories": [
+    {
+      "id": "general",
+      "name": "General Management Practices",
+      "description": "Practices adapted from general business management for service management",
+      "practices": [
+        {
+          "id": "GMP01",
+          "name": "Architecture Management",
+          "description": "Provide an understanding of all the different elements that make up an organization and how those elements interrelate.",
+          "keywords": ["architecture", "enterprise architecture", "technology architecture", "blueprint", "standards"]
+        },
+        {
+          "id": "GMP02",
+          "name": "Continual Improvement",
+          "description": "Align the organization's practices and services with changing business needs through the ongoing identification and improvement of services.",
+          "keywords": ["improvement", "continual improvement", "CSI", "optimization", "maturity", "lean", "kaizen"]
+        },
+        {
+          "id": "GMP03",
+          "name": "Information Security Management",
+          "description": "Protect the information needed by the organization to conduct its business.",
+          "keywords": ["security", "information security", "ISMS", "confidentiality", "integrity", "availability", "cybersecurity"]
+        },
+        {
+          "id": "GMP04",
+          "name": "Knowledge Management",
+          "description": "Maintain and improve the effective, efficient, and convenient use of information and knowledge across the organization.",
+          "keywords": ["knowledge", "documentation", "knowledge base", "wiki", "information management", "lessons learned"]
+        },
+        {
+          "id": "GMP05",
+          "name": "Measurement and Reporting",
+          "description": "Support good decision-making and continual improvement by decreasing the levels of uncertainty.",
+          "keywords": ["measurement", "reporting", "KPI", "metrics", "dashboard", "analytics", "performance"]
+        },
+        {
+          "id": "GMP06",
+          "name": "Organizational Change Management",
+          "description": "Ensure that changes in an organization are smoothly and successfully implemented and that lasting benefits are achieved.",
+          "keywords": ["organizational change", "change management", "adoption", "transformation", "culture"]
+        },
+        {
+          "id": "GMP07",
+          "name": "Portfolio Management",
+          "description": "Ensure that the organization has the right mix of programs, projects, products, and services to execute its strategy.",
+          "keywords": ["portfolio", "investment", "prioritization", "project portfolio", "demand management"]
+        },
+        {
+          "id": "GMP08",
+          "name": "Project Management",
+          "description": "Ensure that all projects in the organization are successfully delivered.",
+          "keywords": ["project", "project management", "PMO", "agile", "waterfall", "delivery", "milestone"]
+        },
+        {
+          "id": "GMP09",
+          "name": "Relationship Management",
+          "description": "Establish and nurture the links between the organization and its stakeholders.",
+          "keywords": ["relationship", "stakeholder", "customer", "satisfaction", "engagement", "partnership"]
+        },
+        {
+          "id": "GMP10",
+          "name": "Risk Management",
+          "description": "Ensure that the organization understands and effectively handles risks.",
+          "keywords": ["risk", "risk management", "risk assessment", "mitigation", "risk register", "appetite"]
+        },
+        {
+          "id": "GMP11",
+          "name": "Service Financial Management",
+          "description": "Support the organization's strategies and plans for service management by ensuring financial resources and investments are being used effectively.",
+          "keywords": ["financial", "budget", "cost", "charging", "accounting", "ROI", "TCO"]
+        },
+        {
+          "id": "GMP12",
+          "name": "Strategy Management",
+          "description": "Formulate the goals of the organization and adopt the courses of action and allocation of resources necessary for achieving those goals.",
+          "keywords": ["strategy", "vision", "mission", "goals", "strategic planning", "direction"]
+        },
+        {
+          "id": "GMP13",
+          "name": "Supplier Management",
+          "description": "Ensure that the organization's suppliers and their performances are managed appropriately.",
+          "keywords": ["supplier", "vendor", "procurement", "contract", "third party", "outsourcing", "SLA"]
+        },
+        {
+          "id": "GMP14",
+          "name": "Workforce and Talent Management",
+          "description": "Ensure that the organization has the right people with the appropriate skills and knowledge.",
+          "keywords": ["workforce", "talent", "HR", "skills", "training", "competency", "recruitment"]
+        }
+      ]
+    },
+    {
+      "id": "service",
+      "name": "Service Management Practices",
+      "description": "Practices developed in service management and ITSM industries",
+      "practices": [
+        {
+          "id": "SMP01",
+          "name": "Availability Management",
+          "description": "Ensure that services deliver agreed levels of availability to meet the needs of customers and users.",
+          "keywords": ["availability", "uptime", "SLA", "downtime", "resilience", "redundancy"]
+        },
+        {
+          "id": "SMP02",
+          "name": "Business Analysis",
+          "description": "Analyze a business or some element of a business, define its needs, and recommend solutions to address those needs.",
+          "keywords": ["business analysis", "requirements", "process analysis", "gap analysis", "needs assessment"]
+        },
+        {
+          "id": "SMP03",
+          "name": "Capacity and Performance Management",
+          "description": "Ensure that services achieve agreed and expected performance, satisfying current and future demand in a cost-effective way.",
+          "keywords": ["capacity", "performance", "scalability", "capacity planning", "load", "throughput"]
+        },
+        {
+          "id": "SMP04",
+          "name": "Change Enablement",
+          "description": "Maximize the number of successful IT changes by ensuring that risks have been properly assessed.",
+          "keywords": ["change", "change control", "CAB", "change enablement", "RFC", "change request"]
+        },
+        {
+          "id": "SMP05",
+          "name": "Incident Management",
+          "description": "Minimize the negative impact of incidents by restoring normal service operation as quickly as possible.",
+          "keywords": ["incident", "outage", "restoration", "escalation", "major incident", "triage"]
+        },
+        {
+          "id": "SMP06",
+          "name": "IT Asset Management",
+          "description": "Plan and manage the full lifecycle of all IT assets to help the organization maximize value.",
+          "keywords": ["asset", "ITAM", "license", "inventory", "lifecycle", "hardware", "software"]
+        },
+        {
+          "id": "SMP07",
+          "name": "Monitoring and Event Management",
+          "description": "Systematically observe services and service components and record and report selected changes of state.",
+          "keywords": ["monitoring", "event", "alerting", "observability", "logging", "SIEM", "threshold"]
+        },
+        {
+          "id": "SMP08",
+          "name": "Problem Management",
+          "description": "Reduce the likelihood and impact of incidents by identifying actual and potential causes of incidents and managing workarounds.",
+          "keywords": ["problem", "root cause analysis", "RCA", "known error", "workaround", "proactive"]
+        },
+        {
+          "id": "SMP09",
+          "name": "Release Management",
+          "description": "Make new and changed services and features available for use.",
+          "keywords": ["release", "deployment", "rollout", "go-live", "version", "release management"]
+        },
+        {
+          "id": "SMP10",
+          "name": "Service Catalog Management",
+          "description": "Provide a single source of consistent information on all services and service offerings.",
+          "keywords": ["service catalog", "catalog", "service offering", "self-service", "service portfolio"]
+        },
+        {
+          "id": "SMP11",
+          "name": "Service Configuration Management",
+          "description": "Ensure that accurate and reliable information about the configuration of services is available when and where it is needed.",
+          "keywords": ["configuration", "CMDB", "CI", "configuration item", "baseline", "dependency"]
+        },
+        {
+          "id": "SMP12",
+          "name": "Service Continuity Management",
+          "description": "Ensure that the availability and performance of a service are maintained at sufficient levels in case of a disaster.",
+          "keywords": ["continuity", "disaster recovery", "BCP", "DRP", "resilience", "failover"]
+        },
+        {
+          "id": "SMP13",
+          "name": "Service Design",
+          "description": "Design products and services that are fit for purpose, fit for use, and can be delivered by the organization.",
+          "keywords": ["service design", "design", "blueprint", "architecture", "user experience"]
+        },
+        {
+          "id": "SMP14",
+          "name": "Service Desk",
+          "description": "Capture demand for incident resolution and service requests. It should also be the entry point and single point of contact for the service provider.",
+          "keywords": ["service desk", "help desk", "support", "ticket", "contact center", "single point of contact"]
+        },
+        {
+          "id": "SMP15",
+          "name": "Service Level Management",
+          "description": "Set clear business-based targets for service levels and ensure that delivery of services is properly assessed, monitored, and managed.",
+          "keywords": ["SLA", "service level", "OLA", "target", "service quality", "performance target"]
+        },
+        {
+          "id": "SMP16",
+          "name": "Service Request Management",
+          "description": "Support the agreed quality of a service by handling all predefined, user-initiated service requests in an effective and user-friendly manner.",
+          "keywords": ["service request", "fulfillment", "self-service", "standard change", "request"]
+        },
+        {
+          "id": "SMP17",
+          "name": "Service Validation and Testing",
+          "description": "Ensure that new or changed products and services meet defined requirements.",
+          "keywords": ["testing", "validation", "QA", "quality assurance", "UAT", "regression", "test"]
+        }
+      ]
+    },
+    {
+      "id": "technical",
+      "name": "Technical Management Practices",
+      "description": "Practices adapted from technology management domains",
+      "practices": [
+        {
+          "id": "TMP01",
+          "name": "Deployment Management",
+          "description": "Move new or changed hardware, software, documentation, processes, or any other component to live environments.",
+          "keywords": ["deployment", "release", "rollout", "CI/CD", "pipeline", "automation"]
+        },
+        {
+          "id": "TMP02",
+          "name": "Infrastructure and Platform Management",
+          "description": "Oversee the infrastructure and platforms used by an organization to deliver services.",
+          "keywords": ["infrastructure", "platform", "cloud", "server", "network", "virtualization", "IaaS"]
+        },
+        {
+          "id": "TMP03",
+          "name": "Software Development and Management",
+          "description": "Ensure that applications meet internal and external stakeholder needs in terms of functionality, reliability, maintainability, compliance, and auditability.",
+          "keywords": ["software development", "coding", "SDLC", "DevOps", "agile", "programming", "application"]
+        }
+      ]
+    }
+  ]
+}

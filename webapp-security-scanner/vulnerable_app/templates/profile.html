@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile - VulnApp{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 2rem auto;">
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2>User Profile</h2>
+            <!-- VULNERABILITY: IDOR - links to other user profiles are easily accessible -->
+            <div style="display: flex; gap: 0.5rem;">
+                {% for i in range(1, 6) %}
+                <a href="/profile/{{ i }}"
+                   class="btn btn-secondary"
+                   style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
+                   {% if user.id == i %}
+                   style="padding: 0.4rem 0.8rem; font-size: 0.8rem; background: #e94560; color: #fff;"
+                   {% endif %}
+                >
+                    User {{ i }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong>VULNERABILITY:</strong> Insecure Direct Object Reference (IDOR) -
+            Change the user ID in the URL to access other users' profiles without authorization.
+        </div>
+
+        <!-- VULNERABILITY: Displaying all user data without authorization check -->
+        <div style="margin-top: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="
+                    width: 80px; height: 80px;
+                    background: linear-gradient(135deg, #e94560, #c23152);
+                    border-radius: 50%;
+                    display: flex; align-items: center; justify-content: center;
+                    font-size: 2rem; font-weight: 700; color: #fff;
+                ">
+                    {{ user.username[0]|upper }}
+                </div>
+                <div>
+                    <h3 style="color: #e0e0e0; font-size: 1.3rem;">{{ user.full_name }}</h3>
+                    <p class="text-muted">@{{ user.username }}</p>
+                    <span style="
+                        display: inline-block;
+                        padding: 0.2rem 0.6rem;
+                        border-radius: 20px;
+                        font-size: 0.75rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        {% if user.role == 'admin' %}
+                        background: rgba(233, 69, 96, 0.2);
+                        color: #e94560;
+                        border: 1px solid #e94560;
+                        {% elif user.role == 'moderator' %}
+                        background: rgba(255, 165, 2, 0.2);
+                        color: #ffa502;
+                        border: 1px solid #ffa502;
+                        {% else %}
+                        background: rgba(46, 213, 115, 0.2);
+                        color: #2ed573;
+                        border: 1px solid #2ed573;
+                        {% endif %}
+                    ">
+                        {{ user.role }}
+                    </span>
+                </div>
+            </div>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600; width: 150px;">User ID</td>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Username</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Full Name</td>
+                        <td>{{ user.full_name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Email</td>
+                        <!-- VULNERABILITY: Exposing email without authorization -->
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Phone</td>
+                        <!-- VULNERABILITY: Exposing phone number without authorization -->
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Address</td>
+                        <!-- VULNERABILITY: Exposing address without authorization -->
+                        <td>{{ user.address }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Role</td>
+                        <td>{{ user.role }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Password</td>
+                        <!-- VULNERABILITY: Exposing password on profile page -->
+                        <td style="color: #e94560;">{{ user.password }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #a0a0b0; font-weight: 600;">Account Status</td>
+                        <td>
+                            {% if user.is_active %}
+                            <span style="color: #2ed573;">Active</span>
+                            {% else %}
+                            <span style="color: #e94560;">Inactive</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="color: #ffa502; font-size: 1.1rem; margin-bottom: 0.8rem;">
+            IDOR Testing
+        </h3>
+        <p style="color: #a0a0b0; font-size: 0.9rem; line-height: 1.6;">
+            This page demonstrates an <strong>Insecure Direct Object Reference (IDOR)</strong>
+            vulnerability. The application does not verify that the currently logged-in user
+            is authorized to view the requested profile. Try changing the user ID in the URL
+            (e.g., <code>/profile/1</code>, <code>/profile/2</code>, etc.) to access other
+            users' personal information, including their passwords.
+        </p>
+        <p style="color: #a0a0b0; font-size: 0.9rem; line-height: 1.6; margin-top: 0.5rem;">
+            In a secure application, the server would verify that the authenticated user
+            has permission to view the requested resource before returning it.
+        </p>
+    </div>
+</div>
+{% endblock %}

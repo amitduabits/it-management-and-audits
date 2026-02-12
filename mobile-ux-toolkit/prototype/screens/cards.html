@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Cards — NovaPay</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .cards-carousel {
+      display: flex;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-5);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .cards-carousel::-webkit-scrollbar { display: none; }
+    .cards-carousel .bank-card {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+      width: 300px;
+    }
+    .card-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+    }
+    .card-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-default);
+      text-decoration: none;
+      color: inherit;
+      border: none;
+      background: none;
+    }
+    .card-action:hover { background: var(--color-neutral-100); }
+    .card-action__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-action__label {
+      font-size: 11px;
+      font-weight: var(--font-weight-medium);
+      text-align: center;
+      color: var(--color-neutral-700);
+    }
+    .card-details {
+      padding: 0 var(--space-5);
+    }
+    .card-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-3) 0;
+    }
+    .card-detail-row + .card-detail-row {
+      border-top: 1px solid var(--color-neutral-100);
+    }
+    .card-detail-row__label {
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-500);
+    }
+    .card-detail-row__value {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-900);
+    }
+    .spending-limit {
+      padding: var(--space-4) var(--space-5);
+    }
+    .spending-limit__header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-2);
+    }
+    .spending-limit__label {
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-600);
+      font-weight: var(--font-weight-medium);
+    }
+    .spending-limit__amount {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <div class="screen" style="background:var(--color-neutral-50);">
+
+      <!-- Status Bar -->
+      <div class="status-bar status-bar-light">
+        <span class="status-bar__time">9:41</span>
+        <div class="status-bar__icons">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="app-header__left">
+          <a href="dashboard.html" class="app-header__back" aria-label="Back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </a>
+        </div>
+        <h1 class="app-header__title">My Cards</h1>
+        <div class="app-header__right">
+          <button class="btn-icon btn-ghost" aria-label="Add card">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="screen-content">
+
+        <!-- Card Carousel -->
+        <div class="cards-carousel">
+          <!-- Primary Card -->
+          <div class="bank-card animate-fade-in-up" data-card-id="card-1">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;">
+              <div class="bank-card__chip"></div>
+              <span style="font-size:12px;font-weight:600;opacity:0.8;text-transform:uppercase;letter-spacing:1px;">Platinum</span>
+            </div>
+            <div class="bank-card__number">4521 **** **** 7832</div>
+            <div class="bank-card__footer">
+              <div>
+                <div class="bank-card__name">Sarah Mitchell</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="bank-card__expiry-label">Valid Thru</div>
+                <div class="bank-card__expiry">09/28</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gold Card -->
+          <div class="bank-card bank-card--gold animate-fade-in-up stagger-2" data-card-id="card-2">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;">
+              <div class="bank-card__chip"></div>
+              <span style="font-size:12px;font-weight:600;opacity:0.8;text-transform:uppercase;letter-spacing:1px;">Gold</span>
+            </div>
+            <div class="bank-card__number">5432 **** **** 1098</div>
+            <div class="bank-card__footer">
+              <div>
+                <div class="bank-card__name">Sarah Mitchell</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="bank-card__expiry-label">Valid Thru</div>
+                <div class="bank-card__expiry">03/27</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platinum/Dark Card -->
+          <div class="bank-card bank-card--platinum animate-fade-in-up stagger-3" data-card-id="card-3">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;">
+              <div class="bank-card__chip"></div>
+              <span style="font-size:12px;font-weight:600;opacity:0.8;text-transform:uppercase;letter-spacing:1px;">Business</span>
+            </div>
+            <div class="bank-card__number">3782 **** **** 4920</div>
+            <div class="bank-card__footer">
+              <div>
+                <div class="bank-card__name">Sarah Mitchell</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="bank-card__expiry-label">Valid Thru</div>
+                <div class="bank-card__expiry">11/27</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Dots -->
+        <div class="steps" style="padding-top:0;">
+          <div class="step-dot step-dot--active"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+        </div>
+
+        <!-- Card Quick Actions -->
+        <div class="card-actions-grid">
+          <button class="card-action" data-card-freeze="card-1">
+            <div class="card-action__icon" style="background:var(--color-primary-50);color:var(--color-primary-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83"/></svg>
+            </div>
+            <span class="card-action__label">Freeze</span>
+          </button>
+          <button class="card-action" onclick="window.PrototypeKit.Toast.show('PIN changed successfully', 'success');">
+            <div class="card-action__icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+            <span class="card-action__label">Change PIN</span>
+          </button>
+          <button class="card-action">
+            <div class="card-action__icon" style="background:var(--color-warning-50);color:var(--color-warning-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33"/></svg>
+            </div>
+            <span class="card-action__label">Settings</span>
+          </button>
+          <button class="card-action" onclick="window.PrototypeKit.Toast.show('Card reported. A replacement will be shipped.', 'success');">
+            <div class="card-action__icon" style="background:var(--color-danger-50);color:var(--color-danger-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="card-action__label">Report</span>
+          </button>
+        </div>
+
+        <!-- Card Details -->
+        <div class="section-header">
+          <h3 class="section-header__title">Card Details</h3>
+        </div>
+        <div class="card" style="margin:0 var(--space-5) var(--space-4);">
+          <div class="card-details" style="padding:0;">
+            <div class="card-detail-row">
+              <span class="card-detail-row__label">Card Type</span>
+              <span class="card-detail-row__value">Visa Platinum</span>
+            </div>
+            <div class="card-detail-row">
+              <span class="card-detail-row__label">Card Number</span>
+              <span class="card-detail-row__value" style="font-family:var(--font-family-mono);">**** **** **** 7832</span>
+            </div>
+            <div class="card-detail-row">
+              <span class="card-detail-row__label">Expiry Date</span>
+              <span class="card-detail-row__value">09/2028</span>
+            </div>
+            <div class="card-detail-row">
+              <span class="card-detail-row__label">Status</span>
+              <span class="badge badge-success">Active</span>
+            </div>
+            <div class="card-detail-row">
+              <span class="card-detail-row__label">Contactless</span>
+              <span class="badge badge-primary">Enabled</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spending Limits -->
+        <div class="section-header">
+          <h3 class="section-header__title">Spending Limits</h3>
+          <button class="section-header__action">Edit</button>
+        </div>
+        <div class="card" style="margin:0 var(--space-5) var(--space-4);">
+          <div class="spending-limit">
+            <div class="spending-limit__header">
+              <span class="spending-limit__label">Daily Limit</span>
+              <span class="spending-limit__amount">$1,200 / $5,000</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill" style="width:24%;"></div>
+            </div>
+          </div>
+          <div class="spending-limit">
+            <div class="spending-limit__header">
+              <span class="spending-limit__label">Monthly Limit</span>
+              <span class="spending-limit__amount">$3,400 / $15,000</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill" style="width:23%;"></div>
+            </div>
+          </div>
+          <div class="spending-limit">
+            <div class="spending-limit__header">
+              <span class="spending-limit__label">ATM Withdrawal</span>
+              <span class="spending-limit__amount">$200 / $1,000</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill progress-bar__fill--warning" style="width:20%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Card Transactions -->
+        <div class="section-header">
+          <h3 class="section-header__title">Card Transactions</h3>
+          <a href="history.html" class="section-header__action">See All</a>
+        </div>
+        <div class="list-group" style="margin:0 var(--space-5) var(--space-4);">
+          <div class="list-item">
+            <div class="list-item__icon list-item__icon--danger">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Whole Foods Market</p>
+              <p class="list-item__subtitle">Today &middot; 2:34 PM</p>
+            </div>
+            <div class="list-item__trailing">
+              <span class="list-item__amount list-item__amount--negative">-$84.32</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-item__icon list-item__icon--primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Netflix</p>
+              <p class="list-item__subtitle">Feb 9 &middot; Recurring</p>
+            </div>
+            <div class="list-item__trailing">
+              <span class="list-item__amount list-item__amount--negative">-$15.99</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:var(--space-6);"></div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="dashboard.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="history.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>History</span>
+        </a>
+        <a href="transfer.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          <span>Transfer</span>
+        </a>
+        <a href="cards.html" class="bottom-nav__item bottom-nav__item--active" aria-current="page">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Cards</span>
+        </a>
+        <a href="profile.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+  <script src="../js/prototype.js"></script>
+</body>
+</html>

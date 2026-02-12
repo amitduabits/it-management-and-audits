@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Profile — NovaPay</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .profile-hero {
+      text-align: center;
+      padding: var(--space-6) var(--space-5);
+      background: var(--color-neutral-0);
+    }
+    .profile-hero__avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      margin: 0 auto var(--space-3);
+      position: relative;
+    }
+    .profile-hero__edit-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-primary-600);
+      border: 3px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .profile-hero__name {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+    }
+    .profile-hero__email {
+      font-size: var(--font-size-sm);
+      color: var(--color-neutral-500);
+      margin-top: 2px;
+    }
+    .profile-hero__member {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--font-size-xs);
+      color: var(--color-primary-600);
+      background: var(--color-primary-50);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      margin-top: var(--space-3);
+      font-weight: var(--font-weight-semibold);
+    }
+    .settings-section {
+      padding: var(--space-4) var(--space-5) 0;
+    }
+    .settings-section__title {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-neutral-400);
+      margin-bottom: var(--space-2);
+    }
+    .logout-btn {
+      margin: var(--space-6) var(--space-5);
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <div class="screen" style="background:var(--color-neutral-50);">
+
+      <!-- Status Bar -->
+      <div class="status-bar status-bar-light">
+        <span class="status-bar__time">9:41</span>
+        <div class="status-bar__icons">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="app-header" style="background:var(--color-neutral-0);">
+        <div class="app-header__left">
+          <a href="dashboard.html" class="app-header__back" aria-label="Back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </a>
+        </div>
+        <h1 class="app-header__title">Profile</h1>
+        <div class="app-header__right"></div>
+      </header>
+
+      <div class="screen-content">
+
+        <!-- Profile Hero -->
+        <div class="profile-hero animate-fade-in">
+          <div class="profile-hero__avatar">
+            SM
+            <div class="profile-hero__edit-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+          </div>
+          <h2 class="profile-hero__name">Sarah Mitchell</h2>
+          <p class="profile-hero__email">sarah.mitchell@email.com</p>
+          <span class="profile-hero__member">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Premium Member
+          </span>
+        </div>
+
+        <div class="divider--thick"></div>
+
+        <!-- Account Settings -->
+        <div class="settings-section">
+          <p class="settings-section__title">Account</p>
+        </div>
+        <div class="list-group" style="margin:0 var(--space-5) var(--space-4);border-radius:var(--radius-xl);">
+          <div class="list-item">
+            <div class="list-item__icon list-item__icon--primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Personal Information</p>
+              <p class="list-item__subtitle">Name, phone, address</p>
+            </div>
+            <svg class="list-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="list-item">
+            <div class="list-item__icon list-item__icon--success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Security</p>
+              <p class="list-item__subtitle">PIN, biometrics, 2FA</p>
+            </div>
+            <svg class="list-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="list-item">
+            <div class="list-item__icon list-item__icon--warning">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Linked Accounts</p>
+              <p class="list-item__subtitle">Bank accounts, cards</p>
+            </div>
+            <svg class="list-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="settings-section">
+          <p class="settings-section__title">Preferences</p>
+        </div>
+        <div class="list-group" style="margin:0 var(--space-5) var(--space-4);border-radius:var(--radius-xl);">
+          <div class="list-item" style="cursor:default;">
+            <div class="list-item__icon list-item__icon--primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Push Notifications</p>
+              <p class="list-item__subtitle">Transaction alerts, promotions</p>
+            </div>
+            <label class="toggle" style="margin:0;">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__track"><span class="toggle__thumb"></span></span>
+            </label>
+          </div>
+          <div class="list-item" style="cursor:default;">
+            <div class="list-item__icon list-item__icon--neutral">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Dark Mode</p>
+              <p class="list-item__subtitle">Reduce eye strain at night</p>
+            </div>
+            <label class="toggle" style="margin:0;">
+              <input type="checkbox" class="toggle__input">
+              <span class="toggle__track"><span class="toggle__thumb"></span></span>
+            </label>
+          </div>
+          <div class="list-item">
+            <div class="list-item__icon" style="background:#faf5ff;color:#7c3aed;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Language</p>
+              <p class="list-item__subtitle">English (US)</p>
+            </div>
+            <svg class="list-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="list-item" style="cursor:default;">
+            <div class="list-item__icon" style="background:var(--color-success-50);color:var(--color-success-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Biometric Login</p>
+              <p class="list-item__subtitle">Use fingerprint or Face ID</p>
+            </div>
+            <label class="toggle" style="margin:0;">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__track"><span class="toggle__thumb"></span></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Support -->
+        <div class="settings-section">
+          <p class="settings-section__title">Support</p>
+        </div>
+        <div class="list-group" style="margin:0 var(--space-5) var(--space-4);border-radius:var(--radius-xl);">
+          <a href="support.html" class="list-item">
+            <div class="list-item__icon" style="background:var(--color-warning-50);color:var(--color-warning-600);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Help Center</p>
+              <p class="list-item__subtitle">FAQs, guides, contact us</p>
+            </div>
+            <svg class="list-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+          <div class="list-item">
+            <div class="list-item__icon list-item__icon--neutral">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="list-item__content">
+              <p class="list-item__title">Legal &amp; Privacy</p>
+              <p class="list-item__subtitle">Terms, privacy policy</p>
+            </div>
+            <svg class="list-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="logout-btn">
+          <button class="btn btn-outline btn-block" style="border-color:var(--color-danger-300);color:var(--color-danger-600);" onclick="window.PrototypeKit.Toast.show('Logged out successfully', 'success'); setTimeout(function(){ window.location.href='login.html'; }, 1500);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Sign Out
+          </button>
+        </div>
+
+        <p class="text-center text-caption text-secondary pb-6">NovaPay v1.0.0</p>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="dashboard.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+        <a href="history.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>History</span>
+        </a>
+        <a href="transfer.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          <span>Transfer</span>
+        </a>
+        <a href="cards.html" class="bottom-nav__item">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Cards</span>
+        </a>
+        <a href="profile.html" class="bottom-nav__item bottom-nav__item--active" aria-current="page">
+          <svg class="bottom-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+  <script src="../js/prototype.js"></script>
+</body>
+</html>
