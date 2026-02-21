@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Export | BI Dashboard Builder{% endblock %}
+
+{% block head %}
+{% if plotly_cdn %}
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+{% endif %}
+<style>
+    /* Export-specific styles for standalone page */
+    .export-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+    }
+
+    .export-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .export-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 0.5rem 0;
+    }
+
+    .export-header .export-meta {
+        font-size: 0.875rem;
+        color: #64748b;
+    }
+
+    /* KPI Grid - matches dashboard.html kpi-grid styling */
+    .export-kpi-section {
+        margin-bottom: 2.5rem;
+    }
+
+    .export-kpi-section h2 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #334155;
+        margin: 0 0 1rem 0;
+    }
+
+    .export-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+    }
+
+    .export-kpi-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        transition: box-shadow 0.2s ease;
+    }
+
+    .export-kpi-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .export-kpi-card .kpi-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .export-kpi-card .kpi-label {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+    }
+
+    .export-kpi-card .kpi-icon-wrapper {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .export-kpi-card .kpi-icon-up {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+    }
+
+    .export-kpi-card .kpi-icon-down {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+    }
+
+    .export-kpi-card .kpi-icon-neutral {
+        background: rgba(100, 116, 139, 0.1);
+        color: #64748b;
+    }
+
+    .export-kpi-card .kpi-value {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.2;
+        margin-bottom: 0.25rem;
+    }
+
+    .export-kpi-card .kpi-footer {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8125rem;
+    }
+
+    .export-kpi-card .kpi-change {
+        font-weight: 600;
+    }
+
+    .export-kpi-card .kpi-change.positive {
+        color: #10b981;
+    }
+
+    .export-kpi-card .kpi-change.negative {
+        color: #ef4444;
+    }
+
+    .export-kpi-card .kpi-period,
+    .export-kpi-card .kpi-function {
+        color: #94a3b8;
+    }
+
+    /* Charts section - matches dashboard.html chart-card styling */
+    .export-charts-section {
+        margin-bottom: 2rem;
+    }
+
+    .export-charts-section h2 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #334155;
+        margin: 0 0 1rem 0;
+    }
+
+    .export-charts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .export-chart-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .export-chart-card .chart-card-header {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .export-chart-card .chart-title {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .export-chart-card .chart-body {
+        padding: 1rem;
+        min-height: 350px;
+    }
+
+    /* Print-friendly adjustments */
+    @media print {
+        .sidebar, .mobile-header, .sidebar-overlay {
+            display: none !important;
+        }
+
+        .main-content {
+            margin-left: 0 !important;
+            padding: 0 !important;
+        }
+
+        .export-container {
+            padding: 0;
+        }
+
+        .export-chart-card,
+        .export-kpi-card {
+            break-inside: avoid;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .export-charts-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="export-container">
+
+    <!-- Export Header -->
+    <div class="export-header">
+        <h1>{{ title }}</h1>
+        <p class="export-meta">Exported Dashboard Report</p>
+    </div>
+
+    <!-- KPI Cards -->
+    {% if kpis %}
+    <section class="export-kpi-section">
+        <h2>Key Performance Indicators</h2>
+        <div class="export-kpi-grid">
+            {% for kpi in kpis %}
+            <div class="export-kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">{{ kpi.label }}</span>
+                    <div class="kpi-icon-wrapper kpi-icon-{{ kpi.trend | default('neutral') }}">
+                        {% if kpi.trend == 'up' %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                        {% elif kpi.trend == 'down' %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                            <polyline points="17 18 23 18 23 12"></polyline>
+                        </svg>
+                        {% else %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="kpi-value">{{ kpi.formatted }}</div>
+                <div class="kpi-footer">
+                    {% if kpi.change_pct is not none %}
+                    <span class="kpi-change {{ 'positive' if kpi.change_pct > 0 else 'negative' if kpi.change_pct < 0 else '' }}">
+                        {% if kpi.change_pct > 0 %}+{% endif %}{{ kpi.change_pct }}%
+                    </span>
+                    <span class="kpi-period">vs. previous period</span>
+                    {% else %}
+                    <span class="kpi-function">{{ kpi.function | default('') }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Charts -->
+    {% if charts %}
+    <section class="export-charts-section">
+        <h2>Charts &amp; Visualizations</h2>
+        <div class="export-charts-grid">
+            {% for chart in charts %}
+            <div class="export-chart-card">
+                <div class="chart-card-header">
+                    <h3 class="chart-title">{{ chart.title | default('Chart ' ~ loop.index) }}</h3>
+                </div>
+                <div class="chart-body">
+                    {{ chart.html | safe }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -16,8 +16,8 @@ Available Scenarios:
 
 from src.scenarios.data_breach import DataBreachScenario
 from src.scenarios.ransomware import RansomwareScenario
-from src.scenarios.phishing import PhishingScenario
-from src.scenarios.ddos import DDoSScenario
+from src.scenarios.phishing_campaign import PhishingScenario
+from src.scenarios.ddos_attack import DDoSScenario
 from src.scenarios.insider_threat import InsiderThreatScenario
 
 SCENARIO_REGISTRY = {

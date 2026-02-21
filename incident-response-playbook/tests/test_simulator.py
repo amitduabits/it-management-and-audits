@@ -21,8 +21,8 @@ from src.models import (
 from src.scenarios import get_scenario, list_scenarios, SCENARIO_REGISTRY
 from src.scenarios.data_breach import DataBreachScenario
 from src.scenarios.ransomware import RansomwareScenario
-from src.scenarios.phishing import PhishingScenario
-from src.scenarios.ddos import DDoSScenario
+from src.scenarios.phishing_campaign import PhishingScenario
+from src.scenarios.ddos_attack import DDoSScenario
 from src.scenarios.insider_threat import InsiderThreatScenario
 from src.simulator import SimulationResult
 from src.timeline import TimelineGenerator

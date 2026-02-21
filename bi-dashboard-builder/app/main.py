@@ -101,7 +101,7 @@ def index():
     """Landing / upload page."""
     templates = load_dashboard_templates()
     samples = load_sample_datasets()
-    return render_template("upload.html", templates=templates, samples=samples)
+    return render_template("index.html", templates=templates, samples=samples)
 
 
 @app.route("/upload", methods=["POST"])
@@ -177,7 +177,7 @@ def configure(session_id: str):
     sess = dashboard_sessions[session_id]
     templates = load_dashboard_templates()
     return render_template(
-        "upload.html",
+        "index.html",
         configure_mode=True,
         session_id=session_id,
         summary=sess["summary"],

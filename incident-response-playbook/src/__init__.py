@@ -17,8 +17,8 @@ Modules:
 Scenario Modules:
     scenarios.data_breach    - Data exfiltration and breach response
     scenarios.ransomware     - Ransomware attack response
-    scenarios.phishing       - Phishing campaign response
-    scenarios.ddos           - Distributed denial-of-service response
+    scenarios.phishing_campaign       - Phishing campaign response
+    scenarios.ddos_attack           - Distributed denial-of-service response
     scenarios.insider_threat - Insider threat response
 """
 

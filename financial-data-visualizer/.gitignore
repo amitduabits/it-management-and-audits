@@ -41,7 +41,7 @@ coverage.xml
 
 # Generated outputs
 output/
-charts/
+/charts/
 reports/
 *.html
 !docs/**/*.html

@@ -9,6 +9,7 @@ CLAUDE.local.md
 # Documents (do not upload)
 *.docx
 *.pdf
+!docs/practical-manuals/*.pdf
 
 # Python
 __pycache__/
